@@ -1,0 +1,85 @@
+<div class="back-to-home rounded d-none d-sm-block">
+  <a routerLink="/index" class="btn btn-icon btn-soft-primary">
+    <i-feather name="home" class="icons"></i-feather>
+  </a>
+</div>
+<!-- Hero Start -->
+<section class="bg-home d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-6">
+        <div class="me-lg-5">
+          <img src="assets/images/user/login.svg" class="img-fluid d-block mx-auto" alt="">
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-6">
+        <div class="card login-page bg-white shadow rounded border-0">
+          <div class="card-body">
+            <h4 class="card-title text-center">Logowanie</h4>
+            <form class="login-form mt-4">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Twój Email <span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="user" class="fea icon-sm icons d-flex"></i-feather>
+                      <input type="email" class="form-control ps-5 pt-2" placeholder="Email" name="email" required="">
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Hasło <span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
+                      <input type="password" class="form-control ps-5 pt-2" placeholder="Hasło" required="">
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <!--<div class="col-lg-12">
+                  <div class="d-flex justify-content-between">
+                    <div class="mb-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Pamiętaj mnie</label>
+                      </div>
+                    </div>
+                    <p class="forgot-pass mb-0"><a routerLink="/auth-re-password" class="text-dark fw-bold">Zapomniałeś
+                    hasła?</a></p>
+                  </div>
+                </div>
+              -->
+                <!--end col-->
+
+                <div class="col-lg-12 mb-0">
+                  <div class="d-grid">
+                    <button class="btn btn-primary">Zaloguj się</button>
+                  </div>
+                </div>
+                <!--end col-->
+
+
+                <div class="col-12 text-center">
+                  <p class="mb-0 mt-3"><small class="text-dark me-2">Nie masz konta?</small> <a
+                      routerLink="/auth-signup" class="text-dark fw-bold">Zarejestruj się</a></p>
+                </div>
+                <!--end col-->
+              </div>
+              <!--end row-->
+            </form>
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+</section>
+<!--end section-->
+<!-- Hero End -->
