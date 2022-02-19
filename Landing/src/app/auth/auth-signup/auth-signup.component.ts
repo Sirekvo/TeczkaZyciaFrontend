@@ -18,7 +18,6 @@ import {any} from "codelyzer/util/function";
  */
 export class AuthSignupComponent implements OnInit {
 
-  errorMessage = 'BLAD';
 
   constructor(private userService: UserService){
   }
