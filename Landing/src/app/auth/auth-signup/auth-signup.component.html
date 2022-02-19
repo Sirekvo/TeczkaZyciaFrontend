@@ -17,14 +17,14 @@
         <div class="card shadow rounded border-0">
           <div class="card-body">
             <h4 class="card-title text-center">Rejestracja</h4>
-            <form class="login-form mt-4">
+            <form class="login-form mt-4" #f="ngForm" >
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Imię<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative" >
                       <i-feather name="user" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" class="form-control ps-5 pt-2" placeholder="Imię" name="s" required="">
+                      <input name="first_name" type="text" class="form-control ps-5 pt-2" placeholder="Imię" ngModel required="">
                     </div>
                   </div>
                 </div>
@@ -35,7 +35,7 @@
                     <label class="form-label">Nazwisko <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" class="form-control ps-5 pt-2" placeholder="Nazwisko" name="s" required="">
+                      <input name="last_name" type="text" class="form-control ps-5 pt-2" placeholder="Nazwisko" ngModel required="">
                     </div>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                     <label class="form-label">Twój Email <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="mail" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="email" class="form-control ps-5 pt-2" placeholder="Email" name="email" required="">
+                      <input name="email" type="email" class="form-control ps-5 pt-2" placeholder="Email" name="email" ngModel required>
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
                     <label class="form-label">Hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="password" class="form-control ps-5 pt-2" placeholder="Hasło" required="">
+                      <input name="password" type="password" class="form-control ps-5 pt-2" placeholder="Hasło" ngModel required>
                     </div>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                     <label class="form-label">Powtórz hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="password" class="form-control ps-5 pt-2" placeholder="Powtórz hasło" required="">
+                      <input name="repeat_password" type="password" class="form-control ps-5 pt-2" placeholder="Powtórz hasło" ngModel required>
                     </div>
                   </div>
                 </div>
@@ -87,7 +87,7 @@
 
                 <div class="col-md-12">
                   <div class="d-grid">
-                    <button class="btn btn-primary">Zarejestruj się</button>
+                    <button class="btn btn-primary" [disabled]="!f.valid">Zarejestruj się</button>
                   </div>
                 </div>
                 <!--end col-->
