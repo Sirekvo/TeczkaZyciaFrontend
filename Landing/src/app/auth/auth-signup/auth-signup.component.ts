@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
+import { UserService } from '../../shared/services/user.service';
+import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute, Router} from "@angular/router";
+import {any} from "codelyzer/util/function";
 
 @Component({
   selector: 'app-auth-signup',
@@ -14,28 +18,26 @@ import {ChangeDetectorRef} from '@angular/core';
  */
 export class AuthSignupComponent implements OnInit {
 
-  newUser: Array<SignUp> = [];
+  errorMessage = 'BLAD';
 
-  constructor() {
+  constructor(private userService: UserService){
   }
 
   ngOnInit(): void {
   }
 
   addNewUser(form: any) {
-    const new_user = new SignUp();
-    new_user.first_name = form.value.first_name;
-    new_user.last_name = form.value.last_name;
-    new_user.email = form.value.email;
-    new_user.password = form.value.password;
-    this.newUser.push(new_user);
+    this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
+        (response: any) => {
+          console.log(response);
+          // this.getEmployees();
+          form.reset();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+          form.reset();
+        }
+    );
 
   }
-}
-
-class SignUp{
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
 }
