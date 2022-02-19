@@ -14,7 +14,7 @@ import {ChangeDetectorRef} from '@angular/core';
  */
 export class AuthSignupComponent implements OnInit {
 
-  newUser: Array<SignUp>;
+  newUser: Array<SignUp> = [];
 
   constructor() {
   }
@@ -29,6 +29,7 @@ export class AuthSignupComponent implements OnInit {
     new_user.email = form.value.email;
     new_user.password = form.value.password;
     this.newUser.push(new_user);
+
   }
 }
 

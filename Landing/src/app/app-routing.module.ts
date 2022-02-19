@@ -17,8 +17,8 @@ const routes: Routes = [
       { path: 'index', component: IndexComponent },
     ]
   },
-  { path: 'auth-login', component: AuthLoginComponent },
-  { path: 'auth-signup', component: AuthSignupComponent },
+  { path: 'login', component: AuthLoginComponent },
+  { path: 'registration', component: AuthSignupComponent },
 
 ];
 
