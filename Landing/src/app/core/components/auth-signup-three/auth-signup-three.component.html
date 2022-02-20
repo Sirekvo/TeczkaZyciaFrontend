@@ -1,0 +1,468 @@
+<div class="back-to-home rounded d-none d-sm-block">
+  <a routerLink="/index" class="btn btn-icon btn-primary">
+    <i-feather name="home" class="icons"></i-feather>
+  </a>
+</div>
+
+<!-- Hero Start -->
+<section class="d-flex task-management-home "
+         style="background: url('assets/images/bg_v2.png') center center ; min-height: 100vh; width:auto; background-size:cover;" id="home">
+  <div class="container" style="margin-top:10%" *ngIf="isVisible_start">
+    <div class="row justify-content-center ">
+      <div class="col-12 text-center">
+        <div class="section-title mb-4 pb-2 ">
+          <h4 class="title mb-4">Uzupełnij o sobie podstawowe informacje</h4>
+          <p class="text-muted para-desc mb-0 mx-auto">Informacje te będą wyświetlane po wpisaniu na stronie twojego kodu w sekcji "Znajdź pacjenta"</p>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+
+    <div class="row justify-content-center">
+      <div class="col-lg-3 col-md-5 mt-4 pt-2">
+        <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-1 h-100" (click)="contact()" *ngIf="isVisible_contact">
+          <span class="h1 icon2 text-primary">
+            <i class="uil uil-user"></i>
+          </span>
+          <div class="card-body p-0 content">
+            <h5>Osoby kontaktowe</h5>
+            <p class="para text-muted mb-0">Podaj numery osób, do których można dzwonić w nagłych wypadkach</p>
+          </div>
+          <span class="big-icon text-center" >
+            <i class="uil uil-user"></i>
+          </span>
+        </div>
+        <div class="card features fea-primary rounded p-4 bg-success text-center position-relative overflow-hidden border-0 h-100" (click)="contact()" *ngIf="isVisible_complete_contact">
+          <span class="" >
+            <i class="uil uil-check" style="color: black; font-size:100px;"></i>
+          </span>
+          <h5>Osoby kontaktowe</h5>
+        </div>
+      </div>
+      <!--end col-->
+      <div class="col-lg-3 col-md-5 mt-4 pt-2">
+        <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-1 h-100" (click)="alergy()"  *ngIf="isVisible_alergy">
+          <span class="h1 icon2 text-primary">
+            <i class="uil uil-medical-square"></i>
+          </span>
+          <div class="card-body p-0 content">
+            <h5>Alergie/uczulenia</h5>
+            <p class="para text-muted mb-0">Podaj nazwy swoich alergenów</p>
+          </div>
+          <span class="big-icon text-center">
+            <i class="uil uil-medical-square"></i>
+          </span>
+        </div>
+        <div class="card features fea-primary rounded p-4 bg-success text-center position-relative overflow-hidden border-0 h-100" (click)="alergy()" *ngIf="isVisible_complete_alergy">
+          <span class="" >
+            <i class="uil uil-check" style="color: black; font-size:100px;"></i>
+          </span>
+          <h5>Alergie/uczulenia</h5>
+        </div>
+      </div>
+      <!--end col-->
+
+      <div class="col-lg-3 col-md-5 mt-4 pt-2">
+        <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-1 h-100" (click)="tabs()" *ngIf="isVisible_tabs">
+          <span class="h1 icon2 text-primary">
+            <i class="uil uil-capsule"></i>
+          </span>
+          <div class="card-body p-0 content">
+            <h5>Przyjmowane leki</h5>
+            <p class="para text-muted mb-0">Podaj nazwy przyjmowanych leków wraz z ich dawkowaniem</p>
+          </div>
+          <span class="big-icon text-center">
+            <i class="uil uil-capsule"></i>
+          </span>
+        </div>
+        <div class="card features fea-primary rounded p-4 bg-success text-center position-relative overflow-hidden border-0 h-100" (click)="tabs()" *ngIf="isVisible_complete_tabs">
+          <span class="" >
+            <i class="uil uil-check" style="color: black; font-size:100px;"></i>
+          </span>
+          <h5>Przyjmowane leki</h5>
+        </div>
+      </div>
+      <!--end col-->
+
+      <div class="col-lg-3 col-md-5 mt-4 pt-2">
+        <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-1 h-100" (click)="illness()" *ngIf="isVisible_illness">
+          <span class="h1 icon2 text-primary">
+            <i class="uil uil-heartbeat"></i>
+          </span>
+          <div class="card-body p-0 content">
+            <h5>Choroby przewlekłe</h5>
+            <p class="para text-muted mb-0">Podaj nazwy swoich chorób przewlekłych</p>
+          </div>
+          <span class="big-icon text-center">
+            <i class="uil uil-heartbeat"></i>
+          </span>
+        </div>
+        <div class="card features fea-primary rounded p-4 bg-success text-center position-relative overflow-hidden border-0 h-100" (click)="illness()" *ngIf="isVisible_complete_illness">
+          <span class="" >
+            <i class="uil uil-check" style="color: black; font-size:100px;"></i>
+          </span>
+          <h5>Choroby przewlekłe</h5>
+        </div>
+      </div>
+      <!--end col-->
+
+      <div class="col-lg-12 text-center col-md-4 mt-4 pt-2">
+        <a href="javascript:void(0)" class="btn btn-primary">Gotowe
+          <i-feather name="arrow-right" class="fea icon-sm"></i-feather>
+        </a>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <div *ngIf="isVisible_1" class="container" style="margin-top:10%;">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-md-5">
+        <div class="card rounded bg-light overflow-hidden border-1 px-3 py-4">
+          <form id="contactForm" #f="ngForm" (submit)="onContactSubmit(f)">
+            <h4 class="title text-center">Osoby Kontaktowe</h4>
+            <div class="row">
+              <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
+              <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
+                <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
+                  <input type="radio" name="type" value=1 autocomplete="off" ngModel required (click)="checkSelected(1)"> Rodzina
+                </label>
+                <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
+                  <input type="radio" name="type" value=2 autocomplete="off" ngModel required (click)=checkSelected(2)> Znajomy
+                </label>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-12">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Telefon kontaktowy<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="phone" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="number" name="phone" class="form-control ps-5 pt-2" placeholder="Telefon" ngModel required pattern=".{9,9}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-0 pb-4 text-center w-100">
+                <p class="text-secondary para-desc mb-0">Możesz dodać maksymalnie 3 osoby</p>
+                <div class="col-5 justify-content-center w-100">
+                  <button type="submit" name="push" class="btn btn-success" [disabled]="!f.valid || contact_counter>2">Dodaj</button>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div name="table" class="p-4" *ngIf="isVisible_table_contact">
+                <div class="table-responsive bg-white shadow rounded" id="contactTable">
+                  <div></div>
+                  <table class=" table mb-0 table-center">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="border-bottom" >#</th>
+                        <th scope="col" class="border-bottom" >Kto</th>
+                        <th scope="col" class="border-bottom" >Numer telefonu</th>
+                        <th scope="col" class="border-bottom" ></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contact of contactList; let indexOfElement=index;">
+                        <td>{{indexOfElement+1}}</td>
+                        <td *ngIf="(contact.type == 1)">Rodzina </td>
+                        <td *ngIf="(contact.type == 2)">Znajomy </td>
+                        <td>{{contact.telephone}}</td>
+                        <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--end table-->
+
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                </div>
+              </div>
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-primary" (click)="back_to_start_complete()">Gotowe</button>
+                </div>
+              </div>
+              <!--end col-->
+             </div>
+            <!--end row-->
+          </form>
+        </div>
+        <!---->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end containter hidden_1-->
+  <div *ngIf="isVisible_2" class="container" style="margin-top:10%;">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-md-5 mb-5">
+        <div class="card rounded bg-light overflow-hidden border-1 px-3 py-4 mb-5">
+          <form id="alergyForm" #fa="ngForm" (submit)="onAllergySubmit(fa)">
+            <h4 class="title text-center">Alergie i Uczulenia</h4>
+            <div class="row">
+              <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
+              <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
+                <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
+                  <input type="radio" name="type2" value="1" autocomplete="off" ngModel required (click)="checkSelected(1)"> Alergia
+                </label>
+                <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
+                  <input type="radio" name="type2" value="2" autocomplete="off" ngModel required (click)=checkSelected(2)> Uczulenie
+                </label>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-12">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Nazwa<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel required minlength="3">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-0 pb-4 text-center w-100">
+                <p class="text-secondary para-desc mb-0">Możesz dodać maksymalnie 15 uczuleń/alergii</p>
+                <div class="col-5 justify-content-center w-100">
+                  <button type="submit" name="push" class="btn btn-success"  [disabled]="!fa.valid || allergy_counter>14">Dodaj</button>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div name="table" class="p-4" *ngIf="isVisible_table_alergy">
+                <div class="table-responsive bg-white shadow rounded" id="alergyTable">
+                  <div></div>
+                  <table class=" table mb-0 table-center">
+                    <thead>
+                    <tr>
+                      <th scope="col" class="border-bottom" >#</th>
+                      <th scope="col" class="border-bottom" >Typ</th>
+                      <th scope="col" class="border-bottom" >Nazwa</th>
+                      <th scope="col" class="border-bottom" ></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let allergy of allergyList ; let indexOfElement=index;">
+                      <td>{{indexOfElement+1}}</td>
+                      <td *ngIf="(allergy.type == 1)">Alergia </td>
+                      <td *ngIf="(allergy.type == 2)">Uczulenie </td>
+                      <td>{{allergy.name}}</td>
+                      <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_allergy(indexOfElement)"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--end table-->
+
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                </div>
+              </div>
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-primary" (click)="back_to_start_complete_2()">Gotowe</button>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </form>
+
+        </div>
+        <!---->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container hidden_2-->
+  <div *ngIf="isVisible_3" class="container" style="margin-top:10%;">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-md-5 mb-5">
+        <div class="card rounded bg-light overflow-hidden border-1 px-3 py-4 mb-5">
+          <form id="tabsForm" #ft="ngForm" (submit)="onTabsSubmit(ft)">
+            <h4 class="title text-center">Przyjmowane leki</h4>
+            <div class="row">
+              <p class="text-secondary text-center para-desc mb-2 mx-auto">Uzupełnij informacje poniżej o przyjmowanych lekach przez Ciebie</p>
+              <div class="col-lg-12">
+                <div class="mt-4">
+                  <label class="form-label">Nazwa<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel required minlength="3">
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-6">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Dawka<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="hash" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="number" name="portion" class="form-control ps-5 pt-2" placeholder="Dawka" ngModel required>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+              <div class="col-lg-6">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Co ile?<span class="text-danger">*</span></label>
+                  <div class="position-relative">
+                    <select [(ngModel)]="selectedModule" name="howOftenSelect" class="form-select form-control-lg pt-2" (change)="selectOptionHandler($event)" required>
+                      <option *ngFor="let interval of how_often; let indexOfElement=index" [value]="interval">{{interval}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div *ngIf="isVisible_others" class="col-lg-12">
+                <div class="mt-4">
+                  <label class="form-label">Inne<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="type" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="text" name="description" class="form-control ps-5 pt-2" placeholder="Opis" ngModel required minlength="3">
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-12 mb-0 pb-4 text-center w-100">
+                <p class="text-secondary para-desc mb-0">Możesz dodać maksymalnie 15 przyjmowanych leków</p>
+                <div class="col-5 justify-content-center w-100">
+                  <button type="submit" name="push" class="btn btn-success"  [disabled]="!ft.valid || tabs_counter>14">Dodaj</button>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div name="table" class="p-4" *ngIf="isVisible_table_tabs">
+                <div class="table-responsive bg-white shadow rounded" id="tabsTable">
+                  <div></div>
+                  <table class=" table mb-0 table-center">
+                    <thead>
+                    <tr>
+                      <th scope="col" class="border-bottom" >#</th>
+                      <th scope="col" class="border-bottom" >Nazwa leku</th>
+                      <th scope="col" class="border-bottom" >Dawka</th>
+                      <th scope="col" class="border-bottom" >Co ile</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let tabs of tabsList ; let indexOfElement=index;">
+                      <td>{{indexOfElement+1}}</td>
+                      <td>{{tabs.name}}</td>
+                      <td>{{tabs.portion}}</td>
+                      <td>{{tabs.how_often}}</td>
+                      <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_tabs(indexOfElement)"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--end table-->
+
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                </div>
+              </div>
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-primary" (click)="back_to_start_complete_3()">Gotowe</button>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </form>
+
+        </div>
+        <!---->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end containter hidden_4-->
+  <div *ngIf="isVisible_4" class="container" style="margin-top:10%;">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-md-5 mb-5">
+        <div class="card rounded bg-light overflow-hidden border-1 px-3 py-4 mb-5">
+          <form id="illnessForm" #fam="ngForm" (submit)="onIllnessSubmit(fam)">
+            <h4 class="title text-center">Choroby przewlełe</h4>
+            <div class="row">
+              <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe choroby przewlekłej, która ci towarzyszy</p>
+              <div class="col-lg-12">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Nazwa choroby<span class="text-danger">*</span></label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
+                    <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa choroby" ngModel required minlength="3">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-0 pb-4 text-center w-100">
+                <p class="text-secondary para-desc mb-0">Możesz dodać maksymalnie 5 chorób przewlekłych</p>
+                <div class="col-5 justify-content-center w-100">
+                  <button type="submit" name="push" class="btn btn-success"  [disabled]="!fam.valid || illness_counter>4">Dodaj</button>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div name="table" class="p-4" *ngIf="isVisible_table_illness">
+                <div class="table-responsive bg-white shadow rounded" id="illnessTable">
+                  <div></div>
+                  <table class=" table mb-0 table-center">
+                    <thead>
+                    <tr>
+                      <th scope="col" class="border-bottom" >#</th>
+                      <th scope="col" class="border-bottom" >Nazwa choroby</th>
+                      <th scope="col" class="border-bottom" ></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let illness of illnessList ; let indexOfElement=index;">
+                      <td>{{indexOfElement+1}}</td>
+                      <td>{{illness.name}}</td>
+                      <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_illness(indexOfElement)"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--end table-->
+
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                </div>
+              </div>
+              <div class="col mb-0">
+                <div class="d-grid">
+                  <button class="btn btn-primary" (click)="back_to_start_complete_4()">Gotowe</button>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </form>
+
+        </div>
+        <!---->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end containter hidden_4-->
+</section>
+<!--end section-->
+<!-- Hero End -->

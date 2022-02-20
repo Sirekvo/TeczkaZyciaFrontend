@@ -18,25 +18,27 @@ import {ActivatedRoute, Router} from "@angular/router";
  */
 export class AuthSignupComponent implements OnInit {
 
+    constructor(private userService: UserService,
+                private router: Router){
+    }
 
-  constructor(private userService: UserService){
-  }
+    ngOnInit(): void {
+    }
 
-  ngOnInit(): void {
-  }
+    addNewUser(form: any) {
+        this.router.navigate(['/starter']);
+        this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
+            (response: any) => {
+              console.log(response);
 
-  addNewUser(form: any) {
-    this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
-        (response: any) => {
-          console.log(response);
-          // this.getEmployees();
-          form.reset();
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-          form.reset();
-        }
-    );
+              // this.getEmployees();
+              form.reset();
+            },
+            (error: HttpErrorResponse) => {
+              alert(error.message);
+              form.reset();
+            }
+        );
 
-  }
+    }
 }
