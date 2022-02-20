@@ -5,7 +5,7 @@ import {ChangeDetectorRef} from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import {HttpErrorResponse} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {any} from "codelyzer/util/function";
+
 
 @Component({
   selector: 'app-auth-signup',
