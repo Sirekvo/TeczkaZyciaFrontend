@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {TokenOutput} from "../models/user.model";
 
 
 @Injectable()
@@ -21,7 +22,16 @@ export class UserService {
 
         const httpOptions = {
           headers: new HttpHeaders({'Content-Type': 'application/json'})
-        }
+        };
         return this.httpClient.post('http://localhost:8080' + '/registration', body, httpOptions);
+    }
+    login(email: string, password: string): Observable<TokenOutput> {
+
+        const body = {
+            email,
+            password
+        };
+
+        return this.httpClient.post<TokenOutput> ('http://localhost:8080' + '/login', body);
     }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../shared/services/user.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {TokenOutput} from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-auth-login',
@@ -11,23 +14,22 @@ import { Component, OnInit } from '@angular/core';
  */
 export class AuthLoginComponent implements OnInit {
 
-  checking: Array<Login> = [];
-
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
   }
 
   checkUser(form: any) {
-    const login = new Login();
-    login.email = form.value.email;
-    login.password = form.value.password;
-    this.checking.push(login);
+      this.userService.login(form.value.email, form.value.password).subscribe(
+          (data: TokenOutput) => {
+              console.log(data);
+              // this.getEmployees();
+              form.reset();
+          },
+          (error: HttpErrorResponse) => {
+              alert(error.message);
+              form.reset();
+          });
   }
-}
-
-class Login{
-  email: string;
-  password: string;
 }
