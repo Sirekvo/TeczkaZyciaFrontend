@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../shared/services/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TokenOutput} from "../../shared/models/user.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth-login',
@@ -14,16 +15,21 @@ import {TokenOutput} from "../../shared/models/user.model";
  */
 export class AuthLoginComponent implements OnInit {
 
-  constructor(private userService: UserService) {
-  }
+    constructor(private userService: UserService,
+                private router: Router) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
+    //     activatedRoute.queryParams.subscribe(params => {
+    //     this.redirectUrl = params['redirectUrl'];
+    // });
+    checkUser(form: any) {
 
-  checkUser(form: any) {
       this.userService.login(form.value.email, form.value.password).subscribe(
           (data: TokenOutput) => {
               console.log(data);
+              this.router.navigate(['/starter']);
               // this.getEmployees();
               form.reset();
           },
@@ -31,5 +37,5 @@ export class AuthLoginComponent implements OnInit {
               alert(error.message);
               form.reset();
           });
-  }
+    }
 }

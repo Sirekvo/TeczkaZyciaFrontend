@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import {HttpErrorResponse} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,15 +18,13 @@ import {ActivatedRoute, Router} from "@angular/router";
  */
 export class AuthSignupComponent implements OnInit {
 
-    constructor(private userService: UserService,
-                private router: Router){
+    constructor(private userService: UserService){
     }
 
     ngOnInit(): void {
     }
 
     addNewUser(form: any) {
-        this.router.navigate(['/starter']);
         this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
             (response: any) => {
               console.log(response);
