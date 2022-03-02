@@ -81,30 +81,35 @@ export class AuthSignupThreeComponent implements OnInit {
     this.isVisible_2 = false;
     this.isVisible_3 = false;
     this.isVisible_4 = false;
+    this.visible = 0;
   }
   back_to_start_complete(){
     this.isVisible_start = true;
     this.isVisible_1 = false;
     this.isVisible_contact = false;
     this.isVisible_complete_contact = true;
+    this.visible = 0;
   }
   back_to_start_complete_2(){
     this.isVisible_start = true;
     this.isVisible_2 = false;
     this.isVisible_alergy = false;
     this.isVisible_complete_alergy = true;
+    this.visible = 0;
   }
   back_to_start_complete_3(){
     this.isVisible_start = true;
     this.isVisible_3 = false;
     this.isVisible_tabs = false;
     this.isVisible_complete_tabs = true;
+    this.visible = 0;
   }
   back_to_start_complete_4(){
     this.isVisible_start = true;
     this.isVisible_4 = false;
     this.isVisible_illness = false;
     this.isVisible_complete_illness = true;
+    this.visible = 0;
   }
 
   onContactSubmit(form: any) {
