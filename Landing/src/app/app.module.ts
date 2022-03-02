@@ -28,6 +28,7 @@ import { MasterPageComponent } from './core/components/master-page/master-page.c
 import { AuthLoginComponent } from './auth/auth-login/auth-login.component';
 import { AuthSignupComponent } from './auth/auth-signup/auth-signup.component';
 import { AuthSignupThreeComponent } from './core/components/auth-signup-three/auth-signup-three.component';
+import { AccountProfileComponent } from './core/components/account-profile/account-profile.component';
 import { IndexComponent } from './core/components/index/index.component';
 import { FeatherModule } from 'angular-feather';
 
@@ -52,6 +53,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MasterPageComponent,
     IndexComponent,
     AuthSignupThreeComponent,
+    AccountProfileComponent,
   ],
   imports: [
     BrowserModule,

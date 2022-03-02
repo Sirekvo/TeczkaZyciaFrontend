@@ -29,8 +29,14 @@ export class AuthLoginComponent implements OnInit {
       this.userService.login(form.value.email, form.value.password).subscribe(
           (data: TokenOutput) => {
               console.log(data);
-              this.router.navigate(['/starter']);
+              // this.router.navigate(['/starter']);
               // this.getEmployees();
+              if(data.firstLogin){
+                  this.router.navigate(['/starter']);
+              }
+              else{
+                  this.router.navigate(['/main']);
+              }
               form.reset();
           },
           (error: HttpErrorResponse) => {
