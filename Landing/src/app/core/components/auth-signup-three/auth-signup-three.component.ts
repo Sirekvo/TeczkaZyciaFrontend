@@ -48,6 +48,10 @@ export class AuthSignupThreeComponent implements OnInit {
   how_often: Array<string> = ['Raz na dzień', 'Dwa razy na dzień', 'Trzy razy na dzień', 'Cztery razy na dzień', 'Co drugi dzień', 'Co trzeci dzień', 'Co tydzień', 'Inne'];
   howOftenSelect = this.how_often[0];
   selectedModule : any;
+  er1 = 0;
+  er2 = 0;
+  er3 = 0;
+  er4 = 0;
 
 
   constructor() { }
@@ -120,9 +124,10 @@ export class AuthSignupThreeComponent implements OnInit {
       this.contactList.push(contact);
       this.contact_counter++;
       form.reset();
-      if (this.visible == 0) {
+      if (this.visible == 0 && this.er1 == 0) {
         this.isVisible_table_contact = !this.isVisible_table_contact;
         this.visible++;
+        this.er1 = 1;
       }
     }
   }
@@ -143,9 +148,10 @@ export class AuthSignupThreeComponent implements OnInit {
       this.allergyList.push(allergy);
       this.allergy_counter++;
       form.reset();
-      if (this.visible == 0) {
+      if (this.visible == 0 && this.er2 == 0) {
         this.isVisible_table_alergy = !this.isVisible_table_alergy;
         this.visible++;
+        this.er2 = 1;
       }
     }
   }
@@ -164,9 +170,10 @@ export class AuthSignupThreeComponent implements OnInit {
       this.illnessList.push(illness);
       this.illness_counter++;
       form.reset();
-      if (this.visible == 0) {
+      if (this.visible == 0 && this.er3 == 0) {
         this.isVisible_table_illness = !this.isVisible_table_illness;
         this.visible++;
+        this.er3 = 1;
       }
     }
   }
@@ -190,9 +197,10 @@ export class AuthSignupThreeComponent implements OnInit {
       this.tabsList.push(tabs);
       this.tabs_counter++;
       form.reset();
-      if (this.visible == 0) {
+      if (this.visible == 0 && this.er4 == 0) {
         this.isVisible_table_tabs = !this.isVisible_table_tabs;
         this.visible++;
+        this.er4 = 1;
       }
     }
   }
