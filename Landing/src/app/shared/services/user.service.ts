@@ -51,6 +51,13 @@ export class UserService {
 
         return this.httpClient.post<TokenOutput> ('http://localhost:8080' + '/login', body);
     }
+    removeLocalUser() {
+        if (window.sessionStorage.getItem('user') === null) {
+            window.localStorage.removeItem('user');
+        } else {
+            window.sessionStorage.removeItem('user');
+        }
+    }
     getToken(): string {
         const user = this.getLocalUser();
 
@@ -61,8 +68,6 @@ export class UserService {
         return null;
     }
     getFromRegistration(): Observable<AccountOutput> {
-
-
 
         return this.httpClient.get<AccountOutput>('http://localhost:8080' + '/information/user');
     }

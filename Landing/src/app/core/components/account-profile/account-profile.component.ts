@@ -3,6 +3,7 @@ import {AccountOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import jwt_decode from 'jwt-decode';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-account-profile',
@@ -19,23 +20,29 @@ export class AccountProfileComponent implements OnInit {
    * nav light class add
    */
   navClass = 'nav-light';
-  token = localStorage.getItem("token");
-
+  name = '';
+  lastName = '';
+  email = '';
 
   constructor(private accountService: AccountService,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.userService.getFromRegistration().subscribe(
     (information: AccountOutput) => {
-            console.log(information.name);
-            console.log(information.lastName);
-            console.log(information.email);
+
+            this.name = information.name;
+            this.lastName = information.lastName;
+            this.email = information.email;
         },
         () => {
         }
     );
+  }
+  logout(){
+      this.userService.removeLocalUser();
   }
 
 

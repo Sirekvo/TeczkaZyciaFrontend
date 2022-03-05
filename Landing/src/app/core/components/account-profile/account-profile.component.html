@@ -4,26 +4,24 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="card public-profile border-1" style="z-index: 1;">
+        <div class="card public-profile rounded shadow-sm" style="z-index: 1;">
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
-                <img src="assets/images/main/ja.jpg" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
+                <img src="assets/images/main/avatar.jpg" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
                   alt="">
               </div>
               <!--end col-->
-              <form id="contactForm" #f="ngForm">
                 <div class="col-lg-10 col-md-9">
                   <div class="row align-items-end">
                     <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
-                      <h3 class="title mb-0">Piotr Świerczyński</h3>
-                      <small class="text-muted h6 me-2">Web Developer</small>
+                      <h3 class="title mb-0">{{name}} {{lastName}}</h3>
+                      <small class="text-muted h6 me-2">{{email}}</small>
                     </div>
                     <!--end col-->
                   </div>
                   <!--end row-->
                 </div>
-              </form>
               <!--end col-->
             </div>
             <!--end row-->
@@ -44,7 +42,7 @@
   <div class="container mt-lg-3">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
-        <div class="sidebar sticky-bar px-4 rounded border-1">
+        <div class="sidebar sticky-bar px-4 rounded shadow-sm">
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
@@ -92,8 +90,7 @@
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/auth-login-three"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a (click)=logout() routerLink="/login" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-dashboard"></i></span>
                   <h6 class="mb-0 ms-2">Logout</h6>
                 </a>

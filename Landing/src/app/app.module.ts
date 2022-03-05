@@ -88,13 +88,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [ UserService, AccountService, AuthInterceptorProvider,
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-
-    },
-  ],
+  providers: [ AuthInterceptorProvider, UserService, AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
