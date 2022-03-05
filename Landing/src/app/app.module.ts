@@ -20,6 +20,8 @@ import { CountToModule } from 'angular-count-to';
 import { NgxMasonryModule } from 'ngx-masonry';
 
 import { UserService } from './shared/services/user.service';
+import { AccountService } from './shared/services/account.service';
+
 
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -37,6 +39,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
+import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -85,7 +88,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [ UserService,
+  providers: [ UserService, AccountService, AuthInterceptorProvider,
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG

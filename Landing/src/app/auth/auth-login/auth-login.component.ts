@@ -28,6 +28,7 @@ export class AuthLoginComponent implements OnInit {
 
       this.userService.login(form.value.email, form.value.password).subscribe(
           (data: TokenOutput) => {
+              this.userService.setLocalUser(data, form.value.remember === true);
               console.log(data);
               // this.router.navigate(['/starter']);
               // this.getEmployees();

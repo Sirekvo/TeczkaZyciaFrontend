@@ -5,4 +5,5 @@ export class TokenOutput {
         this.token = _token;
         this.firstLogin = _firstLogin;
     }
+
 }
