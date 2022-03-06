@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthSignupThreeComponent } from './auth-signup-three.component';
+import { AuthSignupThreeComponent } from './starter.component';
 
 describe('AuthSignupThreeComponent', () => {
   let component: AuthSignupThreeComponent;

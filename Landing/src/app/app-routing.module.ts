@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
 import { AuthLoginComponent } from './auth/auth-login/auth-login.component';
 import { AuthSignupComponent } from './auth/auth-signup/auth-signup.component';
-import { AuthSignupThreeComponent } from './core/components/auth-signup-three/auth-signup-three.component';
+import { StarterComponent } from './core/components/starter/starter.component';
 import { AccountProfileComponent } from './core/components/account-profile/account-profile.component';
 import { IndexComponent } from './core/components/index/index.component';
 import { MasterPageComponent } from './core/components/master-page/master-page.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   { path: 'login', component: AuthLoginComponent },
   { path: 'registration', component: AuthSignupComponent },
-  { path: 'starter', component: AuthSignupThreeComponent,
+  { path: 'starter', component: StarterComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] }
     },

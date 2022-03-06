@@ -5,16 +5,16 @@ import { NgForm } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
 
 @Component({
-  selector: 'app-auth-signup-three',
-  templateUrl: './auth-signup-three.component.html',
-  styleUrls: ['./auth-signup-three.component.css']
+  selector: 'starter',
+  templateUrl: './starter.component.html',
+  styleUrls: ['./srarter.component.css']
 })
 
 /**
  * Auth Signup-three Component
  */
 
-export class AuthSignupThreeComponent implements OnInit {
+export class StarterComponent implements OnInit {
   activeToggle = 0;
   click = false;
   contactList: Array<Contact> = [];
