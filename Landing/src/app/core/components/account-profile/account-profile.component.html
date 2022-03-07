@@ -17,6 +17,7 @@
                     <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
                       <h3 class="title mb-0">{{name}} {{lastName}}</h3>
                       <small class="text-muted h6 me-2">{{email}}</small>
+                      <small class="text-muted h6 me-2">Twój unikalny kod: {{code}}</small>
                     </div>
                     <!--end col-->
                   </div>
@@ -129,9 +130,7 @@
         <div class="pb-4">
           <h3>Choroby przewlekłe</h3>
           <hr>
-          <p class="text-muted mb-0">I have started my career as a trainee and prove my self and achieve all the
-            milestone with good guidance and reach up to the project manager. In this journey, I understand all the
-            procedure which make me a good developer, team leader, and a project manager.</p>
+          <p class="text-muted mb-0">{{illnessList[0].name}}</p>
         </div>
 
       </div>

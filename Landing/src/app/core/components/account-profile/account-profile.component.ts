@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountOutput} from "../../../shared/models/account.model";
+import {AccountOutput,DiseasesOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import jwt_decode from 'jwt-decode';
@@ -23,6 +23,8 @@ export class AccountProfileComponent implements OnInit {
   name = '';
   lastName = '';
   email = '';
+  code = '';
+  illnessList: Array<DiseasesOutput>;
 
   constructor(private accountService: AccountService,
               private userService: UserService,
@@ -36,14 +38,23 @@ export class AccountProfileComponent implements OnInit {
             this.name = information.name;
             this.lastName = information.lastName;
             this.email = information.email;
+            this.code = information.code;
+
+            this.accountService.getChronicDiseases(information.code).subscribe(
+            (date: Array<DiseasesOutput>) => {
+                this.illnessList = date;
+            },
+            () => {
+            }
+            );
         },
         () => {
         }
     );
+
+
   }
   logout(){
       this.userService.removeLocalUser();
   }
-
-
 }
