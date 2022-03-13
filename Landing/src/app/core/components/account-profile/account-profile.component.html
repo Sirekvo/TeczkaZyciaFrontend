@@ -130,7 +130,22 @@
         <div class="pb-4">
           <h3>Choroby przewlekłe</h3>
           <hr>
-          <p class="text-muted mb-0">{{illnessList[0].name}}</p>
+          <table class=" table mb-0 table-center">
+            <thead>
+            <tr>
+              <th scope="col" class="border-bottom" >#</th>
+              <th scope="col" class="border-bottom" >Nazwa choroby</th>
+              <th scope="col" class="border-bottom" ></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
+              <td>{{indexOfElement+1}}</td>
+              <td>{{illness.name}}</td>
+              <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
+            </tr>
+            </tbody>
+          </table>
         </div>
 
       </div>

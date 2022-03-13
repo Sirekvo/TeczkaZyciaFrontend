@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
+import {DiseasesOutput} from "../../../shared/models/account.model";
+import {AccountService} from "../../../shared/services/account.service";
 
 @Component({
   selector: 'starter',
@@ -54,7 +56,7 @@ export class StarterComponent implements OnInit {
   er4 = 0;
 
 
-  constructor() { }
+  constructor(private accountService: AccountService) {  }
 
   ngOnInit(): void {
   }
@@ -114,6 +116,13 @@ export class StarterComponent implements OnInit {
     this.isVisible_illness = false;
     this.isVisible_complete_illness = true;
     this.visible = 0;
+    this.accountService.setChronicDiseases(this.illnessList).subscribe(
+        (response: any) => {
+          console.log(response);
+        },
+        () => {
+        }
+    );
   }
 
   onContactSubmit(form: any) {

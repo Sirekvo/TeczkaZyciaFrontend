@@ -21,5 +21,10 @@ export class AccountService {
         return this.httpClient.get<Array<DiseasesOutput>>(environment.apiUrl + '/information/chronicDiseases/' + code);
     }
 
+    setChronicDiseases(list: Array<DiseasesOutput>): Observable<any> {
+
+        return this.httpClient.post(environment.apiUrl  + '/information/chronicDiseases', list);
+    }
+
 
 }
