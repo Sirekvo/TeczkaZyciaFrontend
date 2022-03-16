@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AccountOutput, DiseasesOutput} from '../models/account.model';
+import {AccountOutput, DiseasesOutput, AllergiesOutput} from '../models/account.model';
 import {TokenOutput} from '../models/user.model';
 import {UserService} from './user.service';
 
@@ -26,5 +26,13 @@ export class AccountService {
         return this.httpClient.post(environment.apiUrl  + '/information/chronicDiseases', list);
     }
 
+    getAllergies(code: string): Observable<Array<AllergiesOutput>>{
+        return this.httpClient.get<Array<AllergiesOutput>>(environment.apiUrl + '/information/allergic/' + code);
+    }
+
+    setAllergies(list: Array<AllergiesOutput>): Observable<any> {
+
+        return this.httpClient.post(environment.apiUrl  + '/information/allergic', list);
+    }
 
 }

@@ -209,10 +209,10 @@
               <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
               <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
                 <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
-                  <input type="radio" name="type2" value="1" autocomplete="off" ngModel required (click)="checkSelected(1)"> Alergia
+                  <input type="radio" name="type2" value="ALLERGY" autocomplete="off" ngModel required (click)="checkSelected(1)"> Alergia
                 </label>
                 <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
-                  <input type="radio" name="type2" value="2" autocomplete="off" ngModel required (click)=checkSelected(2)> Uczulenie
+                  <input type="radio" name="type2" value="SENSITIVITY" autocomplete="off" ngModel required (click)="checkSelected(2)"> Uczulenie
                 </label>
               </div>
               <!--end col-->
@@ -249,8 +249,8 @@
                     <tbody>
                     <tr *ngFor="let allergy of allergyList ; let indexOfElement=index;">
                       <td>{{indexOfElement+1}}</td>
-                      <td *ngIf="(allergy.type == 1)">Alergia </td>
-                      <td *ngIf="(allergy.type == 2)">Uczulenie </td>
+                      <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
+                      <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
                       <td>{{allergy.name}}</td>
                       <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_allergy(indexOfElement)"></td>
                     </tr>

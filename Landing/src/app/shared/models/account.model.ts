@@ -8,5 +8,9 @@ export class AccountOutput {
 export class DiseasesOutput {
     name: string;
 }
+export class AllergiesOutput {
+    name: string;
+    type: string;
+}
 
 
