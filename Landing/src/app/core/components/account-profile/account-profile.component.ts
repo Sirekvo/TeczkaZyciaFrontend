@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountOutput,DiseasesOutput} from "../../../shared/models/account.model";
+import {AccountOutput, DiseasesOutput, AllergiesOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
-import jwt_decode from 'jwt-decode';
 import {Router} from "@angular/router";
 
 @Component({
@@ -25,6 +24,7 @@ export class AccountProfileComponent implements OnInit {
   email = '';
   code = '';
   illnessList: Array<DiseasesOutput>;
+  allegriesList: Array<AllergiesOutput>
 
   constructor(private accountService: AccountService,
               private userService: UserService,
@@ -43,6 +43,13 @@ export class AccountProfileComponent implements OnInit {
             this.accountService.getChronicDiseases(information.code).subscribe(
             (date: Array<DiseasesOutput>) => {
                 this.illnessList = date;
+            },
+            () => {
+            }
+            );
+            this.accountService.getAllergies(information.code).subscribe(
+            (date: Array<AllergiesOutput>) => {
+                this.allegriesList = date;
             },
             () => {
             }

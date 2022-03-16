@@ -102,6 +102,13 @@ export class StarterComponent implements OnInit {
     this.isVisible_alergy = false;
     this.isVisible_complete_alergy = true;
     this.visible = 0;
+    this.accountService.setAllergies(this.allergyList).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      () => {
+      }
+  );
   }
   back_to_start_complete_3(){
     this.isVisible_start = true;
@@ -243,7 +250,7 @@ class Contact{
 }
 
 export class Allergy{
-  type: number;
+  type: string;
   name: string;
 }
 
