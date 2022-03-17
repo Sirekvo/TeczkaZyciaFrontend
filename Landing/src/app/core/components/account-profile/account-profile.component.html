@@ -39,11 +39,11 @@
 <!-- Hero End -->
 
 <!-- Profile Start -->
-<section class="section mt-60 ">
+<section class="section mt-60">
   <div class="container mt-lg-3">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
-        <div class="sidebar sticky-bar px-4 rounded border-primary border-5">
+        <div class="sidebar sticky-bar px-4 rounded shadow" >
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
@@ -125,8 +125,9 @@
             <tbody>
             <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
               <td>{{indexOfElement+1}}</td>
+              <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
+              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
               <td>{{allergy.name}}</td>
-              <td>{{allergy.type}}</td>
               <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
             </tr>
             </tbody>

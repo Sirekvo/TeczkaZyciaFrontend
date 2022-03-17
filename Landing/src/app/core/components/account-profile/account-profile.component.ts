@@ -24,7 +24,7 @@ export class AccountProfileComponent implements OnInit {
   email = '';
   code = '';
   illnessList: Array<DiseasesOutput>;
-  allegriesList: Array<AllergiesOutput>
+  allegriesList: Array<AllergiesOutput>;
 
   constructor(private accountService: AccountService,
               private userService: UserService,
