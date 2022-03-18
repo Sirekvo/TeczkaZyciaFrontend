@@ -95,6 +95,13 @@ export class StarterComponent implements OnInit {
     this.isVisible_contact = false;
     this.isVisible_complete_contact = true;
     this.visible = 0;
+    this.accountService.setContacts(this.contactList).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      () => {
+      }
+    );
   }
   back_to_start_complete_2(){
     this.isVisible_start = true;
@@ -108,7 +115,7 @@ export class StarterComponent implements OnInit {
       },
       () => {
       }
-  );
+    );
   }
   back_to_start_complete_3(){
     this.isVisible_start = true;
@@ -116,6 +123,13 @@ export class StarterComponent implements OnInit {
     this.isVisible_tabs = false;
     this.isVisible_complete_tabs = true;
     this.visible = 0;
+    this.accountService.setMedications(this.tabsList).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      () => {
+      }
+    );
   }
   back_to_start_complete_4(){
     this.isVisible_start = true;
@@ -206,9 +220,9 @@ export class StarterComponent implements OnInit {
       const tabs = new Tabs();
       tabs.name = form.value.name;
       tabs.portion = form.value.portion;
-      tabs.how_often = this.howOftenSelect;
-      if (tabs.how_often == 'Inne'){
-        tabs.how_often = form.value.description;
+      tabs.howOften = this.howOftenSelect;
+      if (tabs.howOften == 'Inne'){
+        tabs.howOften = form.value.description;
       }
       this.tabsList.push(tabs);
       this.tabs_counter++;
@@ -245,11 +259,11 @@ export class StarterComponent implements OnInit {
 }
 
 class Contact{
-  type: number;
-  telephone: string;
+  type: boolean;
+  telephone: number;
 }
 
-export class Allergy{
+class Allergy{
   type: string;
   name: string;
 }
@@ -257,7 +271,7 @@ export class Allergy{
 class Tabs{
   name: string;
   portion: number;
-  how_often: string;
+  howOften: string;
 }
 
 class Illness{

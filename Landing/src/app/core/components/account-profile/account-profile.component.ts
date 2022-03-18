@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountOutput, DiseasesOutput, AllergiesOutput} from "../../../shared/models/account.model";
+import {AccountOutput, DiseasesOutput, AllergiesOutput, ContactsOutput, MedicationsOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
@@ -25,6 +25,8 @@ export class AccountProfileComponent implements OnInit {
   code = '';
   illnessList: Array<DiseasesOutput>;
   allegriesList: Array<AllergiesOutput>;
+  contactList: Array<ContactsOutput>;
+  medicationsList: Array<MedicationsOutput>;
 
   constructor(private accountService: AccountService,
               private userService: UserService,
@@ -41,15 +43,29 @@ export class AccountProfileComponent implements OnInit {
             this.code = information.code;
 
             this.accountService.getChronicDiseases(information.code).subscribe(
-            (date: Array<DiseasesOutput>) => {
-                this.illnessList = date;
+            (data: Array<DiseasesOutput>) => {
+                this.illnessList = data;
             },
             () => {
             }
             );
             this.accountService.getAllergies(information.code).subscribe(
-            (date: Array<AllergiesOutput>) => {
-                this.allegriesList = date;
+            (data: Array<AllergiesOutput>) => {
+                this.allegriesList = data;
+            },
+            () => {
+            }
+            );
+            this.accountService.getContacts(information.code).subscribe(
+            (data: Array<ContactsOutput>) => {
+                this.contactList = data;
+            },
+            () => {
+            }
+            );
+            this.accountService.getMedications(information.code).subscribe(
+            (data: Array<MedicationsOutput>) => {
+                 this.medicationsList = data;
             },
             () => {
             }

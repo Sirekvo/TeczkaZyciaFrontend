@@ -12,5 +12,15 @@ export class AllergiesOutput {
     name: string;
     type: string;
 }
+export class ContactsOutput {
+    telephone: number;
+    type: boolean;
+}
+export class MedicationsOutput {
+    name: string;
+    portion: number;
+    howOften: string;
+}
+
 
 
