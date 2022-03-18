@@ -110,16 +110,16 @@
             <thead>
             <tr>
               <th scope="col" class="border-bottom" >#</th>
-              <th scope="col" class="border-bottom" >Numer telefonu</th>
               <th scope="col" class="border-bottom" >Typ</th>
+              <th scope="col" class="border-bottom" >Numer telefonu</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let contact of contactList; let indexOfElement=index;">
               <td>{{indexOfElement+1}}</td>
-              <td>{{contact.telephone}}</td>
-              <td *ngIf="(contact.type == 0)">Rodzina</td>
-              <td *ngIf="(contact.type == 1)">Znajomy</td>
+              <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</td>
+              <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</td>
+              <td>{{contact.phoneNumber}}</td>
               <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
             </tr>
             </tbody>
@@ -140,9 +140,9 @@
             <tbody>
             <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
               <td>{{indexOfElement+1}}</td>
-              <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
-              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
               <td>{{allergy.name}}</td>
+              <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
+              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
               <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
             </tr>
             </tbody>
@@ -152,9 +152,24 @@
         <div class="pb-4">
           <h3>Przyjmowane leki</h3>
           <hr>
-          <p class="text-muted mb-0">I have started my career as a trainee and prove my self and achieve all the
-            milestone with good guidance and reach up to the project manager. In this journey, I understand all the
-            procedure which make me a good developer, team leader, and a project manager.</p>
+          <table class=" table mb-0 table-center">
+            <thead>
+            <tr>
+              <th scope="col" class="border-bottom" >#</th>
+              <th scope="col" class="border-bottom" >Nazwa leku</th>
+              <th scope="col" class="border-bottom" >Dawka</th>
+              <th scope="col" class="border-bottom" >Co ile</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
+              <td>{{indexOfElement+1}}</td>
+              <td class="flex-column">{{tabs.name}}</td>
+              <td>{{tabs.portion}}</td>
+              <td>{{tabs.howOften}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="pb-4">

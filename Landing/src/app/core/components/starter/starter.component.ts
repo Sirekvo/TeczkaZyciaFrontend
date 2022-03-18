@@ -149,8 +149,8 @@ export class StarterComponent implements OnInit {
   onContactSubmit(form: any) {
     if (this.contact_counter < 3) {
       const contact = new Contact();
-      contact.type = form.value.type;
-      contact.telephone = form.value.phone;
+      contact.contactPersonRole = form.value.type;
+      contact.phoneNumber = form.value.phone;
       this.contactList.push(contact);
       this.contact_counter++;
       form.reset();
@@ -259,8 +259,8 @@ export class StarterComponent implements OnInit {
 }
 
 class Contact{
-  type: boolean;
-  telephone: number;
+  contactPersonRole: string;
+  phoneNumber: number;
 }
 
 class Allergy{

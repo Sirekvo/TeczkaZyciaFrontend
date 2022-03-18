@@ -13,8 +13,8 @@ export class AllergiesOutput {
     type: string;
 }
 export class ContactsOutput {
-    telephone: number;
-    type: boolean;
+    phoneNumber: number;
+    contactPersonRole: string;
 }
 export class MedicationsOutput {
     name: string;
