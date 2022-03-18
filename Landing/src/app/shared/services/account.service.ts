@@ -2,16 +2,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AccountOutput, DiseasesOutput, AllergiesOutput} from '../models/account.model';
+import {AccountOutput, DiseasesOutput, AllergiesOutput, ContactsOutput,MedicationsOutput} from '../models/account.model';
 import {TokenOutput} from '../models/user.model';
 import {UserService} from './user.service';
 
 
 @Injectable()
 export class AccountService {
-
-
-
 
     constructor(private httpClient: HttpClient) {
     }
@@ -34,5 +31,19 @@ export class AccountService {
 
         return this.httpClient.post(environment.apiUrl  + '/information/allergic', list);
     }
+    getContacts(code: string): Observable<Array<ContactsOutput>>{
+        return this.httpClient.get<Array<ContactsOutput>>(environment.apiUrl + '/information/contactPerson/' + code);
+    }
 
+    setContacts(list: Array<ContactsOutput>): Observable<any> {
+        return this.httpClient.post(environment.apiUrl + '/information/contactPerson', list);
+    }
+
+    getMedications(code: string): Observable<Array<MedicationsOutput>>{
+        return this.httpClient.get<Array<MedicationsOutput>>(environment.apiUrl + '/information/medications/' + code);
+    }
+
+    setMedications(list: Array<MedicationsOutput>): Observable<any> {
+        return this.httpClient.post(environment.apiUrl + '/information/medications', list);
+    }
 }
