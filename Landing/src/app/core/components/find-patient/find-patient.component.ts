@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountOutput, DiseasesOutput, AllergiesOutput, ContactsOutput, MedicationsOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
-import {UserService} from "../../../shared/services/user.service";
-import {Router} from "@angular/router";
+import {PatientService} from "../../../shared/services/patient.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-find-patient',
@@ -28,56 +28,56 @@ export class FindPatientComponent implements OnInit {
     contactList: Array<ContactsOutput>;
     medicationsList: Array<MedicationsOutput>;
 
-    constructor(private accountService: AccountService,
-                private userService: UserService,
-                private router: Router) {
+    constructor(private patientService: PatientService,
+                private router: Router,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.userService.getFromRegistration().subscribe(
-            (information: AccountOutput) => {
-
-                this.name = information.name;
-                this.lastName = information.lastName;
-                this.email = information.email;
-                this.code = information.code;
-
-                this.accountService.getChronicDiseases(information.code).subscribe(
-                    (data: Array<DiseasesOutput>) => {
-                        this.illnessList = data;
-                    },
-                    () => {
-                    }
-                );
-                this.accountService.getAllergies(information.code).subscribe(
-                    (data: Array<AllergiesOutput>) => {
-                        this.allegriesList = data;
-                    },
-                    () => {
-                    }
-                );
-                this.accountService.getContacts(information.code).subscribe(
-                    (data: Array<ContactsOutput>) => {
-                        this.contactList = data;
-                    },
-                    () => {
-                    }
-                );
-                this.accountService.getMedications(information.code).subscribe(
-                    (data: Array<MedicationsOutput>) => {
-                        this.medicationsList = data;
-                    },
-                    () => {
-                    }
-                );
+        this.code = this.route.snapshot.paramMap.get('code');
+        console.log("to jest kod: " + this.code);
+        this.patientService.getChronicDiseases(this.code).subscribe(
+            (data: Array<DiseasesOutput>) => {
+                this.illnessList = data;
             },
             () => {
             }
         );
+        this.patientService.getAllergies(this.code).subscribe(
+            (data: Array<AllergiesOutput>) => {
+                this.allegriesList = data;
+            },
+            () => {
+            }
+        );
+        this.patientService.getContacts(this.code).subscribe(
+            (data: Array<ContactsOutput>) => {
+                this.contactList = data;
+            },
+            () => {
+            }
+        );
+        this.patientService.getMedications(this.code).subscribe(
+            (data: Array<MedicationsOutput>) => {
+                this.medicationsList = data;
+            },
+            () => {
+            }
+        );
+        // this.userService.getFromRegistration().subscribe(
+        //     (information: AccountOutput) => {
+        //
+        //         this.name = information.name;
+        //         this.lastName = information.lastName;
+        //         this.email = information.email;
+        //
+        //
+        //
+        //     },
+        //     () => {
+        //     }
+        // );
 
 
-    }
-    logout(){
-        this.userService.removeLocalUser();
     }
 }

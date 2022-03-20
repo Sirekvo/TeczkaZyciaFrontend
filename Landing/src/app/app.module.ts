@@ -40,6 +40,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
+import {FindPatientComponent} from "./core/components/find-patient/find-patient.component";
+import {PatientService} from "./shared/services/patient.service";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -57,6 +59,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     IndexComponent,
     StarterComponent,
     AccountProfileComponent,
+    FindPatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [ AuthInterceptorProvider, UserService, AccountService],
+  providers: [ AuthInterceptorProvider, UserService, AccountService, PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

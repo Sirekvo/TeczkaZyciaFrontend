@@ -6,6 +6,7 @@ import { StarterComponent } from './core/components/starter/starter.component';
 import { AccountProfileComponent } from './core/components/account-profile/account-profile.component';
 import { IndexComponent } from './core/components/index/index.component';
 import { MasterPageComponent } from './core/components/master-page/master-page.component';
+import { FindPatientComponent} from "./core/components/find-patient/find-patient.component";
 
 import { AuthGuard } from './auth/auth.guard';
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: AuthLoginComponent },
+  { path: 'patient/:code', component: FindPatientComponent },
   { path: 'registration', component: AuthSignupComponent },
   { path: 'starter', component: StarterComponent,
     canActivate: [AuthGuard],

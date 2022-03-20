@@ -40,9 +40,8 @@
       <div class="row justify-content-center mt-4 pt-2">
         <div class="col-lg-7 col-md-10">
           <div class="subcribe-form">
-
-            <form class="ms-0">
-              <input type="email" id="email" name="email" class="bg-white shadow rounded-pill" placeholder="Kod użytkownika:">
+            <form class="ms-0" id="findPatient" #f="ngForm" (submit)="findPatient(f)">
+              <input type="code" id="code" name="code" ngModel class="bg-white shadow rounded-pill" placeholder="Kod użytkownika:">
               <button type="submit" class="btn btn-pills btn-primary">Szukaj <i class="uil uil-arrow-right"></i></button>
             </form>
             <!--end form-->
