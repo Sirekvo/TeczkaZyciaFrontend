@@ -24,7 +24,7 @@
                     <label class="form-label">Imię<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative" >
                       <i-feather name="user" class="fea icon-sm icons d-flex"></i-feather>
-                      <input name="firstName" type="text" class="form-control ps-5 pt-2" placeholder="Imię" ngModel required="">
+                      <input name="firstName" type="text" class="form-control ps-5 pt-2" placeholder="Imię" ngModel>
                     </div>
                   </div>
                 </div>
@@ -35,29 +35,33 @@
                     <label class="form-label">Nazwisko <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
-                      <input name="lastName" type="text" class="form-control ps-5 pt-2" placeholder="Nazwisko" ngModel required="">
+                      <input name="lastName" type="text" class="form-control ps-5 pt-2" placeholder="Nazwisko" ngModel>
                     </div>
                   </div>
                 </div>
                 <!--end col-->
 
+                <form [formGroup]="userEmails">
                 <div class="col-md-12">
                   <div class="mb-3">
                     <label class="form-label">Twój Email <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="mail" class="fea icon-sm icons d-flex"></i-feather>
-                      <input name="email" type="email" class="form-control ps-5 pt-2" placeholder="Email" name="email" ngModel required>
+                      <input [class.is-invalid]="email.invalid && email.touched" name="email" type="email" class="form-control ps-5 pt-2" placeholder="Email" email="true" formControlName="primaryEmail">
                     </div>
                   </div>
                 </div>
+                <div *ngIf="(email.invalid && email.touched) || email.dirty">
+                  <small *ngIf="email.errors?.pattern" class="text-danger">Niepoprawny email</small>
+                </div>
                 <!--end col-->
-
+                </form>
                 <div class="col-md-12">
                   <div class="mb-3">
                     <label class="form-label">Hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input name="password" type="password" class="form-control ps-5 pt-2" placeholder="Hasło" ngModel required>
+                      <input name="password" type="password" class="form-control ps-5 pt-2" placeholder="Hasło" ngModel>
                     </div>
                   </div>
                 </div>
@@ -68,7 +72,7 @@
                     <label class="form-label">Powtórz hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input name="repeat_password" type="password" class="form-control ps-5 pt-2" placeholder="Powtórz hasło" ngModel required>
+                      <input name="repeat_password" type="password" class="form-control ps-5 pt-2" placeholder="Powtórz hasło" ngModel>
                     </div>
                   </div>
                 </div>
@@ -77,8 +81,8 @@
                 <div class="col-md-12">
                   <div class="mb-3">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      <label class="form-check-label" for="flexCheckDefault">Akceptuję <a routerLink="/auth-signup"
+                      <input class="form-check-input" name="rules" type="checkbox" value="1" id="flexCheckDefault" [value]="true" [(ngModel)]="isChecked" >
+                      <label class="form-check-label" for="flexCheckDefault">Akceptuję <a routerLink=""
                           class="text-primary">Regulamin</a></label>
                     </div>
                   </div>
@@ -87,7 +91,8 @@
 
                 <div class="col-md-12">
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Zarejestruj się</button>
+                    <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
+                    <button type="submit" class="btn btn-primary">Zarejestruj się</button>
                   </div>
                 </div>
                 <!--end col-->
