@@ -5,6 +5,7 @@ import {ChangeDetectorRef} from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {PatientService} from "../../shared/services/patient.service";
 
 
 @Component({
@@ -20,9 +21,10 @@ export class AuthSignupComponent implements OnInit {
 
     information_to_user = '';
     isChecked : boolean;
-    userEmail='';
 
-    constructor(private userService: UserService){
+
+    constructor(private userService: UserService,
+                private patientService: PatientService){
     }
 
     ngOnInit(): void {
@@ -36,26 +38,58 @@ export class AuthSignupComponent implements OnInit {
     get email(){
         return this.userEmails.get('primaryEmail');
     }
+
     addNewUser(form: any) {
         if(form.value.firstName != ''){
-            if(form.value.lastName != ''){
-                if(form.value.email=''){
-                    // if(form.value.password == form.value.repeat_password) {
-                    //     if(this.isChecked == true){
-                    //         console.log("zaznaczono");
-                    //     }
-                    //     else{
-                    //         this.information_to_user="Nie zaakcpetowano regulaminu";
-                    //         form.reset();
-                    //     }
-                    // }
-                    // else{
-                    //     this.information_to_user="Hasła są różne";
-                    //     form.reset();
-                    // }
+            if(form.value.lastName != '') {
+                if (this.userEmails.get('primaryEmail').value != '') {
+                    this.patientService.existsEmail(this.userEmails.get('primaryEmail').value).subscribe(
+                        (data: any) => {
+                            if (data.exists == false) {
+                                if(form.value.password != ''){
+                                    if(form.value.password == form.value.repeat_password) {
+                                        if(this.isChecked == true){
+                                            this.userService.registerUser(form.value.firstName, form.value.lastName, this.userEmails.get('primaryEmail').value , form.value.password).subscribe(
+                                                (response: any) => {
+                                                    console.log(response);
+
+                                                    // this.getEmployees();
+                                                    form.reset();
+                                                },
+                                                (error: HttpErrorResponse) => {
+                                                    alert(error.message);
+                                                    form.reset();
+                                                }
+                                            );
+                                        }
+                                        else{
+                                            this.information_to_user="Nie zaakcpetowano regulaminu";
+                                            form.reset();
+                                        }
+                                    }
+                                    else{
+                                        this.information_to_user="Hasła są różne";
+                                        form.reset();
+                                    }
+                                }
+                                else{
+                                    this.information_to_user = 'Nie wpisano hasła';
+                                    form.reset();
+                                }
+                            }
+                            else {
+                                this.information_to_user = 'Podany email jest już użyty';
+                                form.reset();
+                            }
+                        },
+                        () => {
+                        }
+                    );
+
+
                 }
-                else{
-                    this.information_to_user="Nie podano emailu";
+                else {
+                    this.information_to_user = "Nie podano emailu";
                     form.reset();
                 }
             }
@@ -70,18 +104,7 @@ export class AuthSignupComponent implements OnInit {
             form.reset();
         }
 
-        // this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
-        //     (response: any) => {
-        //       console.log(response);
-        //
-        //       // this.getEmployees();
-        //       form.reset();
-        //     },
-        //     (error: HttpErrorResponse) => {
-        //       alert(error.message);
-        //       form.reset();
-        //     }
-        // );
+
 
     }
 }

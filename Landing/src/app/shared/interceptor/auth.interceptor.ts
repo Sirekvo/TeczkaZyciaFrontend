@@ -10,10 +10,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
     isRefreshing = false;
 
-    constructor(private userService: UserService) {
+    constructor(private injector: Injector,
+                private userService: UserService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        if (!this.userService) {
+            this.userService = this.injector.get(UserService);
+        }
 
         req = req.clone({
             headers: req.headers

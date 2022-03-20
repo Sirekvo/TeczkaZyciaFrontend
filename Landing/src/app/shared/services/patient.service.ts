@@ -2,7 +2,14 @@ import {HttpClient, HttpHeaders, HttpBackend} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AccountOutput, DiseasesOutput, AllergiesOutput, ContactsOutput,MedicationsOutput} from '../models/account.model';
+import {
+    AccountOutput,
+    DiseasesOutput,
+    AllergiesOutput,
+    ContactsOutput,
+    MedicationsOutput,
+    CodeOutput, EmailOutput
+} from '../models/account.model';
 
 
 @Injectable()
@@ -25,4 +32,11 @@ export class PatientService {
         return this.httpClient.get<Array<MedicationsOutput>>(environment.apiUrl + '/information/medications/' + code);
     }
 
+    existsCode(code: string): Observable<Array<CodeOutput>>{
+        return this.httpClient.get<Array<CodeOutput>>(environment.apiUrl + '/account/check-code/' + code);
+    }
+
+    existsEmail(email: string): Observable<Array<EmailOutput>>{
+        return this.httpClient.get<Array<EmailOutput>>(environment.apiUrl + '/account/check-email/' + email);
+    }
 }

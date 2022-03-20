@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
@@ -9,7 +9,10 @@ import {AccountOutput} from "../models/account.model";
 @Injectable()
 export class UserService {
 
-    constructor(private httpClient: HttpClient) {
+    constructor(handler: HttpBackend,
+                private httpClient: HttpClient,
+                private httpClient_withoutToken: HttpClient) {
+        this.httpClient_withoutToken = new HttpClient(handler);
     }
 
     registerUser(name: string, lastName: string, email: string, password: string): Observable<any> {
@@ -22,9 +25,10 @@ export class UserService {
         };
 
         const httpOptions = {
-          headers: new HttpHeaders({'Content-Type': 'application/json'})
+            headers: new HttpHeaders({'Content-Type': 'application/json'})
         };
-        return this.httpClient.post('http://localhost:8080' + '/registration', body, httpOptions);
+
+        return this.httpClient_withoutToken.post('http://localhost:8080' + '/registration', body, httpOptions);
     }
 
     setLocalUser(user: TokenOutput, remember: boolean) {

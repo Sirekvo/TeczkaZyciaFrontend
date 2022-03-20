@@ -21,6 +21,12 @@ export class MedicationsOutput {
     portion: number;
     howOften: string;
 }
+export class EmailOutput {
+    exists: boolean;
+}
+export class CodeOutput {
+    exists: boolean;
+}
 
 
 
