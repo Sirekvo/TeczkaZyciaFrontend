@@ -106,23 +106,15 @@
         <div class="pb-4">
           <h3>Osoby kontaktowe</h3>
           <hr>
-          <table class=" table mb-0 table-center">
-            <thead>
-
-            </thead>
-            <tbody>
-            <tr *ngFor="let contact of contactList; let indexOfElement=index;">
-              <div class="icon d-flex align-items-center justify-content-center bg-soft-primary rounded-circle mx-auto"
-                   style="height: 90px; width:90px;">
-                <i class="uil uil-user align-middle h1 mb-0"></i>
-              </div>
-              <td>{{contact.phoneNumber}}</td>
-              <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</td>
-              <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</td>
-              <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
-            </tr>
-            </tbody>
-          </table>
+          <div *ngFor="let contact of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
+            <div class="mx-auto bg-soft-primary rounded-circle position-relative"
+                 style="height: 90px; width: 90px;">
+              <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
+            </div>
+            <h6>{{contact.phoneNumber}}</h6>
+            <p *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</p>
+            <p *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</p>
+          </div>
         </div>
 
         <div class="pb-4">
