@@ -42,6 +42,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
 import {FindPatientComponent} from "./core/components/find-patient/find-patient.component";
 import {PatientService} from "./shared/services/patient.service";
+import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
+import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -60,6 +62,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     StarterComponent,
     AccountProfileComponent,
     FindPatientComponent,
+    PageConfirmMailComponent,
+    AuthRePasswordComponent,
   ],
   imports: [
     BrowserModule,

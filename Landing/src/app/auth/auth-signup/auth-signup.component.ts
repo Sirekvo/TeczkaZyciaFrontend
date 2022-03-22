@@ -24,7 +24,8 @@ export class AuthSignupComponent implements OnInit {
 
 
     constructor(private userService: UserService,
-                private patientService: PatientService){
+                private patientService: PatientService,
+                private router: Router){
     }
 
     ngOnInit(): void {
@@ -51,24 +52,20 @@ export class AuthSignupComponent implements OnInit {
                                         if(this.isChecked == true){
                                             this.userService.registerUser(form.value.firstName, form.value.lastName, this.userEmails.get('primaryEmail').value , form.value.password).subscribe(
                                                 (response: any) => {
-                                                    console.log(response);
-
-                                                    // this.getEmployees();
-                                                    form.reset();
+                                                    this.router.navigate(['/confirm-mail', form.value.firstName]);
                                                 },
                                                 (error: HttpErrorResponse) => {
-                                                    alert(error.message);
                                                     form.reset();
                                                 }
                                             );
                                         }
                                         else{
-                                            this.information_to_user="Nie zaakcpetowano regulaminu";
+                                            this.information_to_user = 'Nie zaakcpetowano regulaminu';
                                             form.reset();
                                         }
                                     }
                                     else{
-                                        this.information_to_user="Hasła są różne";
+                                        this.information_to_user = 'Hasła są różne';
                                         form.reset();
                                     }
                                 }
@@ -89,18 +86,18 @@ export class AuthSignupComponent implements OnInit {
 
                 }
                 else {
-                    this.information_to_user = "Nie podano emailu";
+                    this.information_to_user = 'Nie podano emailu';
                     form.reset();
                 }
             }
             else{
-                this.information_to_user="Nie wypelniono wszystkich wymaganych pól";
+                this.information_to_user = 'Nie wypelniono wszystkich wymaganych pól';
                 form.reset();
             }
 
         }
         else{
-            this.information_to_user="Nie wypelniono wszystkich wymaganych pól";
+            this.information_to_user = 'Nie wypelniono wszystkich wymaganych pól';
             form.reset();
         }
 

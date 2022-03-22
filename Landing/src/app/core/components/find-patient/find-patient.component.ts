@@ -35,7 +35,6 @@ export class FindPatientComponent implements OnInit {
 
     ngOnInit(): void {
         this.code = this.route.snapshot.paramMap.get('code');
-        console.log("to jest kod: " + this.code);
         this.patientService.getChronicDiseases(this.code).subscribe(
             (data: Array<DiseasesOutput>) => {
                 this.illnessList = data;

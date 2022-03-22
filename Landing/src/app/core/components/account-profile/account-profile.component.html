@@ -48,51 +48,51 @@
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
                 <a routerLink="/account-profile" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-dashboard"></i></span>
+                  <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
                   <h6 class="mb-0 ms-2 ">Profil</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/account-members" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-users-alt"></i></span>
-                  <h6 class="mb-0 ms-2">Members</h6>
+                  <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
+                  <h6 class="mb-0 ms-2">Szczepienia</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/account-works" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-file"></i></span>
-                  <h6 class="mb-0 ms-2">Portfolio</h6>
+                  <h6 class="mb-0 ms-2">Wyniki krwi</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/account-messages"
                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-envelope-star"></i></span>
-                  <h6 class="mb-0 ms-2">Messages</h6>
+                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/account-payments"
                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-transaction"></i></span>
-                  <h6 class="mb-0 ms-2">Payments</h6>
+                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/account-setting" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
-                  <h6 class="mb-0 ms-2">Settings</h6>
+                  <h6 class="mb-0 ms-2">Ustawienia</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a (click)=logout() routerLink="/login" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-dashboard"></i></span>
+                  <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
               </li>
@@ -108,18 +108,17 @@
           <hr>
           <table class=" table mb-0 table-center">
             <thead>
-            <tr>
-              <th scope="col" class="border-bottom" >#</th>
-              <th scope="col" class="border-bottom" >Typ</th>
-              <th scope="col" class="border-bottom" >Numer telefonu</th>
-            </tr>
+
             </thead>
             <tbody>
             <tr *ngFor="let contact of contactList; let indexOfElement=index;">
-              <td>{{indexOfElement+1}}</td>
+              <div class="icon d-flex align-items-center justify-content-center bg-soft-primary rounded-circle mx-auto"
+                   style="height: 90px; width:90px;">
+                <i class="uil uil-user align-middle h1 mb-0"></i>
+              </div>
+              <td>{{contact.phoneNumber}}</td>
               <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</td>
               <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</td>
-              <td>{{contact.phoneNumber}}</td>
               <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
             </tr>
             </tbody>
