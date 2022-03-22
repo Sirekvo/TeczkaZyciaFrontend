@@ -107,7 +107,7 @@
           <h3>Osoby kontaktowe</h3>
           <hr>
           <div *ngFor="let contact of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
-            <div class="mx-auto bg-soft-primary rounded-circle position-relative"
+            <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
                  style="height: 90px; width: 90px;">
               <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
             </div>
@@ -143,7 +143,7 @@
         <div class="pb-4">
           <h3>Przyjmowane leki</h3>
           <hr>
-          <table class=" table mb-0 table-center">
+         <!-- <table class=" table mb-0 table-center">
             <thead>
             <tr>
               <th scope="col" class="border-bottom" >#</th>
@@ -160,7 +160,20 @@
               <td>{{tabs.howOften}}</td>
               </tr>
             </tbody>
-          </table>
+          </table>-->
+          <div *ngFor="let tabs of medicationsList" class="col-6 col-sm-6 col-md-6 d-inline-flex">
+            <div class="position-relative ms-1">
+              <div class="bg-soft-primary rounded-circle position-absolute top-50 start-50 translate-middle-y"
+                   style="height: 50px; width: 50px;">
+                <i class="uil uil-capsule h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
+              </div>
+            </div>
+            <div class="ms-5">
+              <h4 class="ms-3">{{tabs.name}}</h4>
+              <h6 class="ms-3"><b>Dawka:</b> {{tabs.portion}}</h6>
+              <h6 class="ms-3"><b>Jak często:</b> {{tabs.howOften}}</h6>
+            </div>
+          </div>
         </div>
 
         <div class="pb-4">
