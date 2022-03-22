@@ -62,6 +62,11 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div *ngFor="let contact of contactList">
+                        <h4>{{contact.phoneNumber}}</h4>
+                        <h6 *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</h6>
+                        <h6 *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</h6>
+                    </div>
                 </div>
 
                 <div class="pb-4">
