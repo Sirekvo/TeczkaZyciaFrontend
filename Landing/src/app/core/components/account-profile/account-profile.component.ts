@@ -4,6 +4,7 @@ import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-account-profile',
   templateUrl: './account-profile.component.html',
@@ -27,6 +28,7 @@ export class AccountProfileComponent implements OnInit {
   allegriesList: Array<AllergiesOutput>;
   contactList: Array<ContactsOutput>;
   medicationsList: Array<MedicationsOutput>;
+  isVisible_illness = false;
 
   constructor(private accountService: AccountService,
               private userService: UserService,
@@ -80,4 +82,7 @@ export class AccountProfileComponent implements OnInit {
   logout(){
       this.userService.removeLocalUser();
   }
+    show_illness_settings(){
+      this.isVisible_illness = true;
+    }
 }

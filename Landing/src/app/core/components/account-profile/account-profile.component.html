@@ -102,9 +102,14 @@
       </div>
       <!--end col-->
 
-      <div class="col-lg-8 col-12">
+      <div class="col-lg-8 col-12 position-relative">
         <div class="pb-4">
-          <h3>Osoby kontaktowe</h3>
+          <div class="d-inline-flex col-12">
+            <h3 class="col-11">Osoby kontaktowe</h3>
+            <button class="h3 text-primary bg-white border-0 p-0 m-0" ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button>
+          </div>
           <hr>
           <div *ngFor="let contact of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
             <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
@@ -118,83 +123,161 @@
         </div>
 
         <div class="pb-4">
-          <h3>Alergie i uczulenia</h3>
+          <div class="d-inline-flex col-12">
+            <h3 class="col-11">Alergie i uczulenia</h3>
+            <button class="h3 text-primary bg-white border-0 p-0 m-0" ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button>
+          </div>
           <hr>
           <table class=" table mb-0 table-center">
             <thead>
             <tr>
-              <th scope="col" class="border-bottom" >#</th>
-              <th scope="col" class="border-bottom" >Nazwa</th>
-              <th scope="col" class="border-bottom" >Typ</th>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:30%;">Nazwa</th>
+              <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
-              <td>{{indexOfElement+1}}</td>
-              <td>{{allergy.name}}</td>
-              <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
-              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
-              <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
-            </tr>
+              <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
+                <td>{{indexOfElement+1}}</td>
+                <td>{{allergy.name}}</td>
+                <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
+                <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <div class="pb-4">
-          <h3>Przyjmowane leki</h3>
+          <div class="d-inline-flex col-12">
+            <h3 class="col-11">Przyjmowane leki</h3>
+            <button class="h3 text-primary bg-white border-0 p-0 m-0" ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button>
+          </div>
           <hr>
-         <!-- <table class=" table mb-0 table-center">
+          <table class="table mb-0 table-center">
             <thead>
             <tr>
-              <th scope="col" class="border-bottom" >#</th>
-              <th scope="col" class="border-bottom" >Nazwa leku</th>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
               <th scope="col" class="border-bottom" >Dawka</th>
               <th scope="col" class="border-bottom" >Co ile</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
+              <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
               <td>{{indexOfElement+1}}</td>
-              <td class="flex-column">{{tabs.name}}</td>
+              <td>{{tabs.name}}</td>
               <td>{{tabs.portion}}</td>
               <td>{{tabs.howOften}}</td>
               </tr>
             </tbody>
-          </table>-->
-          <div *ngFor="let tabs of medicationsList" class="col-6 col-sm-6 col-md-6 d-inline-flex">
-            <div class="position-relative ms-1">
-              <div class="bg-soft-primary rounded-circle position-absolute top-50 start-50 translate-middle-y"
-                   style="height: 50px; width: 50px;">
-                <i class="uil uil-capsule h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
-              </div>
-            </div>
-            <div class="ms-5">
-              <h4 class="ms-3">{{tabs.name}}</h4>
+          </table>
+          <!--<div *ngFor="let tabs of medicationsList" class="col-6 col-sm-4 col-md-4 d-inline-flex border-2 rounded" style="border:solid;">
+            <div class="mx-auto w-100 h-100">
+              <h6 class="text-center"><b>{{tabs.name}}</b></h6>
               <h6 class="ms-3"><b>Dawka:</b> {{tabs.portion}}</h6>
               <h6 class="ms-3"><b>Jak często:</b> {{tabs.howOften}}</h6>
             </div>
-          </div>
+          </div>-->
         </div>
 
-        <div class="pb-4">
-          <h3>Choroby przewlekłe</h3>
+        <div class="pb-4 position-relative">
+          <div class="d-inline-flex col-12">
+            <h3 class="col-11">Choroby przewlekłe</h3>
+            <button class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_illness_settings()" ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button>
+          </div>
           <hr>
           <table class=" table mb-0 table-center">
             <thead>
             <tr>
-              <th scope="col" class="border-bottom" >#</th>
-              <th scope="col" class="border-bottom" >Nazwa choroby</th>
-              <th scope="col" class="border-bottom" ></th>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
-              <td>{{indexOfElement+1}}</td>
-              <td>{{illness.name}}</td>
-              <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
-            </tr>
+              <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
+                <td >{{indexOfElement+1}}</td>
+                <td>{{illness.name}}</td>
+                <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
+              </tr>
             </tbody>
           </table>
+        </div>
+
+        <div *ngIf="isVisible_illness" class="col-12 position-absolute sticky-bar" style="top:20%">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-8 col-md-5 mb-5">
+              <div class="card rounded bg-light overflow-hidden border-1 px-3 py-4 mb-5">
+                <form id="illnessForm" #fam="ngForm" >
+                  <h4 class="title text-center">Choroby przewlełe</h4>
+                  <div class="row">
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe choroby przewlekłej, która ci towarzyszy</p>
+                    <div class="col-lg-12">
+                      <div class="mb-3 mt-4">
+                        <label class="form-label">Nazwa choroby<span class="text-danger">*</span></label>
+                        <div class="form-icon position-relative">
+                          <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
+                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa choroby" ngModel required minlength="3">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-0 pb-4 text-center w-100">
+                      <p class="text-secondary para-desc mb-0">Możesz dodać maksymalnie 5 chorób przewlekłych</p>
+                      <div class="col-5 justify-content-center w-100">
+                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!fam.valid">Dodaj</button>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div name="table" class="p-4" >
+                      <div class="table-responsive bg-white shadow rounded" id="illnessTable">
+                        <div></div>
+                        <table class=" table mb-0 table-center">
+                          <thead>
+                          <tr>
+                            <th scope="col" class="border-bottom" >#</th>
+                            <th scope="col" class="border-bottom" >Nazwa choroby</th>
+                            <th scope="col" class="border-bottom" ></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let illness of illnessList ; let indexOfElement=index;">
+                            <td>{{indexOfElement+1}}</td>
+                            <td>{{illness.name}}</td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" ></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!--end table-->
+
+                    <div class="col mb-0">
+                      <div class="d-grid">
+                        <button class="btn btn-secondary">Pomiń</button>
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="d-grid">
+                        <button class="btn btn-primary" >Gotowe</button>
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+
+              </div>
+              <!---->
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
         </div>
 
       </div>
@@ -203,6 +286,7 @@
     <!--end row-->
   </div>
   <!--end container-->
+
 </section>
 <!--end section-->
 <!-- Profile End -->
