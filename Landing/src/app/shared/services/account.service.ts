@@ -5,9 +5,13 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {
     AccountOutput,
     DiseasesOutput,
+    DiseasesInput,
     AllergiesOutput,
+    AllergiesInput,
     ContactsOutput,
+    ContactsInput,
     MedicationsOutput,
+    MedicationsInput,
     CodeOutput, EmailOutput
 } from '../models/account.model';
 import {TokenOutput} from '../models/user.model';
@@ -21,9 +25,9 @@ export class AccountService {
     }
 
 
-    getChronicDiseases(code: string): Observable<Array<DiseasesOutput>> {
+    getChronicDiseases(code: string): Observable<Array<DiseasesInput>> {
 
-        return this.httpClient.get<Array<DiseasesOutput>>(environment.apiUrl + '/information/chronicDiseases/' + code);
+        return this.httpClient.get<Array<DiseasesInput>>(environment.apiUrl + '/information/chronicDiseases/' + code);
     }
 
     setChronicDiseases(list: Array<DiseasesOutput>): Observable<any> {
@@ -31,24 +35,24 @@ export class AccountService {
         return this.httpClient.post(environment.apiUrl  + '/information/chronicDiseases', list);
     }
 
-    getAllergies(code: string): Observable<Array<AllergiesOutput>>{
-        return this.httpClient.get<Array<AllergiesOutput>>(environment.apiUrl + '/information/allergic/' + code);
+    getAllergies(code: string): Observable<Array<AllergiesInput>>{
+        return this.httpClient.get<Array<AllergiesInput>>(environment.apiUrl + '/information/allergic/' + code);
     }
 
     setAllergies(list: Array<AllergiesOutput>): Observable<any> {
 
         return this.httpClient.post(environment.apiUrl  + '/information/allergic', list);
     }
-    getContacts(code: string): Observable<Array<ContactsOutput>>{
-        return this.httpClient.get<Array<ContactsOutput>>(environment.apiUrl + '/information/contactPerson/' + code);
+    getContacts(code: string): Observable<Array<ContactsInput>>{
+        return this.httpClient.get<Array<ContactsInput>>(environment.apiUrl + '/information/contactPerson/' + code);
     }
 
     setContacts(list: Array<ContactsOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/information/contactPerson', list);
     }
 
-    getMedications(code: string): Observable<Array<MedicationsOutput>>{
-        return this.httpClient.get<Array<MedicationsOutput>>(environment.apiUrl + '/information/medications/' + code);
+    getMedications(code: string): Observable<Array<MedicationsInput>>{
+        return this.httpClient.get<Array<MedicationsInput>>(environment.apiUrl + '/information/medications/' + code);
     }
 
     setMedications(list: Array<MedicationsOutput>): Observable<any> {

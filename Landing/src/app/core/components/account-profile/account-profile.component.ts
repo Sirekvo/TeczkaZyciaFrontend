@@ -2,9 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {
     AccountOutput,
     AllergiesOutput,
+    AllergiesInput,
     ContactsOutput,
+    ContactsInput,
     DiseasesOutput,
-    MedicationsOutput
+    DiseasesInput,
+    MedicationsOutput,
+    MedicationsInput
 } from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
@@ -30,10 +34,10 @@ export class AccountProfileComponent implements OnInit {
   lastName = '';
   email = '';
   code = '';
-  illnessList: Array<DiseasesOutput>;
-  allegriesList: Array<AllergiesOutput>;
-  contactList: Array<ContactsOutput>;
-  medicationsList: Array<MedicationsOutput>;
+  illnessList: Array<DiseasesInput>;
+  allegriesList: Array<AllergiesInput>;
+  contactList: Array<ContactsInput>;
+  medicationsList: Array<MedicationsInput>;
   isVisible_illness = false;
   isVisible_contact = false;
   isVisible_allergy = false;
@@ -60,28 +64,28 @@ export class AccountProfileComponent implements OnInit {
           this.code = information.code;
 
           this.accountService.getChronicDiseases(information.code).subscribe(
-          (data: Array<DiseasesOutput>) => {
+          (data: Array<DiseasesInput>) => {
               this.illnessList = data;
           },
           () => {
           }
           );
           this.accountService.getAllergies(information.code).subscribe(
-          (data: Array<AllergiesOutput>) => {
+          (data: Array<AllergiesInput>) => {
               this.allegriesList = data;
           },
           () => {
           }
           );
           this.accountService.getContacts(information.code).subscribe(
-          (data: Array<ContactsOutput>) => {
+          (data: Array<ContactsInput>) => {
               this.contactList = data;
           },
           () => {
           }
           );
           this.accountService.getMedications(information.code).subscribe(
-          (data: Array<MedicationsOutput>) => {
+          (data: Array<MedicationsInput>) => {
                this.medicationsList = data;
           },
           () => {

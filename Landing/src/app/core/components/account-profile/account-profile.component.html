@@ -119,6 +119,14 @@
             <h6>{{contact.phoneNumber}}</h6>
             <p *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</p>
             <p *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</p>
+            <p>{{contact.appUserID}}</p>
+            <p>{{contact.id}}</p>
+            <!-- skrypt do testów-->
+            <!-- <script>
+              function log_console(){
+                console.log(contact.appUserID)
+              }
+            </script> -->
           </div>
         </div>
 
