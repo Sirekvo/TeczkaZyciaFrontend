@@ -111,22 +111,14 @@
             </button>
           </div>
           <hr>
-          <div *ngFor="let contact of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
+          <div *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
             <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
                  style="height: 90px; width: 90px;">
               <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
             </div>
-            <h6>{{contact.phoneNumber}}</h6>
-            <p *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</p>
-            <p *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</p>
-            <p>{{contact.appUserID}}</p>
-            <p>{{contact.id}}</p>
-            <!-- skrypt do testów-->
-            <!-- <script>
-              function log_console(){
-                console.log(contact.appUserID)
-              }
-            </script> -->
+            <h6>{{contact_main.phoneNumber}}</h6>
+            <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina</p>
+            <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
           </div>
         </div>
 
@@ -221,7 +213,7 @@
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12">
               <div class="px-3 py-4">
-                <form id="contactForm" #f="ngForm" >
+                <form id="contactForm" #f="ngForm" (submit)="onContactSubmit(f)" >
                   <h4 class="title text-center">Osoby Kontaktowe</h4>
                   <div class="row">
                     <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
@@ -247,7 +239,7 @@
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 3 osoby</p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success" [disabled]="!f.valid">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success" [disabled]="!f.valid || contact_counter>2">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -265,12 +257,12 @@
                           </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let contact of contactList; let indexOfElement=index;">
+                          <tr *ngFor="let contact of contact_tmp; let indexOfElement=index;">
                             <td>{{indexOfElement+1}}</td>
                             <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina </td>
                             <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy </td>
                             <td>{{contact.phoneNumber}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_contact(indexOfElement,contact.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -285,7 +277,7 @@
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary">Gotowe</button>
+                        <button class="btn btn-primary" (click)="back_to_start_complete()">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->
