@@ -374,7 +374,7 @@
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12 mb-5">
               <div class="px-3 py-4 mb-5">
-                <form id="tabsForm" #ft="ngForm" >
+                <form id="tabsForm" #ft="ngForm" (submit)="onMedicationsSubmit(ft)">
                   <h4 class="title text-center">Przyjmowane leki</h4>
                   <div class="row">
                     <p class="text-secondary text-center para-desc mb-2 mx-auto">Uzupełnij informacje poniżej o przyjmowanych lekach przez Ciebie</p>
@@ -425,7 +425,7 @@
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mx-auto mb-0">Możesz dodać maksymalnie 15 przyjmowanych leków</p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!ft.valid">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!ft.valid || medications_counter>14 ">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -443,12 +443,12 @@
                           </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
+                          <tr *ngFor="let tabs of medications_tmp ; let indexOfElement=index;">
                             <td>{{indexOfElement+1}}</td>
                             <td>{{tabs.name}}</td>
                             <td>{{tabs.portion}}</td>
                             <td>{{tabs.howOften}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_medications(indexOfElement,tabs.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -463,7 +463,7 @@
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary">Gotowe</button>
+                        <button class="btn btn-primary" (click)="back_to_start_complete_3()">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -484,7 +484,7 @@
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12 mb-5">
               <div class="px-3 py-4 mb-5">
-                <form id="illnessForm" #fam="ngForm" >
+                <form id="illnessForm" #fam="ngForm" (submit)="onIllnessSubmit(fam)">
                   <h4 class="title text-center">Choroby przewlełe</h4>
                   <div class="row">
                     <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe choroby przewlekłej, która ci towarzyszy</p>
@@ -500,7 +500,7 @@
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 5 chorób przewlekłych</p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!fam.valid">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!fam.valid || illness_counter>4">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -517,10 +517,10 @@
                           </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let illness of illnessList ; let indexOfElement=index;">
+                          <tr *ngFor="let illness of illness_tmp ; let indexOfElement=index;">
                             <td>{{indexOfElement+1}}</td>
                             <td>{{illness.name}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" ></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_illness(indexOfElement,illness.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -535,7 +535,7 @@
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" >Gotowe</button>
+                        <button class="btn btn-primary" (click)="back_to_start_complete_4()">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->

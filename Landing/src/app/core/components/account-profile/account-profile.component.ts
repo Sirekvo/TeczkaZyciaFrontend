@@ -35,6 +35,8 @@ export class AccountProfileComponent implements OnInit {
   email = '';
   code = '';
   illnessList: Array<DiseasesInput>;
+  illness_tmp: Array<DiseasesInput>;
+  addIllness: Array<DiseasesOutput> = [];
 
   allegriesList: Array<AllergiesInput>;
   allergies_tmp: Array<AllergiesInput>;
@@ -45,9 +47,14 @@ export class AccountProfileComponent implements OnInit {
   addContact: Array<ContactsOutput> = [];
 
   medicationsList: Array<MedicationsInput>;
+  medications_tmp: Array<MedicationsInput>;
+  addMedications: Array<MedicationsOutput> = [];
 
   idContacts: Array<number> = [];
   idAllergies: Array<number> = [];
+  idMedications: Array<number> = [];
+  idIllness: Array<number> = [];
+
   isVisible_illness = false;
   isVisible_contact = false;
   isVisible_allergy = false;
@@ -123,11 +130,13 @@ export class AccountProfileComponent implements OnInit {
   show_illness_settings(){
       this.isVisible_illness = true;
       this.isVisible = false;
+      this.illness_tmp = this.illnessList.slice();
   }
 
   show_medications_settings(){
       this.isVisible_medications = true;
       this.isVisible = false;
+      this.medications_tmp = this.medicationsList.slice();
   }
 
   show_contact_settings(){
@@ -140,7 +149,6 @@ export class AccountProfileComponent implements OnInit {
       this.isVisible_allergy = true;
       this.isVisible = false;
       this.allergies_tmp = this.allegriesList.slice();
-      console.log(this.allergies_tmp);
   }
 
   back_to_start(){
@@ -149,19 +157,20 @@ export class AccountProfileComponent implements OnInit {
       this.isVisible_medications = false;
       this.isVisible_contact = false;
       this.isVisible = true;
+      this.idContacts.splice(0, this.idContacts.length);
+      this.idAllergies.splice(0, this.idAllergies.length);
+      this.idMedications.splice(0, this.idMedications.length);
+      this.idIllness.splice(0, this.idIllness.length);
+      this.addContact.splice(0, this.addContact.length);
+      this.addAllergies.splice(0, this.addAllergies.length);
+      this.addMedications.splice(0, this.addMedications.length);
+      this.addIllness.splice(0, this.addIllness.length);
   }
   back_to_start_complete(){
-      console.log(this.idContacts);
-      console.log(this.idContacts[0]);
-      console.log(this.idContacts[1]);
-      console.log(this.idContacts[2]);
       if(this.idContacts.length != 0){
-          console.log(this.idContacts.length);
           for(let i = 0; i < this.idContacts.length; i++){
-              console.log(this.idContacts[i]);
               this.accountService.deleteContacts(this.idContacts[i]).subscribe(
                   (response: any) => {
-                      console.log("USUWANKO: " + response);
                   },
                   () => {
                   }
@@ -169,9 +178,7 @@ export class AccountProfileComponent implements OnInit {
           }
           this.refresh();
       }
-
-      this.idContacts.splice(0,this.idContacts.length);
-
+      this.idContacts.splice(0, this.idContacts.length);
       if(this.addContact.length != 0){
           this.accountService.setContacts(this.addContact).subscribe(
               (response: any) => {
@@ -182,7 +189,7 @@ export class AccountProfileComponent implements OnInit {
               }
           );
       }
-      this.addContact.splice(0,this.addContact.length);
+      this.addContact.splice(0, this.addContact.length);
 
       this.isVisible_contact = false;
       this.isVisible = true;
@@ -190,7 +197,6 @@ export class AccountProfileComponent implements OnInit {
 
   }
   back_to_start_complete_2(){
-      console.log(this.idAllergies);
       if(this.idAllergies.length != 0){
           for(let i = 0; i < this.idAllergies.length; i++){
               this.accountService.deleteAllergies(this.idAllergies[i]).subscribe(
@@ -203,7 +209,7 @@ export class AccountProfileComponent implements OnInit {
           this.refresh();
       }
 
-      this.idAllergies.splice(0,this.idAllergies.length);
+      this.idAllergies.splice(0, this.idAllergies.length);
       if(this.addAllergies.length != 0){
           this.accountService.setAllergies(this.addAllergies).subscribe(
               (response: any) => {
@@ -214,10 +220,68 @@ export class AccountProfileComponent implements OnInit {
               }
           );
       }
-      this.addAllergies.splice(0,this.addAllergies.length);
+      this.addAllergies.splice(0, this.addAllergies.length);
       this.isVisible_allergy = false;
       this.isVisible = true;
   }
+  back_to_start_complete_3(){
+      if(this.idMedications.length != 0){
+          for(let i = 0; i < this.idMedications.length; i++){
+              this.accountService.deleteMedications(this.idMedications[i]).subscribe(
+                  (response: any) => {
+
+                  },
+                  () => {
+                  }
+              );
+          }
+          this.refresh();
+      }
+
+      this.idMedications.splice(0, this.idMedications.length);
+      if(this.addMedications.length != 0){
+          this.accountService.setMedications(this.addMedications).subscribe(
+              (response: any) => {
+                  console.log(response);
+                  this.refresh();
+              },
+              () => {
+              }
+          );
+      }
+      this.addMedications.splice(0, this.addMedications.length);
+      this.isVisible_medications = false;
+      this.isVisible = true;
+  }
+  back_to_start_complete_4(){
+      if(this.idIllness.length != 0){
+          for(let i = 0; i < this.idIllness.length; i++){
+              this.accountService.deleteChronicDiseases(this.idIllness[i]).subscribe(
+                  (response: any) => {
+
+                  },
+                  () => {
+                  }
+              );
+          }
+          this.refresh();
+      }
+
+      this.idIllness.splice(0, this.idIllness.length);
+      if(this.addIllness.length != 0){
+          this.accountService.setChronicDiseases(this.addIllness).subscribe(
+              (response: any) => {
+                  console.log(response);
+                  this.refresh();
+              },
+              () => {
+              }
+          );
+      }
+      this.addIllness.splice(0, this.addIllness.length);
+      this.isVisible_illness = false;
+      this.isVisible = true;
+    }
 
   checkSelected(selectedChoice: number){
       this.activeToggle = selectedChoice;
@@ -284,6 +348,60 @@ export class AccountProfileComponent implements OnInit {
       else{
           this.allergies_tmp.splice(rowNumber, 1);
           this.allergies_counter--;
+      }
+  }
+  onMedicationsSubmit(form: any) {
+      if (this.medications_counter < 15) {
+          const tabs = new MedicationsInput();
+          const tabs2 = new MedicationsOutput();
+          tabs.id = 0;
+          tabs.name = form.value.name;
+          tabs.portion = form.value.portion;
+          tabs.howOften = this.howOftenSelect;
+          tabs.appUserID = 0;
+          tabs2.name = form.value.name;
+          tabs2.portion = form.value.portion;
+          tabs2.howOften = this.howOftenSelect;
+          this.medications_tmp.push(tabs);
+          this.addMedications.push(tabs2);
+          this.medications_counter++;
+          form.reset();
+      }
+  }
+  delete_medications(rowNumber, id){
+      if(id != 0){
+          this.medications_tmp.splice(rowNumber, 1);
+          this.medications_counter--;
+          this.idMedications.push(id);
+      }
+      else{
+          this.medications_tmp.splice(rowNumber, 1);
+          this.medications_counter--;
+      }
+  }
+    onIllnessSubmit(form: any) {
+      if (this.illness_counter < 5) {
+          const illness = new DiseasesInput();
+          const illness2 = new DiseasesOutput();
+          illness.id = 0;
+          illness.name = form.value.name;
+          illness.appUserID = 0;
+          illness2.name = form.value.name;
+          this.illness_tmp.push(illness);
+          this.addIllness.push(illness2);
+          this.illness_counter++;
+          form.reset();
+      }
+  }
+  delete_illness(rowNumber, id){
+      if(id != 0){
+          this.illness_tmp.splice(rowNumber, 1);
+          this.illness_counter--;
+          this.idIllness.push(id);
+      }
+      else{
+          this.illness_tmp.splice(rowNumber, 1);
+          this.illness_counter--;
       }
   }
 }
