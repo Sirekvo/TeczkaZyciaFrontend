@@ -62,4 +62,7 @@ export class AccountService {
     deleteContacts(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/contactPerson/' + id);
     }
+    deleteAllergies(id: number): Observable<any> {
+        return this.httpClient.delete(environment.apiUrl + '/information/allergic/' + id);
+    }
 }

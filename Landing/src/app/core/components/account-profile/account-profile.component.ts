@@ -35,12 +35,19 @@ export class AccountProfileComponent implements OnInit {
   email = '';
   code = '';
   illnessList: Array<DiseasesInput>;
+
   allegriesList: Array<AllergiesInput>;
+  allergies_tmp: Array<AllergiesInput>;
+  addAllergies: Array<AllergiesOutput> = [];
+
   contactList: Array<ContactsInput>;
   contact_tmp: Array<ContactsInput>;
   addContact: Array<ContactsOutput> = [];
-  idContacts: Array<number> = [];
+
   medicationsList: Array<MedicationsInput>;
+
+  idContacts: Array<number> = [];
+  idAllergies: Array<number> = [];
   isVisible_illness = false;
   isVisible_contact = false;
   isVisible_allergy = false;
@@ -132,6 +139,8 @@ export class AccountProfileComponent implements OnInit {
   show_allergies_settings(){
       this.isVisible_allergy = true;
       this.isVisible = false;
+      this.allergies_tmp = this.allegriesList.slice();
+      console.log(this.allergies_tmp);
   }
 
   back_to_start(){
@@ -140,30 +149,74 @@ export class AccountProfileComponent implements OnInit {
       this.isVisible_medications = false;
       this.isVisible_contact = false;
       this.isVisible = true;
-      this.refresh();
   }
   back_to_start_complete(){
-      for(let i = 0; i < this.idContacts.length; i++){
-          this.accountService.deleteContacts(this.idContacts[i]).subscribe(
+      console.log(this.idContacts);
+      console.log(this.idContacts[0]);
+      console.log(this.idContacts[1]);
+      console.log(this.idContacts[2]);
+      if(this.idContacts.length != 0){
+          console.log(this.idContacts.length);
+          for(let i = 0; i < this.idContacts.length; i++){
+              console.log(this.idContacts[i]);
+              this.accountService.deleteContacts(this.idContacts[i]).subscribe(
+                  (response: any) => {
+                      console.log("USUWANKO: " + response);
+                  },
+                  () => {
+                  }
+              );
+          }
+          this.refresh();
+      }
+
+      this.idContacts.splice(0,this.idContacts.length);
+
+      if(this.addContact.length != 0){
+          this.accountService.setContacts(this.addContact).subscribe(
               (response: any) => {
+                  console.log(response);
+                  this.refresh();
               },
               () => {
               }
           );
       }
-      this.idContacts = [];
-      this.accountService.setContacts(this.addContact).subscribe(
-          (response: any) => {
-              console.log(response);
-              this.refresh();
-          },
-          () => {
-          }
-      );
+      this.addContact.splice(0,this.addContact.length);
+
       this.isVisible_contact = false;
       this.isVisible = true;
 
 
+  }
+  back_to_start_complete_2(){
+      console.log(this.idAllergies);
+      if(this.idAllergies.length != 0){
+          for(let i = 0; i < this.idAllergies.length; i++){
+              this.accountService.deleteAllergies(this.idAllergies[i]).subscribe(
+                  (response: any) => {
+                  },
+                  () => {
+                  }
+              );
+          }
+          this.refresh();
+      }
+
+      this.idAllergies.splice(0,this.idAllergies.length);
+      if(this.addAllergies.length != 0){
+          this.accountService.setAllergies(this.addAllergies).subscribe(
+              (response: any) => {
+                  console.log(response);
+                  this.refresh();
+              },
+              () => {
+              }
+          );
+      }
+      this.addAllergies.splice(0,this.addAllergies.length);
+      this.isVisible_allergy = false;
+      this.isVisible = true;
   }
 
   checkSelected(selectedChoice: number){
@@ -205,7 +258,32 @@ export class AccountProfileComponent implements OnInit {
           this.contact_tmp.splice(rowNumber, 1);
           this.contact_counter--;
       }
-
   }
-
+  onAllergySubmit(form: any) {
+      if (this.allergies_counter < 15) {
+          const allergy = new AllergiesInput();
+          const allergy2 = new AllergiesOutput();
+          allergy.id = 0;
+          allergy.type = form.value.type2;
+          allergy.name = form.value.name;
+          allergy.appUserID = 0;
+          allergy2.type = form.value.type2;
+          allergy2.name = form.value.name;
+          this.allergies_tmp.push(allergy);
+          this.addAllergies.push(allergy2);
+          this.allergies_counter++;
+          form.reset();
+      }
+  }
+  delete_allergy(rowNumber, id){
+      if(id != 0){
+          this.allergies_tmp.splice(rowNumber, 1);
+          this.allergies_counter--;
+          this.idAllergies.push(id);
+      }
+      else{
+          this.allergies_tmp.splice(rowNumber, 1);
+          this.allergies_counter--;
+      }
+  }
 }
