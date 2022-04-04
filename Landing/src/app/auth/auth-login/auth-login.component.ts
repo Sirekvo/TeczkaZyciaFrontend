@@ -15,6 +15,7 @@ import {ActivatedRoute, Router} from "@angular/router";
  */
 export class AuthLoginComponent implements OnInit {
 
+    information_to_user = '';
     constructor(private userService: UserService,
                 private router: Router) {
     }
@@ -28,19 +29,23 @@ export class AuthLoginComponent implements OnInit {
 
       this.userService.login(form.value.email, form.value.password).subscribe(
           (data: TokenOutput) => {
+              console.log(data.token);
               this.userService.setLocalUser(data, form.value.remember === true);
 
-              if(data.firstLogin){
+              if(data.firstLogin == true){
                   this.router.navigate(['/starter']);
               }
-              else{
+              else if(data.firstLogin == false){
                   this.router.navigate(['/main']);
               }
-              form.reset();
+              else{
+                  this.information_to_user = 'Niepoprawny email lub hasło';
+                  form.reset();
+              }
+
           },
-          (error: HttpErrorResponse) => {
-              alert(error.message);
-              form.reset();
+          () => {
+
           });
     }
 }

@@ -179,4 +179,7 @@ export class HeaderComponent implements OnInit {
   scroll_faq() {
     document.querySelector('#faq').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+  scroll_home() {
+    document.querySelector('#home').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }

@@ -42,39 +42,30 @@
 <section class="section mt-60">
     <div class="container mt-lg-3">
         <div class="row">
-            <div class="col-lg-8 col-12">
+            <div class="col-lg-8 col-12 mx-auto">
                 <div class="pb-4">
-                    <h3>Osoby kontaktowe</h3>
+                    <h3 class="text-center">Osoby kontaktowe</h3>
                     <hr>
-                    <table class=" table mb-0 table-center">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Typ</th>
-                            <th scope="col" class="border-bottom" >Numer telefonu</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let contact of contactList; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina</td>
-                            <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy</td>
-                            <td>{{contact.phoneNumber}}</td>
-                            <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
+                        <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
+                             style="height: 90px; width: 90px;">
+                            <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
+                        </div>
+                        <h6>{{contact_main.phoneNumber}}</h6>
+                        <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina</p>
+                        <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
+                    </div>
                 </div>
 
                 <div class="pb-4">
-                    <h3>Alergie i uczulenia</h3>
+                    <h3 class="text-center">Alergie i uczulenia</h3>
                     <hr>
                     <table class=" table mb-0 table-center">
                         <thead>
                         <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Nazwa</th>
-                            <th scope="col" class="border-bottom" >Typ</th>
+                            <th scope="col" class="border-bottom" style="width:10%;">#</th>
+                            <th scope="col" class="border-bottom" style="width:25%;">Nazwa</th>
+                            <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,20 +74,19 @@
                             <td>{{allergy.name}}</td>
                             <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
                             <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
-                            <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="pb-4">
-                    <h3>Przyjmowane leki</h3>
+                    <h3 class="text-center">Przyjmowane leki</h3>
                     <hr>
-                    <table class=" table mb-0 table-center">
+                    <table class="table mb-0 table-center">
                         <thead>
                         <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Nazwa leku</th>
+                            <th scope="col" class="border-bottom" style="width:11%;">#</th>
+                            <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
                             <th scope="col" class="border-bottom" >Dawka</th>
                             <th scope="col" class="border-bottom" >Co ile</th>
                         </tr>
@@ -104,7 +94,7 @@
                         <tbody>
                         <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
                             <td>{{indexOfElement+1}}</td>
-                            <td class="flex-column">{{tabs.name}}</td>
+                            <td>{{tabs.name}}</td>
                             <td>{{tabs.portion}}</td>
                             <td>{{tabs.howOften}}</td>
                         </tr>
@@ -113,19 +103,18 @@
                 </div>
 
                 <div class="pb-4">
-                    <h3>Choroby przewlekłe</h3>
+                    <h3 class="text-center">Choroby przewlekłe</h3>
                     <hr>
                     <table class=" table mb-0 table-center">
                         <thead>
                         <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Nazwa choroby</th>
-                            <th scope="col" class="border-bottom" ></th>
+                            <th scope="col" class="border-bottom" style="width:10%;">#</th>
+                            <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
+                            <td >{{indexOfElement+1}}</td>
                             <td>{{illness.name}}</td>
                             <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
                         </tr>
