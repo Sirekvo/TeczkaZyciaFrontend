@@ -18,7 +18,7 @@ export class IndexComponent implements OnInit {
 
   active = 'top';
   code = '';
-  information_to_user= '';
+  information_to_user = '';
 
   constructor(private modalService: NgbModal,
               private patientService: PatientService,
