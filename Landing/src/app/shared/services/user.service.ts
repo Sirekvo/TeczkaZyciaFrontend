@@ -28,7 +28,7 @@ export class UserService {
             headers: new HttpHeaders({'Content-Type': 'application/json'})
         };
 
-        return this.httpClient_withoutToken.post('http://localhost:8080' + '/registration', body, httpOptions);
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/registration', body, httpOptions);
     }
 
     setLocalUser(user: TokenOutput, remember: boolean) {
@@ -53,7 +53,7 @@ export class UserService {
             password
         };
 
-        return this.httpClient.post<TokenOutput> ('http://localhost:8080' + '/login', body);
+        return this.httpClient.post<TokenOutput> (environment.apiUrl + '/login', body);
     }
     removeLocalUser() {
         if (window.sessionStorage.getItem('user') === null) {
@@ -73,6 +73,6 @@ export class UserService {
     }
     getFromRegistration(): Observable<AccountOutput> {
 
-        return this.httpClient.get<AccountOutput>('http://localhost:8080' + '/information/user');
+        return this.httpClient.get<AccountOutput>(environment.apiUrl + '/information/user');
     }
 }
