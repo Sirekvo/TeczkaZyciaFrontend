@@ -1,3 +1,4 @@
+import { ViewportScroller } from "@angular/common";
 import {Component, OnInit} from '@angular/core';
 import {
     AccountOutput,
@@ -402,28 +403,29 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onIllnessSubmit(form: any) {
-      if (this.illness_counter < 5) {
-          const illness = new DiseasesInput();
-          const illness2 = new DiseasesOutput();
-          illness.id = 0;
-          illness.name = form.value.name;
-          illness.appUserID = 0;
-          illness2.name = form.value.name;
-          this.illness_tmp.push(illness);
-          this.addIllness.push(illness2);
-          this.illness_counter++;
-          form.reset();
-      }
-  }
-  delete_illness(rowNumber, id){
-      if(id != 0){
-          this.illness_tmp.splice(rowNumber, 1);
-          this.illness_counter--;
-          this.idIllness.push(id);
-      }
-      else{
-          this.illness_tmp.splice(rowNumber, 1);
-          this.illness_counter--;
-      }
-  }
+        if (this.illness_counter < 5) {
+            const illness = new DiseasesInput();
+            const illness2 = new DiseasesOutput();
+            illness.id = 0;
+            illness.name = form.value.name;
+            illness.appUserID = 0;
+            illness2.name = form.value.name;
+            this.illness_tmp.push(illness);
+            this.addIllness.push(illness2);
+            this.illness_counter++;
+            form.reset();
+        }
+    }
+
+    delete_illness(rowNumber, id) {
+        if (id != 0) {
+            this.illness_tmp.splice(rowNumber, 1);
+            this.illness_counter--;
+            this.idIllness.push(id);
+        } else {
+            this.illness_tmp.splice(rowNumber, 1);
+            this.illness_counter--;
+        }
+    }
+
 }
