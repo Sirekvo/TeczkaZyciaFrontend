@@ -25,6 +25,7 @@ export class IndexComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   findPatient(form: any){
