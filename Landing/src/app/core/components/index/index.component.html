@@ -40,7 +40,7 @@
       <div class="row justify-content-center mt-4 pt-2">
         <div class="col-lg-7 col-md-10">
           <div class="subcribe-form">
-            <form class="ms-0" id="findPatient" #f="ngForm" (submit)="findPatient(f)">
+            <form class="ms-0"  #f="ngForm" (submit)="findPatient(f)">
               <input type="code" id="code" name="code" ngModel class="bg-white shadow rounded-pill" placeholder="Kod użytkownika:">
               <button type="submit" class="btn btn-pills btn-primary">Szukaj <i class="uil uil-arrow-right"></i></button>
             </form>
@@ -248,8 +248,8 @@
 <!-- End -->
 
 <!-- Back to top -->
-<section class="section">
-  <div class="container mt-0 mt-0" id="faq" #faq>
+<section class="section" >
+  <div class="container mt-0 mt-0" >
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="section-title mb-4 pb-2 text-center">
@@ -261,12 +261,12 @@
     <!--end row-->
 
     <div class="row">
-      <div class="col-md-6 col-12 mt-4 pt-2">
+      <div class="col-md-6 col-12 mt-0 pt-2">
         <div class="d-flex">
           <i-feather name="help-circle" class="fea icon-ex-md text-primary me-2 mt-1"></i-feather>
           <div class="flex-1">
             <h5 class="mt-0">Jak <span class="text-primary">Teczka Życia</span> działa?</h5>
-            <p class="answer text-secondary mb-0">Teczka Życia służy do ułatwienia użytkownikom kontrolowania informacji o swoim zdrowiu. Korzystając z naszego produktu łatwiej przygotujesz się do wizyty u lekarza, a także będziesz mieć
+            <p id="section_faq" class="answer text-secondary mb-0">Teczka Życia służy do ułatwienia użytkownikom kontrolowania informacji o swoim zdrowiu. Korzystając z naszego produktu łatwiej przygotujesz się do wizyty u lekarza, a także będziesz mieć
               natychmiastowy dostęp do przechowywanych w niej informacji także podczas samej wizyty.<br>Poprzez <span class="text-primary">Teczkę Życia</span> możesz się także zabezpieczyć na wypadek sytuacji awaryjnej, kiedy nie będziesz w stanie osobiście przekazać informacji o swoim zdrowiu lekarzowi, bądź ratownikowi.
               Poprzez wykorzystanie Twojego unikalnego kodu, lub kodu QR, ratownik bądź lekarz może sprawdzić udostępnione przez Ciebie, oraz wybrane do pokazania w Twojej <span class="text-primary">"Karcie Pacjenta"</span> informacje o Twoim zdrowiu.
             </p>
@@ -275,7 +275,7 @@
       </div>
       <!--end col-->
 
-      <div class="col-md-6 col-12 mt-4 pt-2">
+      <div class="col-md-6 col-12 mt-0 pt-2">
         <div class="d-flex">
           <i-feather name="help-circle" class="fea icon-ex-md text-primary me-2 mt-1"></i-feather>
           <div class="flex-1">
@@ -316,7 +316,7 @@
 </div>
 <!-- End -->
 
-<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">
+<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'" [ngxScrollToDuration]="'0'">
   <i-feather name="arrow-up" class="icons"></i-feather>
 </a>
 <!-- Back to top -->

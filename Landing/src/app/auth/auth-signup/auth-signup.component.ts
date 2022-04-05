@@ -21,6 +21,7 @@ export class AuthSignupComponent implements OnInit {
 
     information_to_user = '';
     isChecked : boolean;
+    web = true;
 
 
     constructor(private userService: UserService,
@@ -29,6 +30,9 @@ export class AuthSignupComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if (window.innerWidth <= 768) { // 768px portrait
+            this.web = false;
+        }
     }
     userEmails = new FormGroup({
         primaryEmail: new FormControl('',[

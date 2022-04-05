@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {IndexComponent} from "../../core/components/index/index.component";
 
 @Component({
   selector: "app-header",
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
   @Input() shopPages: boolean;
 
 
-  constructor(private router: Router, private modalService: NgbModal) {
+  constructor(private router: Router,
+              private modalService: NgbModal) {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
@@ -177,7 +179,7 @@ export class HeaderComponent implements OnInit {
     document.querySelector('#find_patient').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   scroll_faq() {
-    document.querySelector('#faq').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.querySelector('#section_faq').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   scroll_home() {
     document.querySelector('#home').scrollIntoView({ behavior: 'smooth', block: 'center' });

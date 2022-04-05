@@ -16,15 +16,16 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AuthLoginComponent implements OnInit {
 
     information_to_user = '';
+    web = true;
     constructor(private userService: UserService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
+        if (window.innerWidth <= 768) { // 768px portrait
+            this.web = false;
+        }
     }
-    //     activatedRoute.queryParams.subscribe(params => {
-    //     this.redirectUrl = params['redirectUrl'];
-    // });
     checkUser(form: any) {
 
       this.userService.login(form.value.email, form.value.password).subscribe(
