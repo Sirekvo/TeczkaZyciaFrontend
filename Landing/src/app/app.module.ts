@@ -44,6 +44,8 @@ import {FindPatientComponent} from "./core/components/find-patient/find-patient.
 import {PatientService} from "./shared/services/patient.service";
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
+import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -61,6 +63,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     IndexComponent,
     StarterComponent,
     AccountProfileComponent,
+    VaccinationsInfoComponent,
     FindPatientComponent,
     PageConfirmMailComponent,
     AuthRePasswordComponent,

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://zesp10-backend.herokuapp.com'
-  //apiUrl: 'http://localhost:8080'
+  //apiUrl: 'https://zesp10-backend.herokuapp.com'
+  apiUrl: 'http://localhost:8080'
 };
 
 /*

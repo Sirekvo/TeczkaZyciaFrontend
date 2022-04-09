@@ -45,6 +45,16 @@ export class MedicationsInput {
     howOften: string;
     appUserID: number;
 }
+export class VaccinationsOutput {
+    name: string;
+    date: string;
+}
+export class VaccinationsInput {
+    id: number;
+    name: string;
+    date: string;
+    appUserID:number;
+}
 export class EmailOutput {
     exists: boolean;
 }

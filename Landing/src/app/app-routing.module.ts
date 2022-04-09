@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { combineLatest } from 'rxjs/internal/operators';
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
+import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
     data: { roles: ['admin'] }
     },
   { path: 'main', component: AccountProfileComponent },
+  { path: 'vaccinations', component: VaccinationsInfoComponent}
 
 ];
 

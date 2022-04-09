@@ -5,8 +5,8 @@
       Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
-      <a class="dropdown-item" style="background: #337ab7; color: white" >Profil</a>
-      <a class="dropdown-item" >Szczepienia</a>
+      <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
+      <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
       <a class="dropdown-item" >Wyniki krwi</a>
       <a class="dropdown-item" >Pełna teczka badań</a>
       <a class="dropdown-item" >Wizyty u specjalistów</a>
@@ -71,14 +71,14 @@
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
-                <a routerLink="/account-profile" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/main" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
                   <h6 class="mb-0 ms-2 ">Profil</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-members" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/vaccinations" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
                   <h6 class="mb-0 ms-2">Szczepienia</h6>
                 </a>

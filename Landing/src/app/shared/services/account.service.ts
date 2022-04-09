@@ -12,6 +12,8 @@ import {
     ContactsInput,
     MedicationsOutput,
     MedicationsInput,
+    VaccinationsOutput,
+    VaccinationsInput,
     CodeOutput, EmailOutput
 } from '../models/account.model';
 import {TokenOutput} from '../models/user.model';
@@ -58,6 +60,12 @@ export class AccountService {
     setMedications(list: Array<MedicationsOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/information/medications', list);
     }
+    getVaccinations(code: string): Observable<Array<VaccinationsInput>>{
+        return this.httpClient.get<Array<VaccinationsInput>>(environment.apiUrl+ '/additional/vaccinations');
+    }
+    setVaccinations(list: Array<VaccinationsOutput>): Observable<any> {
+        return this.httpClient.post(environment.apiUrl + '/additional/vaccinations', list);
+    }
 
     deleteContacts(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/contactPerson/' + id);
@@ -70,5 +78,8 @@ export class AccountService {
     }
     deleteChronicDiseases(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/chronicDiseases/' + id);
+    }
+    deleteVaccinations(id: number): Observable<any> {
+        return this.httpClient.delete(environment.apiUrl + '/additional/vaccinations/' + id);
     }
 }
