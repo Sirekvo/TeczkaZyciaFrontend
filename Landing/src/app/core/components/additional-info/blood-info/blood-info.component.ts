@@ -61,8 +61,6 @@ export class BloodInfoComponent implements OnInit {
     bloodType_counter = 0;
     isCondensed = false;
 
-    selected_groupValue: string;
-    selected_factorValue: string;
     bloodID: number;
 
     constructor(private accountService: AccountService,

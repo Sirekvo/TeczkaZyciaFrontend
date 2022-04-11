@@ -38,7 +38,7 @@ export class AuthSignupComponent implements OnInit {
             firstName: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
             email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$")]),
+            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,16}$")]),
             confirmPassword: new FormControl('', [Validators.required]),
             rules: new FormControl(false,[Validators.requiredTrue]),
         }, {
@@ -72,7 +72,7 @@ export class AuthSignupComponent implements OnInit {
                     );
                 }
                 else {
-                    this.information_to_user = 'Podany email jest już użyty';
+                    this.information_to_user = 'Podany adres e-mail jest już zajęty';
                 }
             },
             () => {

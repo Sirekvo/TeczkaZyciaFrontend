@@ -12,7 +12,7 @@
     <div class="row mt-5 align-items-center">
       <div class="col-lg-6 col-md-6">
         <div class="title-heading">
-          <h4 class="heading my-3">Twoje dane dotyczące <span class="text-primary">zdrowia</span> w jednym miejscu</h4>
+          <h4 class="heading my-3">Twoje dane <span class="text-primary">medyczne</span> w jednym miejscu</h4>
           <p class="para-desc text-secondary mb-0">Trzymaj swoją dokumentację medyczną i wyniki badań w jednym miejscu. Teczka Życia przechowuje i porządkuje Twoje dane medyczne, dzięki czemu masz do nich łatwy dostęp w każdej chwili.</p>
           <p class="text-secondary mb-0 mt-3">Nie posiadasz jeszcze konta?<a routerLink="/registration"
                                                                              class="text-primary ms-2 h6 mb-0">Zarejestruj się <i-feather name="arrow-right" class="fea icon-sm">
@@ -41,8 +41,8 @@
         <div class="col-lg-7 col-md-10">
           <div class="subcribe-form">
             <form class="ms-0"  #f="ngForm" (submit)="findPatient(f)">
-              <input type="code" id="code" name="code" ngModel class="bg-white shadow rounded-pill" placeholder="Kod użytkownika:">
-              <button type="submit" class="btn btn-pills btn-primary">Szukaj <i class="uil uil-arrow-right"></i></button>
+              <input type="code" id="code" name="code" ngModel class="bg-white shadow rounded-pill" placeholder="Kod użytkownika" ngModel required>
+              <button type="submit" class="btn btn-pills btn-primary" [disabled]="!f.valid" >Szukaj <i class="uil uil-arrow-right"></i></button>
             </form>
             <!--end form-->
           </div>
