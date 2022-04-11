@@ -55,6 +55,16 @@ export class VaccinationsInput {
     date: string;
     appUserID:number;
 }
+export class BloodTypeOutput {
+    type: string;
+    factor: string;
+}
+export class BloodTypeInput {
+    id: number;
+    type: string;
+    factor: string;
+    appUserID: number;
+}
 export class EmailOutput {
     exists: boolean;
 }

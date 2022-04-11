@@ -15,6 +15,7 @@ import { combineLatest } from 'rxjs/internal/operators';
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
 import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
+import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     data: { roles: ['admin'] }
     },
   { path: 'main', component: AccountProfileComponent },
-  { path: 'vaccinations', component: VaccinationsInfoComponent}
+  { path: 'vaccinations', component: VaccinationsInfoComponent},
+  { path: 'blood', component: BloodInfoComponent}
 
 ];
 

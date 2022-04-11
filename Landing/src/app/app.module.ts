@@ -45,6 +45,7 @@ import {PatientService} from "./shared/services/patient.service";
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
 import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
+import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component'; 
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -64,6 +65,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     StarterComponent,
     AccountProfileComponent,
     VaccinationsInfoComponent,
+    BloodInfoComponent,
     FindPatientComponent,
     PageConfirmMailComponent,
     AuthRePasswordComponent,

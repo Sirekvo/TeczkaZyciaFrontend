@@ -7,8 +7,8 @@
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
-      <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/vaccinations">Szczepienia</a>
-      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
+      <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood" style="background: #337ab7; color: white">Wyniki krwi</a>
       <a class="dropdown-item">Pełna teczka badań</a>
       <a class="dropdown-item">Wizyty u specjalistów</a>
       <div class="dropdown-divider"></div>
@@ -60,7 +60,7 @@
 <!-- Hero End -->
 <br>
 <!-- Profile Start -->
-<section class="section mt-60" id="vaccinations_tab">
+<section class="section mt-60" id="blood-type-tab">
 
   <div class="container mt-lg-3">
     <div class="row">
@@ -78,14 +78,14 @@
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2 active">
+              <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/vaccinations" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
                   <h6 class="mb-0 ms-2">Szczepienia</h6>
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
+              <li class="navbar-item account-menu px-0 mt-2 active">
                 <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-file"></i></span>
                   <h6 class="mb-0 ms-2">Wyniki krwi</h6>
@@ -131,107 +131,77 @@
       <div class="col-lg-8 col-12 position-relative">
         <div *ngIf="isVisible" class="pb-4">
           <div class="d-inline-flex col-12">
-            <h3 class="col-11">Szczepienia</h3>
-            <button [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
-              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
+            <h3 class="col-11">
+              <div *ngIf="bloodTypeList?.length">
+                <div *ngFor="let blood of bloodTypeList;">
+                  <div>
+                    Twoja Grupa krwi:<br> {{blood.type}} {{blood.factor}}
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!bloodTypeList?.length">
+                Brak podanej grupy krwi
+              </div>
+            </h3>
+            <button [ngxScrollTo]="'#blood-type'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_bloodType_settings()"
               ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
-          <table class=" table mb-0 table-center">
-            <thead>
-              <tr>
-                <th scope="col" class="border-bottom" style="width:10%;">#</th>
-                <th scope="col" class="border-bottom" style="width:25%;">Nazwa szczepienia</th>
-                <th scope="col" class="border-bottom" style="width:50%;">Data szczepienia</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let vaccine of vaccinationsList; let indexOfElement=index;">
-                <td>{{indexOfElement+1}}</td>
-                <td>{{vaccine.name}}</td>
-                <td>{{vaccine.date}}</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
-        <div *ngIf="isVisible_vaccinations" id="vaccinations" class="col-12">
+        <div *ngIf="isVisible_bloodType" id="blood-type" class="col-12">
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12 mb-5">
               <div class="px-3 py-4 mb-5">
-                <form id="vaccinationsForm" #fv="ngForm" (submit)="onVaccinationsSubmit(fv)">
-                  <h4 class="title text-center">Szczepienia</h4>
+                <form id="blood-typeForm" #fb="ngForm" (submit)="onBloodTypeSubmit(fb)">
+                  <h4 class="title text-center">Grupa Krwi</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe szczepienia oraz
-                      wybierz datę jego wykonania</p>
-                    <div class="col-lg-8">
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Podaj swoją grupę krwi oraz jej RH</p>
+                    <div class="col-lg-4">
                       <div class="mb-3 mt-4">
-                        <label class="form-label">Nazwa szczepienia<span class="text-danger">*</span></label>
-                        <div class="form-icon position-relative">
-                          <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa szczepienia"
-                            ngModel required minlength="3">
+                        <label class="form-label">Grupa krwi<span class="text-danger">*</span></label>
+                        <div class="position-relative">
+                          <select [(ngModel)]="selectedGroupModule" name="bloodGroupSelect" class="form-select form-control-lg pt-2" (change)="selectOptionGroupHandler($event)" required>
+                            <option *ngFor="let interval of blood_group" [selected]="interval == selectedGroupModule" 
+                            [disabled]="interval == blood_group[0]" [hidden]="interval == blood_group[0]" [value]="interval" >
+                            {{interval}}</option>
+                          </select>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="mb-3 mt-4">
-                        <label class="form-label">Data szczepienia<span class="text-danger">*</span></label>
-                        <div class="form-icon position-relative">
-                          <i-feather name="calendar" class="fea icon-sm icons d-flex"></i-feather>
-                          <input readonly class="form-control ps-5 pt-2" placeholder="yyyy-mm-dd" name="dp"
-                            [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                            [maxDate]="{year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()}"
-                            (click)="d.toggle()">
+                        <label class="form-label">Typ RH<span class="text-danger">*</span></label>
+                        <div class="position-relative">
+                          <select [(ngModel)]="selectedFactorModule" name="bloodFactorSelect" class="form-select form-control-lg pt-2" (change)="selectOptionFactorHandler($event)" required>
+                            <option *ngFor="let interval of blood_factor" [selected]="interval == selectedFactorModule" 
+                            [disabled]="interval == blood_factor[0]" [hidden]="interval == blood_factor[0]" [value]="interval">
+                            {{interval}}</option>
+                          </select>
                         </div>
                       </div>
                     </div>
-                    <div class="col-12 mb-0 pb-4 text-center w-100">
-                      <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 10 szczepień</p>
-                      <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success"
-                          [disabled]="!fv.valid || vaccinations_counter>9">Dodaj</button>
-                      </div>
-                    </div>
-                    <!--end col-->
-
-                    <div name="table" class="p-4">
-                      <div class="table-responsive bg-white shadow rounded" id="vaccinationsTable">
-                        <div></div>
-                        <table class="table mb-0 table-center">
-                          <thead>
-                            <tr>
-                              <th scope="col" class="border-bottom">#</th>
-                              <th scope="col" class="border-bottom">Nazwa szczepienia</th>
-                              <th scope="col" class="border-bottom">Data wykonania</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let vaccinations of vaccinations_tmp ; let indexOfElement=index;">
-                              <td>{{indexOfElement+1}}</td>
-                              <td>{{vaccinations.name}}</td>
-                              <td>{{vaccinations.date}}</td>
-                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-"
-                                  (click)="delete_vaccinations(indexOfElement,vaccinations.id)"></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <!--end table-->
-
-                    <div class="col mb-0">
+                    <div class="col-lg-4 mb-3 mt-5">
                       <div class="d-grid">
-                        <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'"
-                          class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <label class="form-label"></label>
+                        <button  name="push" class="btn btn-danger pt-2" (click)="delete_bloodType(0,this.bloodTypeList[0].id)"
+                        [disabled]="!fb.valid || bloodType_counter<1">Usuń grupę krwi</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'" class="btn btn-primary"
-                          (click)="back_to_start_complete_5()">Gotowe</button>
+                        <button [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
+                          class="btn btn-secondary" (click)="back_to_start()">Anuluj</button>
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="d-grid">
+                        <button type="submit" name="push" class="btn btn-success" 
+                        [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
+                          [disabled]="!fb.valid || bloodType_counter>2 || selectedFactorModule==blood_factor[0] || selectedGroupModule == blood_group[0]">Zapisz</button>
                       </div>
                     </div>
                     <!--end col-->
