@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { LightboxModule } from 'ngx-lightbox';
+// import { LightboxModule } from 'ngx-lightbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CountToModule } from 'angular-count-to';
-import { NgxMasonryModule } from 'ngx-masonry';
+// import { NgxMasonryModule } from 'ngx-masonry';
 
 import { UserService } from './shared/services/user.service';
 import { AccountService } from './shared/services/account.service';
@@ -89,8 +89,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxTypedJsModule,
     FlatpickrModule.forRoot(),
     CountToModule,
-    NgxMasonryModule,
-    LightboxModule,
+    // NgxMasonryModule,
+    // LightboxModule,
     HttpClientModule,
     ReactiveFormsModule,
 
