@@ -48,6 +48,7 @@ import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.
 import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
 import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component'; 
 import { ClipboardModule } from 'ngx-clipboard';
+import { AccountSettingsComponent } from './core/components/account-settings/account-settings.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -71,6 +72,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FindPatientComponent,
     PageConfirmMailComponent,
     AuthRePasswordComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     BrowserModule,

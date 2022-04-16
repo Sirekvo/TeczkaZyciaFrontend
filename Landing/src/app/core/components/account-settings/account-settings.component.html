@@ -1,0 +1,235 @@
+<!-- Hero Start -->
+<div *ngIf="mobile" class="back-to-home rounded">
+  <div class="btn-group dropdown-primary" ngbDropdown>
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+      Menu
+    </button>
+    <div class="dropdown-menu " ngbDropdownMenu>
+      <a class="dropdown-item" routerLink="/main">Profil</a>
+      <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood" >Wyniki krwi</a>
+      <a class="dropdown-item" >Pełna teczka badań</a>
+      <a class="dropdown-item" >Wizyty u specjalistów</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" routerLink="/settings" style="background: #337ab7; color: white">Ustawienia</a>
+      <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="bg-profile d-table w-100 bg-primary"
+  style="background: url('assets/images/main/bg.png') center center;" id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="public-profile card rounded shadow-sm">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 text-md-start text-center">
+                <img src="assets/images/main/avatar.png" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
+                  alt="">
+              </div>
+              <!--end col-->
+                <div class="col-lg-6 col-md-6">
+                  <div class="row align-items-end">
+                    <div class="col-md-8 text-md-start text-center">
+                      <h3 class="title mb-0">{{name}} {{lastName}} 
+                        <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
+                          <i class="uil uil-copy"></i>
+                        </button> -->
+                      </h3>
+                      <!-- <div class="row "> -->
+                        <small class="h6 me-2">{{email}}<br>
+                        <!-- //<div class="col-lg-12"> -->
+                          Twój kod: <b>{{code}}</b>
+                            <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
+                            <i class="uil uil-copy"></i>
+                          </button> 
+                        </small> 
+                        <!-- </div> -->
+                      <!-- </div> -->
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </div>
+                <div class="col-lg-4 col-md-3 mt-2">
+                  <div class="text-center">
+                    <p>Twój Kod QR<br>
+                      <qr-code [value]=code_link></qr-code>
+                    </p>
+                  </div>
+                </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--ed container-->
+</section>
+<!--end section-->
+<!-- Hero End -->
+
+<!-- Profile Start -->
+<section class="section mt-60">
+
+  <div class="container ">
+    <div class="row">
+      <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
+        <div class="sidebar sticky-bar px-4 rounded shadow" >
+          <div class="widget">
+            <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
+              <li class="navbar-item account-menu px-0">
+                <a routerLink="/main" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
+                  <h6 class="mb-0 ms-2 ">Profil</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/vaccinations" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
+                  <h6 class="mb-0 ms-2">Szczepienia</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-file"></i></span>
+                  <h6 class="mb-0 ms-2">Wyniki krwi</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/account-messages"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/account-payments"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2 active">
+                <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
+                  <h6 class="mb-0 ms-2">Ustawienia</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a (click)=logout() routerLink="/login" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
+                  <h6 class="mb-0 ms-2">Wyloguj się</h6>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+
+      <div class="col-lg-8 col-12 position-relative">
+        <div class="col-md-6 mt-4 pt-2 ">
+          <h5>Zmień hasło :</h5>
+          <form #form="ngForm" [formGroup]="changePasswordForm" (ngSubmit)="changePassword(form)">
+            <div class="row mt-4 ">
+              <div class="col-lg-12 form-group">
+                <div class="mb-3">
+                  <label class="form-label">Stare hasło :</label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                    <input formControlName="password" type="password" class="form-control ps-5" placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Należy wpisać stare hasło</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-12 form-group">
+                <div class="mb-3">
+                  <label class="form-label">Nowe hasło :</label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                    <input formControlName="newPassword" type="password" class="form-control ps-5" placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }">
+                    <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.newPassword.errors.required">Należy wpisać nowe hasło</div>
+                      <div *ngIf="f.newPassword.errors.pattern">Hasło musi posiadać 8-16 znaków w tym, jedną małą literę, duża literę oraz znak specjalny</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-12 form-group">
+                <div class="mb-3">
+                  <label class="form-label">Powtórz nowe hasło :</label>
+                  <div class="form-icon position-relative">
+                    <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                    <input formControlName="confirmPassword" type="password" class="form-control ps-5" placeholder="Powtórz nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.confirmPassword.errors.required">Powtórzenie hasła jest wymagane</div>
+                      <div *ngIf="f.confirmPassword.errors.mustMatch">Hasła muszą się zgadzać</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-12 mt-2 mb-0">
+                <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
+                <button type="submit" class="btn btn-primary">Zapisz hasło</button>
+              </div>
+              <!--end col-->
+              
+            </div>
+            <!--end row-->
+          </form>
+        </div>
+        <!--end col-->
+        <div class="mt-4">
+          <div class="border-bottom">
+            <h5 class="mb-4 text-danger">Usuń konto :</h5>
+          </div>
+
+          <div class="">
+            <h6 class="mb-1">Chcesz usunąć swoje konto? Prosze kliknąć przycisk "Usuń konto" poniżej</h6>
+            <div class="mt-4">
+              <button class="btn btn-danger">Usuń konto</button>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end row-->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+
+</section>
+<!--end section-->
+<!-- Profile End -->
+
+<!-- Back to top -->
+<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">
+  <i-feather name="arrow-up" class="icons"></i-feather>
+</a>
+<app-footer [footerVariant]="footerClass" [hideFooter]="hideFooter"></app-footer>
+<!-- Back to top -->

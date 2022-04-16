@@ -93,4 +93,8 @@ export class AccountService {
     deleteBloodType(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/additional/blood-type/' + id);
     }
+    setFirstLogin(): Observable<any> {
+
+        return this.httpClient.put(environment.apiUrl  + '/account/first-login',null);
+    }
 }

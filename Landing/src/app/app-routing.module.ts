@@ -16,6 +16,7 @@ import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-ma
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
 import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
 import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component';
+import { AccountSettingsComponent } from './core/components/account-settings/account-settings.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     },
   { path: 'main', component: AccountProfileComponent },
   { path: 'vaccinations', component: VaccinationsInfoComponent},
-  { path: 'blood', component: BloodInfoComponent}
+  { path: 'blood', component: BloodInfoComponent},
+  { path: 'settings', component: AccountSettingsComponent},
 
 ];
 

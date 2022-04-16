@@ -75,4 +75,11 @@ export class UserService {
 
         return this.httpClient.get<AccountOutput>(environment.apiUrl + '/information/user');
     }
+    ChangePassword(password: string, newPassword: string): Observable<any>{
+        const body = {
+            password,
+            newPassword
+        };
+        return this.httpClient.post(environment.apiUrl + '/login', body);
+    }
 }

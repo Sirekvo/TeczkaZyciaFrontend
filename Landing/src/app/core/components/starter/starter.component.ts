@@ -5,11 +5,12 @@ import { NgForm } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
 import {DiseasesOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'starter',
   templateUrl: './starter.component.html',
-  styleUrls: ['./srarter.component.css']
+  styleUrls: ['./starter.component.css']
 })
 
 /**
@@ -56,7 +57,8 @@ export class StarterComponent implements OnInit {
   er4 = 0;
 
 
-  constructor(private accountService: AccountService) {  }
+  constructor(private accountService: AccountService,
+              private router: Router) {  }
 
   ngOnInit(): void {
   }
@@ -254,6 +256,15 @@ export class StarterComponent implements OnInit {
       this.isVisible_others = false;
       this.howOftenSelect = event.target.value;
     }
+  }
+  complete(){
+    this.accountService.setFirstLogin().subscribe(
+      (response: any) => {
+        this.router.navigate(['/main']);
+      },
+      () => {
+      }
+    );
   }
 
 }

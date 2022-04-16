@@ -20,12 +20,12 @@
 
 
 
-<section class="bg-profile d-table w-100 bg-primary" style="background: url('assets/images/main/bg.png') center center;"
-  id="home">
+<section class="bg-profile d-table w-100 bg-primary" 
+  style="background: url('assets/images/main/bg.png') center center;" id="home">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="card public-profile rounded shadow-sm">
+        <div class="public-profile card rounded shadow-sm">
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
@@ -79,13 +79,10 @@
 <!-- Hero End -->
 <br>
 <!-- Profile Start -->
-<section class="section mt-60" id="blood-type-tab">
+<section class="section" id="blood-type-tab">
 
-  <div class="container mt-lg-3">
+  <div class="container">
     <div class="row">
-
-
-
       <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
         <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
@@ -128,7 +125,7 @@
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-setting" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
                   <h6 class="mb-0 ms-2">Ustawienia</h6>
                 </a>
