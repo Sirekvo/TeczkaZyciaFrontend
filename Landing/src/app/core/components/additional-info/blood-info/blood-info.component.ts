@@ -10,6 +10,9 @@ import { UserService } from "../../../../shared/services/user.service";
 import { Router } from "@angular/router";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {environment} from '../../../../../environments/environment';
+
+import { ClipboardService } from "ngx-clipboard";
 
 
 @Component({
@@ -36,6 +39,8 @@ export class BloodInfoComponent implements OnInit {
     lastName = '';
     email = '';
     code = '';
+
+    code_link: string;
 
     bloodTypeList: Array<BloodTypeInput>;
     bloodType_tmp: Array<BloodTypeInput>;
@@ -67,7 +72,8 @@ export class BloodInfoComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private scroller: ViewportScroller,
-        private modalService: NgbModal) {
+        private modalService: NgbModal,
+        private clipboardApi: ClipboardService) {
     }
 
     ngOnInit(): void {
@@ -87,6 +93,8 @@ export class BloodInfoComponent implements OnInit {
                 this.lastName = information.lastName;
                 this.email = information.email;
                 this.code = information.code;
+
+                this.code_link = environment.codeUrl + this.code;
 
                 this.accountService.getBloodType().subscribe(
                     (data: Array<BloodTypeInput>) => {
@@ -199,6 +207,10 @@ export class BloodInfoComponent implements OnInit {
             this.bloodType_counter--;
         }
         this.back_to_start_complete();
+    }
+
+    copyCode(){
+        this.clipboardApi.copyFromContent(this.code);
     }
 
 }

@@ -33,16 +33,35 @@
                   class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
               </div>
               <!--end col-->
-              <div class="col-lg-10 col-md-9">
+              <div class="col-lg-6 col-md-6">
                 <div class="row align-items-end">
-                  <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
-                    <h3 class="title mb-0">{{name}} {{lastName}}</h3>
-                    <small class="text-muted h6 me-2">{{email}}</small><br>
-                    <small class="text-muted h6 me-2">Twój unikalny kod: {{code}}</small>
+                  <div class="col-md-8 text-md-start text-center">
+                    <h3 class="title mb-0">{{name}} {{lastName}} 
+                      <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
+                        <i class="uil uil-copy"></i>
+                      </button> -->
+                    </h3>
+                    <!-- <div class="row "> -->
+                      <small class="h6 me-2">{{email}}<br>
+                      <!-- //<div class="col-lg-12"> -->
+                        Twój kod: <b>{{code}}</b>
+                          <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
+                          <i class="uil uil-copy"></i>
+                        </button> 
+                      </small> 
+                      <!-- </div> -->
+                    <!-- </div> -->
                   </div>
                   <!--end col-->
                 </div>
                 <!--end row-->
+              </div>
+              <div class="col-lg-4 col-md-3 mt-2">
+                <div class="text-center">
+                  <p>Twój Kod QR<br>
+                    <qr-code [value]=code_link></qr-code>
+                  </p>
+                </div>
               </div>
               <!--end col-->
             </div>

@@ -14,6 +14,9 @@ import {
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
+import {environment} from '../../../../environments/environment';
+
+import { ClipboardService } from "ngx-clipboard";
 
 
 @Component({
@@ -38,6 +41,8 @@ export class AccountProfileComponent implements OnInit {
     illnessList: Array<DiseasesInput>;
     illness_tmp: Array<DiseasesInput>;
     addIllness: Array<DiseasesOutput> = [];
+
+    code_link: string;
 
     allegriesList: Array<AllergiesInput>;
     allergies_tmp: Array<AllergiesInput>;
@@ -79,7 +84,8 @@ export class AccountProfileComponent implements OnInit {
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
-                private scroller: ViewportScroller) {
+                private scroller: ViewportScroller,
+                private clipboardApi: ClipboardService) {
     }
 
     ngOnInit(): void {
@@ -98,6 +104,9 @@ export class AccountProfileComponent implements OnInit {
                 this.lastName = information.lastName;
                 this.email = information.email;
                 this.code = information.code;
+
+                this.code_link = environment.codeUrl + this.code;
+                // console.log("link" + this.code_link); 
 
                 this.accountService.getChronicDiseases(information.code).subscribe(
                     (data: Array<DiseasesInput>) => {
@@ -426,6 +435,10 @@ export class AccountProfileComponent implements OnInit {
             this.illness_tmp.splice(rowNumber, 1);
             this.illness_counter--;
         }
+    }
+
+    copyCode(){
+        this.clipboardApi.copyFromContent(this.code);
     }
 
 }

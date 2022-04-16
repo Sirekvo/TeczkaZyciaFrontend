@@ -12,6 +12,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { from } from "rxjs";
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {environment} from '../../../../../environments/environment';
+import { ClipboardService } from "ngx-clipboard";
 
 
 @Component({
@@ -39,6 +41,8 @@ export class VaccinationsInfoComponent implements OnInit {
     email = '';
     code = '';
 
+    code_link: string;
+
     vaccinationsList: Array<VaccinationsInput>;
     vaccinations_tmp: Array<VaccinationsInput>;
     addVaccinations: Array<VaccinationsOutput> = [];
@@ -61,7 +65,8 @@ export class VaccinationsInfoComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private scroller: ViewportScroller,
-        private modalService: NgbModal) {
+        private modalService: NgbModal,
+        private clipboardApi: ClipboardService) {
     }
 
     ngOnInit(): void {
@@ -81,6 +86,8 @@ export class VaccinationsInfoComponent implements OnInit {
                 this.lastName = information.lastName;
                 this.email = information.email;
                 this.code = information.code;
+
+                this.code_link = environment.codeUrl + this.code;
 
                 this.accountService.getVaccinations(information.code).subscribe(
                     (data: Array<VaccinationsInput>) => {
@@ -175,6 +182,10 @@ export class VaccinationsInfoComponent implements OnInit {
             this.vaccinations_tmp.splice(rowNumber, 1);
             this.vaccinations_counter--;
         }
+    }
+
+    copyCode(){
+        this.clipboardApi.copyFromContent(this.code);
     }
 
 }

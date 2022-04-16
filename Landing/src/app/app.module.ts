@@ -38,6 +38,7 @@ import { allIcons } from 'angular-feather/icons';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QRCodeModule } from 'angular2-qrcode';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
 import {FindPatientComponent} from "./core/components/find-patient/find-patient.component";
@@ -46,6 +47,7 @@ import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-ma
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
 import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
 import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component'; 
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -89,10 +91,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxTypedJsModule,
     FlatpickrModule.forRoot(),
     CountToModule,
+    QRCodeModule,
     // NgxMasonryModule,
     // LightboxModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ClipboardModule,
 
   ],
   exports: [
