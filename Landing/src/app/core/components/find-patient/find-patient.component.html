@@ -46,7 +46,7 @@
                 <div class="pb-4">
                     <h3 class="text-center">Osoby kontaktowe</h3>
                     <hr>
-                    <div [style.visibility]="(contactList.length == 0) ? 'hidden' : 'visible' " *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
+                    <div [style.visibility]="(contact_counter == 0) ? 'hidden' : 'visible' " *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
                         <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
                              style="height: 90px; width: 90px;">
                             <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
@@ -60,7 +60,7 @@
                 <div class="pb-4">
                     <h3 class="text-center">Alergie i uczulenia</h3>
                     <hr>
-                    <table [style.visibility]="(allegriesList.length == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
+                    <table [style.visibility]="(allergies_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
                         <thead>
                         <tr>
                             <th scope="col" class="border-bottom" style="width:10%;">#</th>
@@ -82,7 +82,7 @@
                 <div class="pb-4">
                     <h3 class="text-center">Przyjmowane leki</h3>
                     <hr>
-                    <table [style.visibility]="(medicationsList.length == 0) ? 'hidden' : 'visible' " class="table mb-0 table-center">
+                    <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' " class="table mb-0 table-center">
                         <thead>
                         <tr>
                             <th scope="col" class="border-bottom" style="width:11%;">#</th>
@@ -105,7 +105,7 @@
                 <div class="pb-4">
                     <h3 class="text-center">Choroby przewlekłe</h3>
                     <hr>
-                    <table [style.visibility]="(illnessList.length == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
+                    <table [style.visibility]="(illness_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
                         <thead>
                         <tr>
                             <th scope="col" class="border-bottom" style="width:10%;">#</th>

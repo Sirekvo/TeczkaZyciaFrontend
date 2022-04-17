@@ -27,6 +27,10 @@ export class FindPatientComponent implements OnInit {
     allegriesList: Array<AllergiesOutput>;
     contactList: Array<ContactsOutput>;
     medicationsList: Array<MedicationsOutput>;
+    illness_counter = 0;
+    allergies_counter = 0;
+    contact_counter = 0;
+    medications_counter = 0;
 
     constructor(private patientService: PatientService,
                 private router: Router,
@@ -37,6 +41,7 @@ export class FindPatientComponent implements OnInit {
         this.code = this.route.snapshot.paramMap.get('code');
         this.patientService.getChronicDiseases(this.code).subscribe(
             (data: Array<DiseasesOutput>) => {
+                this.illness_counter = data.length;
                 this.illnessList = data;
             },
             () => {
@@ -44,6 +49,7 @@ export class FindPatientComponent implements OnInit {
         );
         this.patientService.getAllergies(this.code).subscribe(
             (data: Array<AllergiesOutput>) => {
+                this.allergies_counter = data.length;
                 this.allegriesList = data;
             },
             () => {
@@ -51,6 +57,7 @@ export class FindPatientComponent implements OnInit {
         );
         this.patientService.getContacts(this.code).subscribe(
             (data: Array<ContactsOutput>) => {
+                this.contact_counter = data.length;
                 this.contactList = data;
             },
             () => {
@@ -58,25 +65,12 @@ export class FindPatientComponent implements OnInit {
         );
         this.patientService.getMedications(this.code).subscribe(
             (data: Array<MedicationsOutput>) => {
+                this.medications_counter = data.length;
                 this.medicationsList = data;
             },
             () => {
             }
         );
-        // this.userService.getFromRegistration().subscribe(
-        //     (information: AccountOutput) => {
-        //
-        //         this.name = information.name;
-        //         this.lastName = information.lastName;
-        //         this.email = information.email;
-        //
-        //
-        //
-        //     },
-        //     () => {
-        //     }
-        // );
-
 
     }
 }
