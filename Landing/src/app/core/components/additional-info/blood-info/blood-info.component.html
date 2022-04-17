@@ -1,0 +1,252 @@
+<!-- Hero Start -->
+<div *ngIf="mobile" class="back-to-home rounded">
+  <div class="btn-group dropdown-primary" ngbDropdown>
+    <button type="button" class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
+      aria-haspopup="true" aria-expanded="false">
+      <i-feather name="menu" className="fea icon-sm"></i-feather>
+    </button>
+    <div class="dropdown-menu " ngbDropdownMenu>
+      <a class="dropdown-item" routerLink="/main">Profil</a>
+      <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood" style="background: #337ab7; color: white">Wyniki krwi</a>
+      <a class="dropdown-item">Pełna teczka badań</a>
+      <a class="dropdown-item">Wizyty u specjalistów</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item">Ustawienia</a>
+      <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="bg-profile d-table w-100 bg-primary" 
+  style="background: url('assets/images/main/bg.png') center center;" id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="public-profile card rounded shadow-sm">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 text-md-start text-center">
+                <img src="assets/images/main/avatar.png"
+                  class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
+              </div>
+              <!--end col-->
+              <div class="col-lg-6 col-md-6">
+                <div class="row align-items-end">
+                  <div class="col-md-8 text-md-start text-center">
+                    <h3 class="title mb-0">{{name}} {{lastName}} 
+                      <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
+                        <i class="uil uil-copy"></i>
+                      </button> -->
+                    </h3>
+                    <!-- <div class="row "> -->
+                      <small class="h6 me-2">{{email}}<br>
+                      <!-- //<div class="col-lg-12"> -->
+                        Twój kod: <b>{{code}}</b>
+                          <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
+                          <i class="uil uil-copy"></i>
+                        </button> 
+                      </small> 
+                      <!-- </div> -->
+                    <!-- </div> -->
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+              <div class="col-lg-4 col-md-3 mt-2">
+                <div class="text-center">
+                  <p>Twój Kod QR<br>
+                    <qr-code [value]=code_link></qr-code>
+                  </p>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--ed container-->
+</section>
+<!--end section-->
+<!-- Hero End -->
+<br>
+<!-- Profile Start -->
+<section class="section" id="blood-type-tab">
+
+  <div class="container">
+    <div class="row">
+      <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
+        <div class="sidebar sticky-bar px-4 rounded shadow">
+          <div class="widget">
+            <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
+              <li class="navbar-item account-menu px-0">
+                <a routerLink="/main" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
+                  <h6 class="mb-0 ms-2 ">Profil</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/vaccinations" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
+                  <h6 class="mb-0 ms-2">Szczepienia</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2 active">
+                <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-file"></i></span>
+                  <h6 class="mb-0 ms-2">Wyniki krwi</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/account-messages"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/account-payments"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
+                  <h6 class="mb-0 ms-2">Ustawienia</h6>
+                </a>
+              </li>
+
+              <li class="navbar-item account-menu px-0 mt-2">
+                <a (click)=logout() routerLink="/login"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
+                  <h6 class="mb-0 ms-2">Wyloguj się</h6>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+
+      <div class="col-lg-8 col-12 position-relative">
+        <div *ngIf="isVisible" class="pb-4">
+          <div class="d-inline-flex col-12">
+            <h3 class="col-11">
+              <div *ngIf="bloodTypeList?.length">
+                <div *ngFor="let blood of bloodTypeList;">
+                  <div>
+                    Twoja Grupa krwi:<br> {{blood.type}} {{blood.factor}}
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!bloodTypeList?.length">
+                Brak podanej grupy krwi
+              </div>
+            </h3>
+            <button [ngxScrollTo]="'#blood-type'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_bloodType_settings()"
+              ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button>
+          </div>
+          <hr>
+        </div>
+
+        <div *ngIf="isVisible_bloodType" id="blood-type" class="col-12">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 col-md-12 mb-5">
+              <div class="px-3 py-4 mb-5">
+                <form id="blood-typeForm" #fb="ngForm" (submit)="onBloodTypeSubmit(fb)">
+                  <h4 class="title text-center">Grupa Krwi</h4>
+                  <div class="row">
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Podaj swoją grupę krwi oraz jej RH</p>
+                    <div class="col-lg-4">
+                      <div class="mb-3 mt-4">
+                        <label class="form-label">Grupa krwi<span class="text-danger">*</span></label>
+                        <div class="position-relative">
+                          <select [(ngModel)]="selectedGroupModule" name="bloodGroupSelect" class="form-select form-control-lg pt-2" (change)="selectOptionGroupHandler($event)" required>
+                            <option *ngFor="let interval of blood_group" [selected]="interval == selectedGroupModule" 
+                            [disabled]="interval == blood_group[0]" [hidden]="interval == blood_group[0]" [value]="interval" >
+                            {{interval}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-3 mt-4">
+                        <label class="form-label">Typ RH<span class="text-danger">*</span></label>
+                        <div class="position-relative">
+                          <select [(ngModel)]="selectedFactorModule" name="bloodFactorSelect" class="form-select form-control-lg pt-2" (change)="selectOptionFactorHandler($event)" required>
+                            <option *ngFor="let interval of blood_factor" [selected]="interval == selectedFactorModule" 
+                            [disabled]="interval == blood_factor[0]" [hidden]="interval == blood_factor[0]" [value]="interval">
+                            {{interval}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 mb-3 mt-5">
+                      <div class="d-grid">
+                        <label class="form-label"></label>
+                        <button  name="push" class="btn btn-danger pt-2" (click)="delete_bloodType(0,this.bloodTypeList[0].id)"
+                        [disabled]="!fb.valid || bloodType_counter<1">Usuń grupę krwi</button>
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="d-grid">
+                        <button [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
+                          class="btn btn-secondary" (click)="back_to_start()">Anuluj</button>
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="d-grid">
+                        <button type="submit" name="push" class="btn btn-success" 
+                        [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
+                          [disabled]="!fb.valid || bloodType_counter>2 || selectedFactorModule==blood_factor[0] || selectedGroupModule == blood_group[0]">Zapisz</button>
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+
+              </div>
+              <!---->
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
+        </div>
+        <!--end containter hidden_4-->
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+
+</section>
+<!--end section-->
+<!-- Profile End -->
+
+<!-- Back to top -->
+<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">
+  <i-feather name="arrow-up" class="icons"></i-feather>
+</a>
+<app-footer [footerVariant]="footerClass" [hideFooter]="hideFooter"></app-footer>
+<!-- Back to top -->

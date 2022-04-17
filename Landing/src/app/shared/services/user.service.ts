@@ -75,4 +75,30 @@ export class UserService {
 
         return this.httpClient.get<AccountOutput>(environment.apiUrl + '/information/user');
     }
+    changePassword(password: string, newPassword: string): Observable<any>{
+        const body = {
+            password,
+            newPassword
+        };
+        return this.httpClient.post(environment.apiUrl + '/account/change-password', body);
+    }
+    changeCode(cardCode: string): Observable<any>{
+        const body = {
+            cardCode
+        };
+
+        return this.httpClient.put(environment.apiUrl + '/account/change-code', body);
+    }
+    forgotPassword(email: string): Observable<any>{
+        const body = {
+            email
+        };
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/account/reset-password', body);
+    }
+    resendMail(email: string): Observable<any>{
+        const body = {
+            email
+        };
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/registration/resend', body);
+    }
 }

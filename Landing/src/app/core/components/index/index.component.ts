@@ -35,7 +35,7 @@ export class IndexComponent implements OnInit {
             this.router.navigate(['/patient', form.value.code]);
           }
           else{
-            this.information_to_user = 'Podano niepoprawny kod';
+            this.information_to_user = 'Nie znaleziono pacjenta o podanym kodzie';
             form.reset();
           }
         },

@@ -4,8 +4,12 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://zesp10-backend.herokuapp.com'
-  //apiUrl: 'http://localhost:8080'
+  //apiUrl: 'https://zesp10-backend.herokuapp.com'
+  apiUrl: 'http://localhost:8080',
+  //codeUrl: 'https://black-dune-006646703.1.azurestaticapps.net/patient/'
+  codeUrl: 'http://localhost:4200/patient/'
+
+  //FMhCfD
 };
 
 /*

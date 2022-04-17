@@ -39,7 +39,8 @@
                             <img src="assets/images/logo_bialy.png" height="70" alt="teczka zycia logo">
                         </a>
                         <p class="mt-4">Teczka Życia to aplikacja, która w łatwy i prosty sposób pozwala na przchowywanie danych medycznych. Teczka Życia pozwala także na przekazanie ratownikom podstawowych danych w sytuacji kryzysowej</p>
-                        <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                        <!-- TODO DODAĆ PROFILE  -->
+                        <!-- <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
                                     <i-feather name="facebook" class="fea icon-sm fea-social"></i-feather>
                                 </a></li>
@@ -52,7 +53,7 @@
                             <li class="list-inline-item ms-1"><a href="javascript:void(0)" class="rounded">
                                     <i-feather name="linkedin" class="fea icon-sm fea-social"></i-feather>
                                 </a></li>
-                        </ul>
+                        </ul> -->
                         <!--end icon-->
                     </div>
                     <!--end col-->
@@ -60,13 +61,14 @@
                     <div class="col-sm-4 pt-2">
                         <h5 class="text-light footer-head text-center">O aplikacji</h5>
                         <ul class="list-unstyled footer-list mt-4">
-                            <li><a routerLink="index-hospital" class="text-foot"><i
+                            <!-- [ngxScrollTo]="'#o_teczce'" [ngxScrollToDuration]="'0'" -->
+                            <li><a routerLink="/index" [ngxScrollTo]="'#o_teczce'" [ngxScrollToDuration]="'0'" class="text-foot"><i
                                         class="uil uil-angle-right-b me-1"></i>
                                     O Teczce Życia</a></li>
-                            <li><a routerLink="index-hospital" class="text-foot"><i
+                            <li><a routerLink="/index" [ngxScrollTo]="'#co_w_teczce'" [ngxScrollToDuration]="'0'" class="text-foot"><i
                                         class="uil uil-angle-right-b me-1"></i>
                                     Co znajduje się w Teczce Życia</a></li>
-                            <li><a routerLink="index-hospital" class="text-foot"><i 
+                            <li><a routerLink="/index" [ngxScrollTo]="'#faq_teczka'" [ngxScrollToDuration]="'0'" class="text-foot"><i 
                                         class="uil uil-angle-right-b me-1"></i>
                                     FAQ</a></li>
                         </ul>

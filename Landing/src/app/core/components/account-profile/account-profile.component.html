@@ -5,9 +5,9 @@
       Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
-      <a class="dropdown-item" style="background: #337ab7; color: white" >Profil</a>
-      <a class="dropdown-item" >Szczepienia</a>
-      <a class="dropdown-item" >Wyniki krwi</a>
+      <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
+      <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood" >Wyniki krwi</a>
       <a class="dropdown-item" >Pełna teczka badań</a>
       <a class="dropdown-item" >Wizyty u specjalistów</a>
       <div class="dropdown-divider"></div>
@@ -24,24 +24,43 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="card public-profile rounded shadow-sm">
+        <div class="public-profile card rounded shadow-sm">
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
-                <img src="assets/images/main/avatar.jpg" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
+                <img src="assets/images/main/avatar.png" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
                   alt="">
               </div>
               <!--end col-->
-                <div class="col-lg-10 col-md-9">
+                <div class="col-lg-6 col-md-6">
                   <div class="row align-items-end">
-                    <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
-                      <h3 class="title mb-0">{{name}} {{lastName}}</h3>
-                      <small class="text-muted h6 me-2">{{email}}</small><br>
-                      <small class="text-muted h6 me-2">Twój unikalny kod: {{code}}</small>
+                    <div class="col-md-8 text-md-start text-center">
+                      <h3 class="title mb-0">{{name}} {{lastName}} 
+                        <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
+                          <i class="uil uil-copy"></i>
+                        </button> -->
+                      </h3>
+                      <!-- <div class="row "> -->
+                        <small class="h6 me-2">{{email}}<br>
+                        <!-- //<div class="col-lg-12"> -->
+                          Twój kod: <b>{{code}}</b>
+                            <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
+                            <i class="uil uil-copy"></i>
+                          </button> 
+                        </small> 
+                        <!-- </div> -->
+                      <!-- </div> -->
                     </div>
                     <!--end col-->
                   </div>
                   <!--end row-->
+                </div>
+                <div class="col-lg-4 col-md-3 mt-2">
+                  <div class="text-center">
+                    <p>Twój Kod QR<br>
+                      <qr-code [value]=code_link></qr-code>
+                    </p>
+                  </div>
                 </div>
               <!--end col-->
             </div>
@@ -61,31 +80,28 @@
 <!-- Profile Start -->
 <section class="section mt-60">
 
-  <div class="container mt-lg-3">
+  <div class="container ">
     <div class="row">
-
-
-
       <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
         <div class="sidebar sticky-bar px-4 rounded shadow" >
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
-                <a routerLink="/account-profile" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/main" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
                   <h6 class="mb-0 ms-2 ">Profil</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-members" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/vaccinations" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
                   <h6 class="mb-0 ms-2">Szczepienia</h6>
                 </a>
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-works" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-file"></i></span>
                   <h6 class="mb-0 ms-2">Wyniki krwi</h6>
                 </a>
@@ -108,7 +124,7 @@
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-setting" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
                   <h6 class="mb-0 ms-2">Ustawienia</h6>
                 </a>
@@ -154,7 +170,7 @@
             </button>
           </div>
           <hr>
-          <table class=" table mb-0 table-center">
+          <table [style.visibility]="(allergies_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
             <thead>
             <tr>
               <th scope="col" class="border-bottom" style="width:10%;">#</th>
@@ -181,7 +197,7 @@
             </button>
           </div>
           <hr>
-          <table class="table mb-0 table-center">
+          <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' " class="table mb-0 table-center">
             <thead>
             <tr>
               <th scope="col" class="border-bottom" style="width:11%;">#</th>
@@ -209,7 +225,7 @@
             </button>
           </div>
           <hr>
-          <table class=" table mb-0 table-center">
+          <table [style.visibility]="(illness_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
             <thead>
             <tr>
               <th scope="col" class="border-bottom" style="width:10%;">#</th>
@@ -278,7 +294,7 @@
                             <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina </td>
                             <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy </td>
                             <td>{{contact.phoneNumber}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_contact(indexOfElement,contact.id)"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_contact(indexOfElement,contact.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -315,7 +331,7 @@
                 <form id="alergyForm" #fa="ngForm" (submit)="onAllergySubmit(fa)">
                   <h4 class="title text-center">Alergie i Uczulenia</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz czy chcesz dodać alergię czy uczulenie</p>
                     <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
                         <input type="radio" name="type2" value="ALLERGY" autocomplete="off" ngModel required (click)="checkSelected(1)"> Alergia
@@ -361,7 +377,7 @@
                             <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
                             <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
                             <td>{{allergy.name}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_allergy(indexOfElement, allergy.id)"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_allergy(indexOfElement, allergy.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -471,7 +487,7 @@
                             <td>{{tabs.name}}</td>
                             <td>{{tabs.portion}}</td>
                             <td>{{tabs.howOften}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_medications(indexOfElement,tabs.id)"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_medications(indexOfElement,tabs.id)"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -543,7 +559,7 @@
                           <tr *ngFor="let illness of illness_tmp ; let indexOfElement=index;">
                             <td>{{indexOfElement+1}}</td>
                             <td>{{illness.name}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_illness(indexOfElement,illness.id)"></td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_illness(indexOfElement,illness.id)"></td>
                           </tr>
                           </tbody>
                         </table>

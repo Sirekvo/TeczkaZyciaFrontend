@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { LightboxModule } from 'ngx-lightbox';
+// import { LightboxModule } from 'ngx-lightbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CountToModule } from 'angular-count-to';
-import { NgxMasonryModule } from 'ngx-masonry';
+// import { NgxMasonryModule } from 'ngx-masonry';
 
 import { UserService } from './shared/services/user.service';
 import { AccountService } from './shared/services/account.service';
@@ -38,12 +38,18 @@ import { allIcons } from 'angular-feather/icons';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QRCodeModule } from 'angular2-qrcode';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
 import {FindPatientComponent} from "./core/components/find-patient/find-patient.component";
 import {PatientService} from "./shared/services/patient.service";
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
+import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
+import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component'; 
+import { ClipboardModule } from 'ngx-clipboard';
+import { AccountSettingsComponent } from './core/components/account-settings/account-settings.component';
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -61,9 +67,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     IndexComponent,
     StarterComponent,
     AccountProfileComponent,
+    VaccinationsInfoComponent,
+    BloodInfoComponent,
     FindPatientComponent,
     PageConfirmMailComponent,
     AuthRePasswordComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,10 +93,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxTypedJsModule,
     FlatpickrModule.forRoot(),
     CountToModule,
-    NgxMasonryModule,
-    LightboxModule,
+    QRCodeModule,
+    // NgxMasonryModule,
+    // LightboxModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ClipboardModule,
 
   ],
   exports: [

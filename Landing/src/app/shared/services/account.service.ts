@@ -12,6 +12,10 @@ import {
     ContactsInput,
     MedicationsOutput,
     MedicationsInput,
+    VaccinationsOutput,
+    VaccinationsInput,
+    BloodTypeOutput,
+    BloodTypeInput,
     CodeOutput, EmailOutput
 } from '../models/account.model';
 import {TokenOutput} from '../models/user.model';
@@ -58,6 +62,18 @@ export class AccountService {
     setMedications(list: Array<MedicationsOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/information/medications', list);
     }
+    getVaccinations(code: string): Observable<Array<VaccinationsInput>>{
+        return this.httpClient.get<Array<VaccinationsInput>>(environment.apiUrl+ '/additional/vaccinations');
+    }
+    setVaccinations(list: Array<VaccinationsOutput>): Observable<any> {
+        return this.httpClient.post(environment.apiUrl + '/additional/vaccinations', list);
+    }
+    getBloodType(): Observable<Array<BloodTypeInput>>{
+        return this.httpClient.get<Array<BloodTypeInput>>(environment.apiUrl + '/additional/blood-type');
+    }
+    setBloodType(list: Array<BloodTypeOutput>): Observable<any> {
+        return this.httpClient.post(environment.apiUrl + '/additional/blood-type', list);
+    }
 
     deleteContacts(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/contactPerson/' + id);
@@ -70,5 +86,15 @@ export class AccountService {
     }
     deleteChronicDiseases(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/chronicDiseases/' + id);
+    }
+    deleteVaccinations(id: number): Observable<any> {
+        return this.httpClient.delete(environment.apiUrl + '/additional/vaccinations/' + id);
+    }
+    deleteBloodType(id: number): Observable<any> {
+        return this.httpClient.delete(environment.apiUrl + '/additional/blood-type/' + id);
+    }
+    setFirstLogin(): Observable<any> {
+
+        return this.httpClient.put(environment.apiUrl  + '/account/first-login',null);
     }
 }

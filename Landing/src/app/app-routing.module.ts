@@ -14,6 +14,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { combineLatest } from 'rxjs/internal/operators';
 import {PageConfirmMailComponent} from "./auth/page-confirm-mail/page-confirm-mail.component";
 import {AuthRePasswordComponent} from "./auth/auth-re-password/auth-re-password.component";
+import { VaccinationsInfoComponent } from './core/components/additional-info/vaccinations-info/vaccinations-info.component';
+import { BloodInfoComponent } from './core/components/additional-info/blood-info/blood-info.component';
+import { AccountSettingsComponent } from './core/components/account-settings/account-settings.component';
 
 const routes: Routes = [
   {
@@ -28,13 +31,16 @@ const routes: Routes = [
   { path: 'login', component: AuthLoginComponent },
   { path: 'patient/:code', component: FindPatientComponent },
   { path: 'registration', component: AuthSignupComponent },
-  { path: 'confirm-mail/:firstName', component: PageConfirmMailComponent },
+  { path: 'confirm-mail', component: PageConfirmMailComponent },
   { path: 'reset-password', component: AuthRePasswordComponent },
   { path: 'starter', component: StarterComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] }
     },
   { path: 'main', component: AccountProfileComponent },
+  { path: 'vaccinations', component: VaccinationsInfoComponent},
+  { path: 'blood', component: BloodInfoComponent},
+  { path: 'settings', component: AccountSettingsComponent},
 
 ];
 
