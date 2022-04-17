@@ -189,6 +189,10 @@ export class AccountProfileComponent implements OnInit {
         this.addAllergies.splice(0, this.addAllergies.length);
         this.addMedications.splice(0, this.addMedications.length);
         this.addIllness.splice(0, this.addIllness.length);
+        this.contact_counter = 0;
+        this.medications_counter = 0;
+        this.allergies_counter = 0;
+        this.illness_counter =0;
     }
 
     back_to_start_complete() {

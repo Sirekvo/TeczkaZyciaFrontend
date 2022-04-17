@@ -158,7 +158,7 @@
             </button>
           </div>
           <hr>
-          <table class=" table mb-0 table-center">
+          <table [style.visibility]="(vaccinations_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
             <thead>
               <tr>
                 <th scope="col" class="border-bottom" style="width:10%;">#</th>

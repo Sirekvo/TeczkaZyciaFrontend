@@ -7,6 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {PatientService} from "../../shared/services/patient.service";
 import {MustMatch} from "../../shared/match_validator/must_match.validator";
+import {state} from "@angular/animations";
 
 
 
@@ -38,7 +39,7 @@ export class AuthSignupComponent implements OnInit {
             firstName: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
             email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,16}$")]),
+            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]),
             confirmPassword: new FormControl('', [Validators.required]),
             rules: new FormControl(false,[Validators.requiredTrue]),
         }, {
@@ -64,7 +65,7 @@ export class AuthSignupComponent implements OnInit {
                 if (data.exists == false) {
                     this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
                         (response: any) => {
-                            this.router.navigate(['/confirm-mail', form.value.firstName]);
+                            this.router.navigate(['/confirm-mail'], {queryParams: { name: form.value.firstName, email: form.value.email}});
                         },
                         (error: HttpErrorResponse) => {
                             form.reset();

@@ -30,7 +30,6 @@ export class AuthLoginComponent implements OnInit {
 
       this.userService.login(form.value.email, form.value.password).subscribe(
           (data: TokenOutput) => {
-              console.log(data.token);
               this.userService.setLocalUser(data, form.value.remember === true);
 
               if(data.firstLogin == true){

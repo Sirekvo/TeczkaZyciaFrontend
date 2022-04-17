@@ -123,6 +123,7 @@ export class VaccinationsInfoComponent implements OnInit {
         this.idVaccinations.splice(0, this.idVaccinations.length);
 
         this.addVaccinations.splice(0, this.addVaccinations.length);
+        this.vaccinations_counter = 0;
     }
 
     back_to_start_complete_5() {
