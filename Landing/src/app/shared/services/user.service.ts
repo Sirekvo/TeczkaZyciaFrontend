@@ -15,11 +15,12 @@ export class UserService {
         this.httpClient_withoutToken = new HttpClient(handler);
     }
 
-    registerUser(name: string, lastName: string, email: string, password: string): Observable<any> {
+    registerUser(name: string, lastName: string, pesel: string, email: string, password: string): Observable<any> {
 
         const body = {
             name,
             lastName,
+            pesel,
             email,
             password
         };

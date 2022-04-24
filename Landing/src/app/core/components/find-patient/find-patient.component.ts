@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountOutput, DiseasesOutput, AllergiesOutput, ContactsOutput, MedicationsOutput} from "../../../shared/models/account.model";
+import {AccountOutput, DiseasesOutput, 
+        AllergiesOutput, ContactsOutput,
+        MedicationsOutput,InformationOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {PatientService} from "../../../shared/services/patient.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -20,7 +22,6 @@ export class FindPatientComponent implements OnInit {
      */
     navClass = 'nav-light';
     name = '';
-    lastName = '';
     email = '';
     code = '';
     illnessList: Array<DiseasesOutput>;
@@ -70,6 +71,14 @@ export class FindPatientComponent implements OnInit {
             },
             () => {
             }
+        );
+        this.patientService.getInformation(this.code).subscribe(
+            (information: InformationOutput) => {
+                this.name = information.name;
+                this.email = information.email;
+            },
+            () => {
+            }        
         );
 
     }

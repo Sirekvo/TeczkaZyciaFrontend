@@ -71,5 +71,9 @@ export class EmailOutput {
 export class CodeOutput {
     exists: boolean;
 }
+export class InformationOutput {
+    name: string;
+    email: string;
+}
 
 

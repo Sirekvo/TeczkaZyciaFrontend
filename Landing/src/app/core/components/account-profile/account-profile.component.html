@@ -245,33 +245,43 @@
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12">
               <div class="px-3 py-4">
-                <form id="contactForm" #f="ngForm" (submit)="onContactSubmit(f)" >
+                <form [formGroup]="contactForm" #f="ngForm" (ngSubmit)="onContactSubmit(f)" >
                   <h4 class="title text-center">Osoby Kontaktowe</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
-                    <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto form-group">Wybierz typ osoby, której podasz numer</p>
+                    <div class="col-12 btn-group btn-group-toggle " data-toggle="buttons">
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
-                        <input type="radio" name="type" value='FAMILY' autocomplete="off" ngModel required (click)="checkSelected(1)"> Rodzina
+                        <input type="radio" formControlName="type" value='FAMILY' autocomplete="off" (click)="checkSelected(1)"
+                        [ngClass]="{ 'is-invalid': submitted && fphone.type.errors }"> Rodzina
                       </label>
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
-                        <input type="radio" name="type" value='FRIEND' autocomplete="off" ngModel required (click)=checkSelected(2)> Znajomy
+                        <input type="radio" formControlName="type" value='FRIEND' autocomplete="off" (click)=checkSelected(2)
+                        [ngClass]="{ 'is-invalid': submitted && fphone.type.errors }"> Znajomy
                       </label>
                     </div>
+                    <div *ngIf="submitted && information_to_user" class="col-12 text-center">
+                      <p class="text-danger">Proszę wybrać typ osoby</p>
+                    </div>
+
                     <!--end col-->
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 form-group">
                       <div class="mb-3 mt-4">
                         <label class="form-label">Telefon kontaktowy<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="phone" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="number" name="phone" class="form-control ps-5 pt-2" placeholder="Telefon" ngModel required pattern=".{9,9}">
+                          <input type="number" formControlName="phone" class="form-control ps-5 pt-2" placeholder="Telefon" [ngClass]="{ 'is-invalid': submitted && fphone.phone.errors }">
+                          <div *ngIf="submitted && fphone.phone.errors" class="invalid-feedback">
+                            <div *ngIf="fphone.phone.errors.required">Należy wpisać numer telefonu</div>
+                            <div *ngIf="fphone.phone.errors.pattern">Nieodpowiednia liczba cyfr</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 3 osoby</p>
-                      <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success" [disabled]="!f.valid || contact_counter>2">Dodaj</button>
+                      <div class="col-5 justify-content-center w-100">                                                       
+                        <button type="submit" name="push" class="btn btn-success" [disabled]="contact_counter>2">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -304,12 +314,12 @@
 
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <button class="btn btn-secondary" (click)="back_to_start(); clean_form(f)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" (click)="back_to_start_complete()">Gotowe</button>
+                        <button class="btn btn-primary" (click)="back_to_start_complete(); clean_form(f)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->

@@ -15,8 +15,9 @@ import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
-
+import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import { ClipboardService } from "ngx-clipboard";
+import { NgForm, Validators } from '@angular/forms';
 
 
 @Component({
@@ -79,17 +80,34 @@ export class AccountProfileComponent implements OnInit {
     illness_counter = 0;
     allergies_counter = 0;
     medications_counter = 0;
+
+    contact_counter_tmp : number;
+    illness_counter_tmp : number;
+    allergies_counter_tmp : number;
+    medications_counter_tmp : number;
+
     isCondensed = false;
+
+    information_to_user = true;
+
+    submitted = false;
+    contactForm : FormGroup;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
                 private scroller: ViewportScroller,
-                private clipboardApi: ClipboardService) {
+                private clipboardApi: ClipboardService,
+                private formBuilder: FormBuilder,) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        this.contactForm = this.formBuilder.group({
+            phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
+            type: new FormControl('', [Validators.required]),
+        }, {
+        });
         if (window.innerWidth <= 991) { // 768px portrait
             this.mobile = true;
         }
@@ -97,6 +115,8 @@ export class AccountProfileComponent implements OnInit {
     }
 
     refresh() {
+        
+
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
 
@@ -146,6 +166,8 @@ export class AccountProfileComponent implements OnInit {
         );
     }
 
+    get fphone() { return this.contactForm.controls; }
+
     logout() {
         this.userService.removeLocalUser();
     }
@@ -181,6 +203,7 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible_medications = false;
         this.isVisible_contact = false;
         this.isVisible = true;
+        this.information_to_user=true;
         this.idContacts.splice(0, this.idContacts.length);
         this.idAllergies.splice(0, this.idAllergies.length);
         this.idMedications.splice(0, this.idMedications.length);
@@ -189,10 +212,13 @@ export class AccountProfileComponent implements OnInit {
         this.addAllergies.splice(0, this.addAllergies.length);
         this.addMedications.splice(0, this.addMedications.length);
         this.addIllness.splice(0, this.addIllness.length);
-        this.contact_counter = 0;
-        this.medications_counter = 0;
-        this.allergies_counter = 0;
-        this.illness_counter =0;
+
+        this.submitted = false;
+
+        this.contact_counter = this.contact_counter_tmp;
+        this.medications_counter = this.medications_counter_tmp;
+        this.allergies_counter = this.allergies_counter_tmp;
+        this.illness_counter = this.illness_counter_tmp;
     }
 
     back_to_start_complete() {
@@ -211,7 +237,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addContact.length != 0) {
             this.accountService.setContacts(this.addContact).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -222,6 +247,7 @@ export class AccountProfileComponent implements OnInit {
 
         this.isVisible_contact = false;
         this.isVisible = true;
+        this.information_to_user=true;
 
 
     }
@@ -243,7 +269,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addAllergies.length != 0) {
             this.accountService.setAllergies(this.addAllergies).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -260,7 +285,6 @@ export class AccountProfileComponent implements OnInit {
             for (let i = 0; i < this.idMedications.length; i++) {
                 this.accountService.deleteMedications(this.idMedications[i]).subscribe(
                     (response: any) => {
-
                     },
                     () => {
                     }
@@ -273,7 +297,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addMedications.length != 0) {
             this.accountService.setMedications(this.addMedications).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -303,7 +326,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addIllness.length != 0) {
             this.accountService.setChronicDiseases(this.addIllness).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -317,6 +339,7 @@ export class AccountProfileComponent implements OnInit {
 
     checkSelected(selectedChoice: number) {
         this.activeToggle = selectedChoice;
+        this.information_to_user = false;
     }
 
     selectOptionHandler(event: any) {
@@ -330,20 +353,41 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onContactSubmit(form: any) {
-        if (this.contact_counter < 3) {
-            const contact = new ContactsInput();
-            const contact2 = new ContactsOutput();
-            contact.id = 0;
-            contact.contactPersonRole = form.value.type;
-            contact.phoneNumber = form.value.phone;
-            contact.appUserID = 0;
-            contact2.contactPersonRole = form.value.type;
-            contact2.phoneNumber = form.value.phone;
-            this.contact_tmp.push(contact);
-            this.addContact.push(contact2);
-            this.contact_counter++;
-            form.reset();
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
+        this.submitted = true;
+        if (this.contactForm.invalid) {
+            return;
         }
+        else{
+            if (this.contact_counter < 3) {
+                const contact = new ContactsInput();
+                const contact2 = new ContactsOutput();
+                contact.id = 0;
+                contact.contactPersonRole = form.value.type;
+                contact.phoneNumber = form.value.phone;
+                contact.appUserID = 0;
+                contact2.contactPersonRole = form.value.type;
+                console.log(form.value.type);
+                contact2.phoneNumber = form.value.phone;
+                this.activeToggle=0;
+                this.information_to_user=true;
+                this.contact_tmp.push(contact);
+                this.addContact.push(contact2);
+                this.contact_counter++;
+                form.reset();
+                this.submitted = false;
+            }
+        }
+    }
+
+    clean_form(form: any){
+        form.reset();
+        this.activeToggle=0;
+        this.submitted = false;
     }
 
     delete_contact(rowNumber, id) {
@@ -358,6 +402,11 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onAllergySubmit(form: any) {
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
         if (this.allergies_counter < 15) {
             const allergy = new AllergiesInput();
             const allergy2 = new AllergiesOutput();
@@ -386,6 +435,11 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onMedicationsSubmit(form: any) {
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
         if (this.medications_counter < 15) {
             const tabs = new MedicationsInput();
             const tabs2 = new MedicationsOutput();
@@ -416,6 +470,11 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onIllnessSubmit(form: any) {
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
         if (this.illness_counter < 5) {
             const illness = new DiseasesInput();
             const illness2 = new DiseasesOutput();
