@@ -97,4 +97,5 @@ export class AccountService {
 
         return this.httpClient.put(environment.apiUrl  + '/account/first-login',null);
     }
+
 }

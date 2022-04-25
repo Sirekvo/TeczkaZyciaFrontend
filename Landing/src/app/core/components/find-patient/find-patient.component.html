@@ -1,6 +1,11 @@
 <!-- Hero Start -->
 <section class="bg-profile d-table w-100 bg-primary"
          style="background: url('assets/images/main/bg.png') center center;" id="home">
+         <div class="back-to-home rounded">
+            <a routerLink="/index" class="btn btn-icon btn-secondary">
+              <i-feather name="home" class="icons"></i-feather>
+            </a>
+          </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -56,7 +61,12 @@
                         <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
                     </div>
                 </div>
-
+                <div class="pb-4">
+                    <h3 class="text-center">Zgoda na pobranie organów</h3>
+                    <hr>
+                    <h4 *ngIf="(isOrganDonor == true)" class="text-center">Wyrażono zgodę na pobranie po śmierci tkanek oraz narządów do przeszczepienia</h4>
+                    <h4 *ngIf="(isOrganDonor == false)" class="text-center"><span class="text-danger">NIE</span> wyrażono zgody na pobranie po śmierci tkanek oraz narządów do przeszczepienia</h4>
+                </div>
                 <div class="pb-4">
                     <h3 class="text-center">Alergie i uczulenia</h3>
                     <hr>

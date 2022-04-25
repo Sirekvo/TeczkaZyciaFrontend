@@ -244,13 +244,13 @@
                     <div class="col mb-0">
                       <div class="d-grid">
                         <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'"
-                          class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                          class="btn btn-secondary" (click)="back_to_start(); clean_form(fv)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
                         <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'" class="btn btn-primary"
-                          (click)="back_to_start_complete_5()">Gotowe</button>
+                          (click)="back_to_start_complete_5(); clean_form(fv)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->

@@ -118,4 +118,10 @@ export class UserService {
     deleteUser(): Observable<any>{
         return this.httpClient.delete(environment.apiUrl + '/account/deleteUser');
     }
+    changeOrganDonor(organDonor: boolean): Observable<any>{
+       const body = {
+            organDonor
+       };
+       return this.httpClient.put(environment.apiUrl + '/information/organ-donor', body);
+    }
 }

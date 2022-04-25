@@ -8,6 +8,7 @@ import {
     AllergiesOutput,
     ContactsOutput,
     MedicationsOutput,
+    OrganDonorOutput,
     CodeOutput, EmailOutput,
     InformationOutput
 } from '../models/account.model';
@@ -43,5 +44,9 @@ export class PatientService {
 
     getInformation(code: string): Observable<InformationOutput>{
         return this.httpClient.get<InformationOutput>(environment.apiUrl + '/information/stars/' + code);
+    }
+
+    getOrganDonor(code: string): Observable<OrganDonorOutput>{
+        return this.httpClient.get<OrganDonorOutput>(environment.apiUrl + "/information/organ-donor/" + code);
     }
 }

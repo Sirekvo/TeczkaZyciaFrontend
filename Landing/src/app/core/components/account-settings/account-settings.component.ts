@@ -1,5 +1,5 @@
 import { ViewportScroller } from "@angular/common";
-import {Component, OnInit} from '@angular/core';
+import {Component, Type, OnInit} from '@angular/core';
 import {
     AccountOutput,
     AllergiesOutput,
@@ -21,7 +21,35 @@ import { ClipboardService } from "ngx-clipboard";
 import { NgForm, Validators } from '@angular/forms';
 import {HttpErrorResponse} from "@angular/common/http";
 import {PatientService} from "../../../shared/services/patient.service";
+import { NgbModal, NgbActiveModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
+@Component({
+    selector: 'ngbd-modal-confirm',
+    template: `
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Usuwanie konta</h4>
+      <button type="button" class="btn-close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span> ?</strong></p>
+      <p>Wszystkie informacje przypisane do tego konta zostaną usunięte.
+      <span class="text-danger">Tej operacji nie można cofnąć.</span>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')" click="deleteUser()">Potwierdź</button>
+    </div>
+    `
+  })
+
+  export class NgbdModalConfirm {
+    constructor(public modal: NgbActiveModal) {}
+  }
+  const MODALS: {[name: string]: Type<any>} = {
+    focusFirst: NgbdModalConfirm,
+    // autofocus: NgbdModalConfirmAutofocus
+  };
 
 @Component({
     selector: 'app-account-settings',
@@ -63,19 +91,21 @@ export class AccountSettingsComponent implements OnInit {
     changeNameForm: FormGroup;
     changePESELForm: FormGroup;
 
+    isOrganDonor
+
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
                 private clipboardApi: ClipboardService,
                 private formBuilder: FormBuilder,
-                private patientService: PatientService) {
+                private patientService: PatientService,
+                private _modalService: NgbModal) {
 
     }
 
     ngOnInit(): void {
         this.refresh();
-
         this.changePasswordForm = this.formBuilder.group({
             password: new FormControl('', [Validators.required]),
             newPassword: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]), // min 8 chracters and max 16 with min 1 capital letter, 1 digit and 1 special character
@@ -104,6 +134,8 @@ export class AccountSettingsComponent implements OnInit {
         }
         window.onresize = () => this.mobile = window.innerWidth <= 991;
     }
+
+
     refresh() {
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
@@ -112,12 +144,21 @@ export class AccountSettingsComponent implements OnInit {
                 this.lastName = information.lastName;
                 this.email = information.email;
                 this.code = information.code;
-
+                this.isOrganDonor = information.isOrganDonor;
                 this.code_link = environment.codeUrl + this.code;
+                console.log("Wartosc IsOrganDonor "+ this.isOrganDonor);
             },
             () => {
             }
         );
+        // this.patientService.getOrganDonor(this.code).subscribe(
+        //     (inputValue: Boolean) => {
+        //         this.isOrganDonor = inputValue;
+        //         console.log("Wartosc startowa isOrganDonor " + this.isOrganDonor );
+        //     },
+        //     () => {
+        //     }
+        // );
     }
 
     get f() { return this.changePasswordForm.controls; }
@@ -218,9 +259,27 @@ export class AccountSettingsComponent implements OnInit {
             );
         }
     }
+
+    open(name: string) { 
+        this._modalService.open(MODALS[name]).result.then((result) => {
+           if(result == 'Ok click') {
+              this.deleteUser(); 
+            //   this.userService.deleteUser();
+            this.router.navigate(['/index']);
+            this.logout();
+           } 
+        }, (reason) => {
+            if (reason === ModalDismissReasons.ESC ||
+                reason === ModalDismissReasons.BACKDROP_CLICK ||
+                reason == 'cancel click' || 
+                reason == 'Cross click'){
+                    console.log("anulowano usuwanie");
+                }
+        });
+    }
+
     deleteUser(){
-
-
+        console.log("Funkcja do usuwania usera");
     }
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
@@ -228,6 +287,25 @@ export class AccountSettingsComponent implements OnInit {
     logout() {
         this.userService.removeLocalUser();
     }
+    toogleEditable(event){
+        if(event.target.checked){
+            this.isOrganDonor = true;
+            this.changeOrganDonor();
+        }
+        else{
+            this.isOrganDonor = false;
+            this.changeOrganDonor();
+        }
+        console.log("Wartosc isOrganDonor "+this.isOrganDonor);
+    }
 
+    changeOrganDonor(){
+        this.userService.changeOrganDonor(this.isOrganDonor).subscribe(
+            (data: any) => {;
+            },
+            () => {
+            }
+        );
+    }
 
 }

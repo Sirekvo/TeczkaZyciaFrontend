@@ -3,6 +3,7 @@ export class AccountOutput {
     lastName: string;
     email: string;
     code: string;
+    isOrganDonor: boolean;
 }
 export class DiseasesOutput {
     name: string;
@@ -67,6 +68,9 @@ export class BloodTypeInput {
 }
 export class EmailOutput {
     exists: boolean;
+}
+export class OrganDonorOutput{
+    isOrganDonor: boolean;
 }
 export class CodeOutput {
     exists: boolean;

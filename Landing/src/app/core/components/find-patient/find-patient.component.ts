@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountOutput, DiseasesOutput, 
         AllergiesOutput, ContactsOutput,
-        MedicationsOutput,InformationOutput} from "../../../shared/models/account.model";
+        MedicationsOutput,InformationOutput, OrganDonorOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {PatientService} from "../../../shared/services/patient.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -24,6 +24,7 @@ export class FindPatientComponent implements OnInit {
     name = '';
     email = '';
     code = '';
+    isOrganDonor: boolean;
     illnessList: Array<DiseasesOutput>;
     allegriesList: Array<AllergiesOutput>;
     contactList: Array<ContactsOutput>;
@@ -79,6 +80,14 @@ export class FindPatientComponent implements OnInit {
             },
             () => {
             }        
+        );
+        this.patientService.getOrganDonor(this.code).subscribe(
+            (information: OrganDonorOutput) => {
+                this.isOrganDonor = information.isOrganDonor;
+            },
+            () => {
+
+            }
         );
 
     }

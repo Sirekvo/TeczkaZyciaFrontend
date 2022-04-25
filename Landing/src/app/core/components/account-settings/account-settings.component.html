@@ -349,6 +349,20 @@
           </div>
 
         </div>
+        <div class="row">
+          <div class="col-md-6 mt-4 ml-5 pt-2 ">
+            <div class="d-inline-flex">
+              <h5>Zgoda na pobranie organów</h5>
+            </div>
+            <div class="border-bottom"></div>
+            <div class="form-check form-switch">
+              <label *ngIf="(isOrganDonor == true)" class="form-check-label" for="organDonorSwitch"> Wyrażam zgodę na pobranie po śmierci moich tkanek i narządów do przeszczepienia</label>
+              <label *ngIf="(isOrganDonor == false)" class="form-check-label" for="organDonorSwitch"><span class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci moich tkanek i narządów do przeszczepienia</label>
+              <input class="form-check-input" type="checkbox" id="organDonorSwitch" [checked]="isOrganDonor"  (change)="toogleEditable($event)">
+            </div>
+            <!--end col-->
+          </div>
+        </div>
         <!--end row-->
 
 
@@ -360,7 +374,7 @@
           <div class="mt-2">
             <h6 class="mb-1">Chcesz usunąć swoje konto? Prosze kliknąć przycisk "Usuń konto" poniżej</h6>
             <div class="mt-4">
-              <button class="btn btn-danger" (click)="deleteUser()">Usuń konto</button>
+              <button class="btn btn-danger" (click)="open('focusFirst')">Usuń konto</button>
             </div>
             <!--end col-->
           </div>
