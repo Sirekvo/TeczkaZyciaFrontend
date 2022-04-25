@@ -1,7 +1,7 @@
 // TODO  opisy, background,
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgForm } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
 import {DiseasesOutput} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
@@ -56,12 +56,22 @@ export class StarterComponent implements OnInit {
   er3 = 0;
   er4 = 0;
 
+  information_to_user = true;
+  submitted = false;
+  contactForm: FormGroup;
 
   constructor(private accountService: AccountService,
-              private router: Router) {  }
+              private router: Router,
+              private formBuilder: FormBuilder) {  }
 
   ngOnInit(): void {
+    this.contactForm = this.formBuilder.group({
+      phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
+      type: new FormControl('', [Validators.required]),
+    }, {
+    });
   }
+  get fphone() { return this.contactForm.controls; }
 
   contact(){
     this.isVisible_start = false;
@@ -147,19 +157,30 @@ export class StarterComponent implements OnInit {
         }
     );
   }
+  clean_form(form: any){
+    form.reset();
+    this.submitted = false;
+  }
 
   onContactSubmit(form: any) {
-    if (this.contact_counter < 3) {
-      const contact = new Contact();
-      contact.contactPersonRole = form.value.type;
-      contact.phoneNumber = form.value.phone;
-      this.contactList.push(contact);
-      this.contact_counter++;
-      form.reset();
-      if (this.visible == 0 && this.er1 == 0) {
-        this.isVisible_table_contact = !this.isVisible_table_contact;
-        this.visible++;
-        this.er1 = 1;
+    this.submitted = true;
+    if (this.contactForm.invalid) {
+      return;
+    }
+    else{
+      if (this.contact_counter < 3) {
+        const contact = new Contact();
+        contact.contactPersonRole = form.value.type;
+        contact.phoneNumber = form.value.phone;
+        this.contactList.push(contact);
+        this.contact_counter++;
+        form.reset();
+        this.submitted = false;
+        if (this.visible == 0 && this.er1 == 0) {
+          this.isVisible_table_contact = !this.isVisible_table_contact;
+          this.visible++;
+          this.er1 = 1;
+        }
       }
     }
   }
@@ -246,6 +267,7 @@ export class StarterComponent implements OnInit {
   }
   checkSelected(selectedChoice: number){
     this.activeToggle = selectedChoice;
+    this.information_to_user = false;
   }
   selectOptionHandler(event: any){
     if (event.target.value === 'Inne'){

@@ -54,11 +54,10 @@
                     <label class="form-label">PESEL</label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="pesel" type="number" class="form-control ps-5 pt-2" placeholder="PESEL" ngModel pattern=".{9,9}"> 
-                      <!-- placeholder="PESEL" [ngClass]="{ 'is-invalid': submitted && f.pesel.errors }"> -->
-                      <!-- <div *ngIf="submitted && f.pesel.errors" class="invalid-feedback"> -->
-                        <!-- <div *ngIf="f.pesel.errors.required">Nazwisko jest wymagane</div> -->
-                      <!-- </div> -->
+                      <input formControlName="pesel" type="number" class="form-control ps-5 pt-2" placeholder="PESEL" [ngClass]="{ 'is-invalid': submitted && f.pesel.errors }">
+                       <div *ngIf="submitted && f.pesel.errors" class="invalid-feedback">
+                         <div *ngIf="f.pesel.errors.pattern">Niepoprawna ilość znaków</div>
+                       </div>
                     </div>
 
                   </div>

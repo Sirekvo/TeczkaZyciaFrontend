@@ -91,14 +91,14 @@ export class AccountProfileComponent implements OnInit {
     information_to_user = true;
 
     submitted = false;
-    contactForm : FormGroup;
+    contactForm: FormGroup;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
                 private scroller: ViewportScroller,
                 private clipboardApi: ClipboardService,
-                private formBuilder: FormBuilder,) {
+                private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
@@ -176,12 +176,25 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible_illness = true;
         this.isVisible = false;
         this.illness_tmp = this.illnessList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
     }
 
     show_medications_settings() {
         this.isVisible_medications = true;
         this.isVisible = false;
         this.medications_tmp = this.medicationsList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
+        console.log(this.medications_counter);
+        console.log(this.medications_counter_tmp);
     }
 
     show_contact_settings() {
@@ -189,12 +202,22 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible = false;
         this.contact_tmp = this.contactList.slice();
 
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
     }
 
     show_allergies_settings() {
         this.isVisible_allergy = true;
         this.isVisible = false;
         this.allergies_tmp = this.allegriesList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
     }
 
     back_to_start() {
@@ -219,6 +242,9 @@ export class AccountProfileComponent implements OnInit {
         this.medications_counter = this.medications_counter_tmp;
         this.allergies_counter = this.allergies_counter_tmp;
         this.illness_counter = this.illness_counter_tmp;
+
+        console.log(this.medications_counter);
+        console.log(this.medications_counter_tmp);
     }
 
     back_to_start_complete() {
@@ -353,11 +379,6 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onContactSubmit(form: any) {
-        this.contact_counter_tmp = this.contact_counter;
-        this.medications_counter_tmp = this.medications_counter;
-        this.allergies_counter_tmp = this.allergies_counter;
-        this.illness_counter_tmp = this.illness_counter;
-
         this.submitted = true;
         if (this.contactForm.invalid) {
             return;
@@ -402,11 +423,6 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onAllergySubmit(form: any) {
-        this.contact_counter_tmp = this.contact_counter;
-        this.medications_counter_tmp = this.medications_counter;
-        this.allergies_counter_tmp = this.allergies_counter;
-        this.illness_counter_tmp = this.illness_counter;
-
         if (this.allergies_counter < 15) {
             const allergy = new AllergiesInput();
             const allergy2 = new AllergiesOutput();
@@ -435,11 +451,6 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onMedicationsSubmit(form: any) {
-        this.contact_counter_tmp = this.contact_counter;
-        this.medications_counter_tmp = this.medications_counter;
-        this.allergies_counter_tmp = this.allergies_counter;
-        this.illness_counter_tmp = this.illness_counter;
-
         if (this.medications_counter < 15) {
             const tabs = new MedicationsInput();
             const tabs2 = new MedicationsOutput();
@@ -470,11 +481,6 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onIllnessSubmit(form: any) {
-        this.contact_counter_tmp = this.contact_counter;
-        this.medications_counter_tmp = this.medications_counter;
-        this.allergies_counter_tmp = this.allergies_counter;
-        this.illness_counter_tmp = this.illness_counter;
-
         if (this.illness_counter < 5) {
             const illness = new DiseasesInput();
             const illness2 = new DiseasesOutput();

@@ -102,4 +102,20 @@ export class UserService {
         };
         return this.httpClient_withoutToken.post(environment.apiUrl + '/registration/resend', body);
     }
+    changeName(name: string, lastName: string): Observable<any>{
+        const body = {
+            name,
+            lastName
+        };
+        return this.httpClient.put(environment.apiUrl + '/account/change-name', body);
+    }
+    changePESEL(pesel: string): Observable<any>{
+        const body = {
+            pesel
+        };
+        return this.httpClient.put(environment.apiUrl + '/account/change-pesel', body);
+    }
+    deleteUser(): Observable<any>{
+        return this.httpClient.delete(environment.apiUrl + '/account/deleteUser');
+    }
 }

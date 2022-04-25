@@ -15,7 +15,7 @@ import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
-import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
+import {Form, FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {MustMatch, MustMatch2} from "../../../shared/match_validator/must_match.validator";
 import { ClipboardService } from "ngx-clipboard";
 import { NgForm, Validators } from '@angular/forms';
@@ -50,12 +50,18 @@ export class AccountSettingsComponent implements OnInit {
     information_to_user3 = '';
     submitted = false;
     submitted_code = false;
+    submitted_name = false;
+    submitted_pesel = false;
 
     showSuccessCode = false;
     showSuccessPassword = false;
+    showSuccessName = false;
+    showSuccessPESEL = false;
 
-    changePasswordForm : FormGroup;
-    changeCodeForm : FormGroup;
+    changePasswordForm: FormGroup;
+    changeCodeForm: FormGroup;
+    changeNameForm: FormGroup;
+    changePESELForm: FormGroup;
 
 
     constructor(private accountService: AccountService,
@@ -72,14 +78,24 @@ export class AccountSettingsComponent implements OnInit {
 
         this.changePasswordForm = this.formBuilder.group({
             password: new FormControl('', [Validators.required]),
-            newPassword: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]),
+            newPassword: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]), // min 8 chracters and max 16 with min 1 capital letter, 1 digit and 1 special character
             confirmPassword: new FormControl('', [Validators.required]),
         },{
             validators: [MustMatch('newPassword', 'confirmPassword'),
                 MustMatch2('password', 'newPassword')]
         });
         this.changeCodeForm = this.formBuilder.group({
-            newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6}$")]),
+            newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6}$")]), // 6 characters without special characters
+        },{
+        });
+        this.changeNameForm = this.formBuilder.group({
+            name: new FormControl('', [Validators.required]),
+            lastName: new FormControl('', [Validators.required]),
+        },{
+        });
+
+        this.changePESELForm = this.formBuilder.group({
+            newPESEL: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
         },{
         });
 
@@ -106,6 +122,8 @@ export class AccountSettingsComponent implements OnInit {
 
     get f() { return this.changePasswordForm.controls; }
     get fa() { return this.changeCodeForm.controls; }
+    get fName() { return this.changeNameForm.controls; }
+    get fPESEL() { return this.changePESELForm.controls; }
 
     changePassword(form: any){
         this.submitted = true;
@@ -162,6 +180,47 @@ export class AccountSettingsComponent implements OnInit {
                 }
             );
         }
+    }
+    changeName(form: any){
+        this.submitted_name = true;
+
+        if (this.changeNameForm.invalid) {
+            return;
+        }
+        else{
+            this.userService.changeName(form.value.name, form.value.lastName).subscribe(
+                (data: any) => {
+                    form.reset();
+                    this.submitted_name = false;
+                    this.showSuccessName = true;
+                    this.refresh();
+                },
+                () => {
+                }
+            );
+        }
+    }
+    changePESEL(form: any){
+        this.submitted_pesel = true;
+
+        if (this.changePESELForm.invalid) {
+            return;
+        }
+        else{
+            this.userService.changePESEL(form.value.newPESEL).subscribe(
+                (data: any) => {
+                    form.reset();
+                    this.submitted_pesel = false;
+                    this.showSuccessPESEL = true;
+                },
+                () => {
+                }
+            );
+        }
+    }
+    deleteUser(){
+
+
     }
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
