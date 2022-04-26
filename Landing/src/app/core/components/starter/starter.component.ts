@@ -68,6 +68,7 @@ export class StarterComponent implements OnInit {
     this.contactForm = this.formBuilder.group({
       phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
       type: new FormControl('', [Validators.required]),
+      optionalName: new FormControl('', ),
     }, {
     });
   }
@@ -172,6 +173,7 @@ export class StarterComponent implements OnInit {
         const contact = new Contact();
         contact.contactPersonRole = form.value.type;
         contact.phoneNumber = form.value.phone;
+        contact.optionalName = form.value.optionalName;
         this.contactList.push(contact);
         this.contact_counter++;
         form.reset();
@@ -294,6 +296,7 @@ export class StarterComponent implements OnInit {
 class Contact{
   contactPersonRole: string;
   phoneNumber: number;
+  optionalName: string;
 }
 
 class Allergy{

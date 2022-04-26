@@ -106,6 +106,7 @@ export class AccountProfileComponent implements OnInit {
         this.contactForm = this.formBuilder.group({
             phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
             type: new FormControl('', [Validators.required]),
+            optionalName: new FormControl('', ),
         }, {
         });
         if (window.innerWidth <= 991) { // 768px portrait
@@ -126,7 +127,6 @@ export class AccountProfileComponent implements OnInit {
                 this.code = information.code;
 
                 this.code_link = environment.codeUrl + this.code;
-                // console.log("link" + this.code_link); 
 
                 this.accountService.getChronicDiseases(information.code).subscribe(
                     (data: Array<DiseasesInput>) => {
@@ -243,8 +243,6 @@ export class AccountProfileComponent implements OnInit {
         this.allergies_counter = this.allergies_counter_tmp;
         this.illness_counter = this.illness_counter_tmp;
 
-        console.log(this.medications_counter);
-        console.log(this.medications_counter_tmp);
     }
 
     back_to_start_complete() {
@@ -388,14 +386,16 @@ export class AccountProfileComponent implements OnInit {
                 const contact = new ContactsInput();
                 const contact2 = new ContactsOutput();
                 contact.id = 0;
+                console.log("imie " + form.value.optionalName);
                 contact.contactPersonRole = form.value.type;
                 contact.phoneNumber = form.value.phone;
                 contact.appUserID = 0;
+                contact.optionalName = form.value.optionalName;
                 contact2.contactPersonRole = form.value.type;
-                console.log(form.value.type);
+                contact2.optionalName = form.value.optionalName;
                 contact2.phoneNumber = form.value.phone;
-                this.activeToggle=0;
-                this.information_to_user=true;
+                this.activeToggle = 0;
+                this.information_to_user = true;
                 this.contact_tmp.push(contact);
                 this.addContact.push(contact2);
                 this.contact_counter++;

@@ -27,12 +27,14 @@ export class AllergiesInput {
 export class ContactsOutput {
     phoneNumber: number;
     contactPersonRole: string;
+    optionalName: string;
 }
 export class ContactsInput {
     id: number;
     phoneNumber: number;
     contactPersonRole: string;
     appUserID: number;
+    optionalName: string;
 }
 export class MedicationsOutput {
     name: string;
@@ -54,7 +56,7 @@ export class VaccinationsInput {
     id: number;
     name: string;
     date: string;
-    appUserID:number;
+    appUserID: number;
 }
 export class BloodTypeOutput {
     type: string;
