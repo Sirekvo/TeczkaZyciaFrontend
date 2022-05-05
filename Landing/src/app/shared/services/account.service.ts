@@ -16,6 +16,7 @@ import {
     VaccinationsInput,
     BloodTypeOutput,
     BloodTypeInput,
+    CardBase64,
     CodeOutput, EmailOutput
 } from '../models/account.model';
 import {TokenOutput} from '../models/user.model';

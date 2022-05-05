@@ -81,5 +81,8 @@ export class InformationOutput {
     name: string;
     email: string;
 }
+export class CardBase64 {
+    base64Code: string;
+}
 
 
