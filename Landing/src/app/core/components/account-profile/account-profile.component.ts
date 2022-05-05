@@ -9,7 +9,7 @@ import {
     DiseasesOutput,
     DiseasesInput,
     MedicationsOutput,
-    MedicationsInput
+    MedicationsInput, CardBase64
 } from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
@@ -18,6 +18,7 @@ import {environment} from '../../../../environments/environment';
 import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import { ClipboardService } from "ngx-clipboard";
 import { NgForm, Validators } from '@angular/forms';
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -88,17 +89,19 @@ export class AccountProfileComponent implements OnInit {
 
     isCondensed = false;
 
-    information_to_user = true;
-
-    submitted = false;
     contactForm: FormGroup;
+
+    information_to_user = true;
+    submitted = false;
+    cardImg: any;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
                 private scroller: ViewportScroller,
                 private clipboardApi: ClipboardService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -116,7 +119,7 @@ export class AccountProfileComponent implements OnInit {
     }
 
     refresh() {
-        
+        this.getCard();
 
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
@@ -405,6 +408,17 @@ export class AccountProfileComponent implements OnInit {
         }
     }
 
+
+
+    getCard() : void {
+        this.accountService.getCardBase64_2().subscribe(
+            (val) => {
+                let objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            },
+            response => {
+            });
+    }
     clean_form(form: any){
         form.reset();
         this.activeToggle=0;
