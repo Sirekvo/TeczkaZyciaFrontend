@@ -94,6 +94,8 @@ export class AccountProfileComponent implements OnInit {
     information_to_user = true;
     submitted = false;
     cardImg: any;
+    cardImg_copy: any;
+    isOrganDonor = false;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
@@ -415,6 +417,7 @@ export class AccountProfileComponent implements OnInit {
             (val) => {
                 let objectURL = 'data:image/jpg;base64,' + val.img;
                 this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                this.cardImg_copy = this.cardImg;
             },
             response => {
             });
@@ -522,6 +525,27 @@ export class AccountProfileComponent implements OnInit {
 
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
+    }
+
+    toogleEditable(event){
+        if(event.target.checked){
+            this.isOrganDonor = true;
+            this.changeOrganDonor();
+        }
+        else{
+            this.isOrganDonor = false;
+            this.changeOrganDonor();
+        }
+        console.log("Wartosc isOrganDonor "+this.isOrganDonor);
+    }
+
+    changeOrganDonor(){
+        this.userService.changeOrganDonor(this.isOrganDonor).subscribe(
+            (data: any) => {;
+            },
+            () => {
+            }
+        );
     }
 
 }

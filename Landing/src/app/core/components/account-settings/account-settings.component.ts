@@ -68,6 +68,8 @@ export class AccountSettingsComponent implements OnInit {
     lastName = '';
     email = '';
     code = '';
+    pesel = '';
+    old_code = '';
     code_link: string;
     mobile = false;
     footerClass: string;
@@ -78,7 +80,7 @@ export class AccountSettingsComponent implements OnInit {
     information_to_user3 = '';
     submitted = false;
     submitted_code = false;
-    submitted_name = false;
+    submitted_data = false;
     submitted_pesel = false;
 
     showSuccessCode = false;
@@ -88,10 +90,8 @@ export class AccountSettingsComponent implements OnInit {
 
     changePasswordForm: FormGroup;
     changeCodeForm: FormGroup;
-    changeNameForm: FormGroup;
+    changeDataForm: FormGroup;
     changePESELForm: FormGroup;
-
-    isOrganDonor
 
 
     constructor(private accountService: AccountService,
@@ -115,12 +115,14 @@ export class AccountSettingsComponent implements OnInit {
                 MustMatch2('password', 'newPassword')]
         });
         this.changeCodeForm = this.formBuilder.group({
-            newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6}$")]), // 6 characters without special characters
+            newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6,}$")]), // 6 characters without special characters
         },{
         });
-        this.changeNameForm = this.formBuilder.group({
+        this.changeDataForm = this.formBuilder.group({
             name: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
+            newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6,}$")]), // 6 characters without special characters
+            newPESEL: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
         },{
         });
 
@@ -144,9 +146,13 @@ export class AccountSettingsComponent implements OnInit {
                 this.lastName = information.lastName;
                 this.email = information.email;
                 this.code = information.code;
-                this.isOrganDonor = information.isOrganDonor;
+                this.pesel = information.pesel;
+                this.old_code = this.code;
                 this.code_link = environment.codeUrl + this.code;
-                console.log("Wartosc IsOrganDonor "+ this.isOrganDonor);
+                this.changeDataForm.controls['name'].setValue(this.name);
+                this.changeDataForm.controls['lastName'].setValue(this.lastName);
+                this.changeDataForm.controls['newCode'].setValue(this.code);
+                this.changeDataForm.controls['newPESEL'].setValue(this.pesel);
             },
             () => {
             }
@@ -163,7 +169,7 @@ export class AccountSettingsComponent implements OnInit {
 
     get f() { return this.changePasswordForm.controls; }
     get fa() { return this.changeCodeForm.controls; }
-    get fName() { return this.changeNameForm.controls; }
+    get fData() { return this.changeDataForm.controls; }
     get fPESEL() { return this.changePESELForm.controls; }
 
     changePassword(form: any){
@@ -202,6 +208,7 @@ export class AccountSettingsComponent implements OnInit {
                         this.userService.changeCode(form.value.newCode).subscribe(
                             (response: any) => {
                                 form.reset();
+                                form.controls['newCode'].setValue(this.code);
                                 this.refresh();
                                 this.submitted_code = false;
                                 this.information_to_user2 = '';
@@ -212,9 +219,11 @@ export class AccountSettingsComponent implements OnInit {
                         );
                     }
                     else{
+
                         this.information_to_user2 = 'Podany kod jest już zajęty';
                         this.submitted_code = false;
                         form.reset();
+                        form.controls['newCode'].setValue(this.code);
                     }
                 },
                 () => {
@@ -222,44 +231,44 @@ export class AccountSettingsComponent implements OnInit {
             );
         }
     }
-    changeName(form: any){
-        this.submitted_name = true;
+    changeData(form: any){
+        this.submitted_data = true;
 
-        if (this.changeNameForm.invalid) {
+        if (this.changeDataForm.invalid) {
             return;
         }
         else{
-            this.userService.changeName(form.value.name, form.value.lastName).subscribe(
+            this.patientService.existsCode(form.value.newCode).subscribe(
                 (data: any) => {
-                    form.reset();
-                    this.submitted_name = false;
-                    this.showSuccessName = true;
-                    this.refresh();
+                    if(data.exists == false){
+                        this.userService.changeCode(form.value.newCode).subscribe(
+                            (response: any) => {
+                                this.userService.changeInformation(form.value.name, form.value.lastName, form.value.newPESEL).subscribe(
+                                    (data: any) => {
+                                        this.submitted_data = false;
+                                        this.showSuccessName = true;
+                                        this.refresh();
+                                    },
+                                    () => {
+                                    }
+                                );
+                                this.submitted_data = false;
+                                this.information_to_user2 = '';
+                            },
+                            () => {
+                            }
+                        );
+                    }
+                    else{
+                        this.information_to_user2 = 'Podany kod jest już zajęty';
+                        this.submitted_data = false;
+                    }
                 },
                 () => {
                 }
             );
         }
     }
-    changePESEL(form: any){
-        this.submitted_pesel = true;
-
-        if (this.changePESELForm.invalid) {
-            return;
-        }
-        else{
-            this.userService.changePESEL(form.value.newPESEL).subscribe(
-                (data: any) => {
-                    form.reset();
-                    this.submitted_pesel = false;
-                    this.showSuccessPESEL = true;
-                },
-                () => {
-                }
-            );
-        }
-    }
-
     open(name: string) { 
         this._modalService.open(MODALS[name]).result.then((result) => {
            if(result == 'Ok click') {
@@ -273,7 +282,6 @@ export class AccountSettingsComponent implements OnInit {
                 reason === ModalDismissReasons.BACKDROP_CLICK ||
                 reason == 'cancel click' || 
                 reason == 'Cross click'){
-                    console.log("anulowano usuwanie");
                 }
         });
     }
@@ -286,26 +294,6 @@ export class AccountSettingsComponent implements OnInit {
     }
     logout() {
         this.userService.removeLocalUser();
-    }
-    toogleEditable(event){
-        if(event.target.checked){
-            this.isOrganDonor = true;
-            this.changeOrganDonor();
-        }
-        else{
-            this.isOrganDonor = false;
-            this.changeOrganDonor();
-        }
-        console.log("Wartosc isOrganDonor "+this.isOrganDonor);
-    }
-
-    changeOrganDonor(){
-        this.userService.changeOrganDonor(this.isOrganDonor).subscribe(
-            (data: any) => {;
-            },
-            () => {
-            }
-        );
     }
 
 }

@@ -3,6 +3,7 @@ export class AccountOutput {
     lastName: string;
     email: string;
     code: string;
+    pesel: string;
     isOrganDonor: boolean;
 }
 export class DiseasesOutput {

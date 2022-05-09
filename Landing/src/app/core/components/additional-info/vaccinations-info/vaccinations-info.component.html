@@ -9,8 +9,8 @@
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/vaccinations">Szczepienia</a>
       <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
-      <a class="dropdown-item">Pełna teczka badań</a>
-      <a class="dropdown-item">Wizyty u specjalistów</a>
+      <a class="dropdown-item bg-soft-secondary" >Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary" >Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" routerLink="/settings" >Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
@@ -111,19 +111,17 @@
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-messages"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
-                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Pełna teczka badań - wkrótce</h6>
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-payments"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
-                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Kalendarz wizyt - wkrótce</h6>
                 </a>
               </li>
 
