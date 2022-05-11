@@ -15,11 +15,12 @@ export class UserService {
         this.httpClient_withoutToken = new HttpClient(handler);
     }
 
-    registerUser(name: string, lastName: string, email: string, password: string): Observable<any> {
+    registerUser(name: string, lastName: string, pesel: string, email: string, password: string): Observable<any> {
 
         const body = {
             name,
             lastName,
+            pesel,
             email,
             password
         };
@@ -100,5 +101,22 @@ export class UserService {
             email
         };
         return this.httpClient_withoutToken.post(environment.apiUrl + '/registration/resend', body);
+    }
+    changeInformation(name: string, lastName: string, pesel: string): Observable<any>{
+        const body = {
+            name,
+            lastName,
+            pesel
+        };
+        return this.httpClient.put(environment.apiUrl + '/account/change-information', body);
+    }
+    deleteUser(): Observable<any>{
+        return this.httpClient.delete(environment.apiUrl + '/account/deleteUser');
+    }
+    changeOrganDonor(organDonor: boolean): Observable<any>{
+       const body = {
+            organDonor
+       };
+       return this.httpClient.put(environment.apiUrl + '/information/organ-donor', body);
     }
 }

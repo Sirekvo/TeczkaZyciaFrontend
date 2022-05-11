@@ -51,6 +51,20 @@
 
                 <div class="col-md-12 form-group">
                   <div class="mb-3">
+                    <label class="form-label">PESEL</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
+                      <input formControlName="pesel" type="number" class="form-control ps-5 pt-2" placeholder="PESEL" [ngClass]="{ 'is-invalid': submitted && f.pesel.errors }">
+                       <div *ngIf="submitted && f.pesel.errors" class="invalid-feedback">
+                         <div *ngIf="f.pesel.errors.pattern">Niepoprawna ilość znaków</div>
+                       </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                  <div class="mb-3">
                     <label class="form-label">Twój Email <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="mail" class="fea icon-sm icons d-flex"></i-feather>
@@ -102,7 +116,7 @@
                 </div>
                 <!--end col-->
 
-                <div class="col-md-12 form-group">
+                <!-- <div class="col-md-12 form-group">
                   <div class="mb-3">
                     <div class="form-check">
                       <input class="form-check-input" formControlName="rules" type="checkbox" id="flexCheckDefault" [ngClass]="{ 'is-invalid': submitted && f.rules.errors }">
@@ -113,11 +127,12 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--end col-->
-
+                
                 <div class="col-md-12 form-group">
                   <div class="d-grid">
+                    <br>
                     <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
                     <button type="submit" class="btn btn-primary">Zarejestruj się</button>
                   </div>

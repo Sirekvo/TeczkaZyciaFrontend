@@ -1,17 +1,18 @@
 <!-- Hero Start -->
 <div *ngIf="mobile" class="back-to-home rounded">
   <div class="btn-group dropdown-primary" ngbDropdown>
-    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
+      aria-haspopup="true" aria-expanded="false">
       Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
-      <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
-      <a class="dropdown-item" routerLink="/blood" >Wyniki krwi</a>
-      <a class="dropdown-item" >Pełna teczka badań</a>
-      <a class="dropdown-item" >Wizyty u specjalistów</a>
+      <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
+      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" routerLink="/settings" >Ustawienia</a>
+      <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
     </div>
   </div>
@@ -19,8 +20,8 @@
 
 
 
-<section class="bg-profile d-table w-100 bg-primary"
-  style="background: url('assets/images/main/bg.png') center center;" id="home">
+<section class="bg-profile d-table w-100 bg-primary" style="background: url('assets/images/main/bg.png') center center;"
+  id="home">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -28,40 +29,59 @@
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
-                <img src="assets/images/main/avatar.png" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                  alt="">
+                <img src="assets/images/main/avatar.png"
+                  class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
               </div>
               <!--end col-->
-                <div class="col-lg-6 col-md-6">
-                  <div class="row align-items-end">
-                    <div class="col-md-8 text-md-start text-center">
-                      <h3 class="title mb-0">{{name}} {{lastName}} 
-                        <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
+              <div class="col-lg-6 col-md-6">
+                <div class="row align-items-end">
+                  <div class="col-md-12 text-md-start text-center">
+                    <h3 class="title mb-0">{{name}} {{lastName}}
+                      <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
                           <i class="uil uil-copy"></i>
                         </button> -->
-                      </h3>
-                      <!-- <div class="row "> -->
-                        <small class="h6 me-2">{{email}}<br>
-                        <!-- //<div class="col-lg-12"> -->
-                          Twój kod: <b>{{code}}</b>
-                            <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
-                            <i class="uil uil-copy"></i>
-                          </button> 
-                        </small> 
-                        <!-- </div> -->
-                      <!-- </div> -->
+                    </h3>
+                    <!-- <div class="row "> -->
+                    <small class="h6 me-2">{{email}}<br>
+                      <!-- //<div class="col-lg-12"> -->
+                      Twój kod: <b>{{code}}</b>
+                      <button (click)="copyCode()" class="h4 text-primary bg-white border-0" ngbTooltip="Skopiuj kod">
+                        <i class="uil uil-copy"></i>
+                      </button>
+                    </small>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+              <div class="col-lg-3 col-md-3 mt-2 d-flex  align-content-center flex-wrap justify-content-center">
+                <a href="cardImg" target="blank">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img src="assets/images/karta_back.jpg" alt="Avatar" style="width:100%;">
                     </div>
-                    <!--end col-->
-                  </div>
-                  <!--end row-->
-                </div>
-                <div class="col-lg-4 col-md-3 mt-2">
-                  <div class="text-center">
-                    <p>Twój Kod QR<br>
-                      <qr-code [value]=code_link></qr-code>
-                    </p>
+                    <div class="flip-card-front">
+                      <img [src]="cardImg" style="width: 100%;">
+                    </div>
                   </div>
                 </div>
+              </a>
+              </div>
+              <div class="col-lg-1 col-md-2 mt-2 d-flex align-content-center flex-wrap justify-content-center">
+                <div>
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę">
+                    <i class="uil uil-shopping-cart"></i>
+                  </button>
+                </div>
+                <div>
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Wydrukuj kartę">
+                    <i class="uil uil-print"></i>
+                  </button>
+                </div>
+              </div>
               <!--end col-->
             </div>
             <!--end row-->
@@ -83,7 +103,7 @@
   <div class="container ">
     <div class="row">
       <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
-        <div class="sidebar sticky-bar px-4 rounded shadow" >
+        <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0 active">
@@ -107,19 +127,17 @@
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-messages"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
-                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Pełna teczka badań - wkrótce</h6>
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-payments"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
-                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Kalendarz wizyt - wkrótce</h6>
                 </a>
               </li>
 
@@ -131,7 +149,8 @@
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a (click)=logout() routerLink="/login" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a (click)=logout() routerLink="/login"
+                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
@@ -144,45 +163,69 @@
 
       <div class="col-lg-8 col-12 position-relative">
         <div *ngIf="isVisible" class="pb-4">
-          <div class="d-inline-flex col-12">
+          <div class="d-inline-flex col-12 ">
             <h3 class="col-11">Osoby kontaktowe</h3>
-            <button [ngxScrollTo]="'#contact'" [ngxScrollToDuration]="'0'" class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_contact_settings()" ngbTooltip="Ustawienia">
+            <button [ngxScrollTo]="'#contact'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_contact_settings()"
+              ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
-          <div *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
-            <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
-                 style="height: 90px; width: 90px;">
+          <div *ngFor="let contact_main of contactList" class="col-4 
+col-sm-4 col-md-4 d-inline-block text-center">
+            <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1" style="height: 90px; width: 90px;">
               <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
             </div>
             <h6>{{contact_main.phoneNumber}}</h6>
-            <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina</p>
-            <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
+            <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina 
+              <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+              <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
+            <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy 
+              <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+              <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-12 pb-4">
+          <div class="d-inline-flex col-12">
+            <h3>Zgoda na pobranie organów</h3>
+          </div>
+          <hr>
+          <div class="form-check form-switch">
+            <label *ngIf="(isOrganDonor == true)" class="form-check-label" for="organDonorSwitch"> Wyrażam zgodę na
+              pobranie po śmierci moich tkanek i narządów do przeszczepienia.</label>
+            <label *ngIf="(isOrganDonor == false)" class="form-check-label" for="organDonorSwitch"><span
+                class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci moich tkanek i narządów do
+              przeszczepienia.</label>
+            <input class="form-check-input" type="checkbox" id="organDonorSwitch" [checked]="isOrganDonor"
+              (change)="toogleEditable($event)">
           </div>
         </div>
 
         <div *ngIf="isVisible" class="pb-4">
           <div class="d-inline-flex col-12">
             <h3 class="col-11">Alergie i uczulenia</h3>
-            <button [ngxScrollTo]="'#allergies'" [ngxScrollToDuration]="'0'" class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_allergies_settings()" ngbTooltip="Ustawienia">
+            <button [ngxScrollTo]="'#allergies'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_allergies_settings()"
+              ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
           <table [style.visibility]="(allergies_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
             <thead>
-            <tr>
-              <th scope="col" class="border-bottom" style="width:10%;">#</th>
-              <th scope="col" class="border-bottom" style="width:25%;">Nazwa</th>
-              <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
-            </tr>
+              <tr>
+                <th scope="col" class="border-bottom" style="width:10%;">#</th>
+                <th scope="col" class="border-bottom" style="width:25%;">Nazwa</th>
+                <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
+              </tr>
             </thead>
             <tbody>
               <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
                 <td>{{indexOfElement+1}}</td>
                 <td>{{allergy.name}}</td>
-                <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
+                <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
                 <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
               </tr>
             </tbody>
@@ -192,26 +235,29 @@
         <div *ngIf="isVisible" class="pb-4 ">
           <div class="d-inline-flex col-12">
             <h3 class="col-11">Przyjmowane leki</h3>
-            <button [ngxScrollTo]="'#medications'" [ngxScrollToDuration]="'0'" class="h3 text-primary bg-white border-0 p-0 m-0"  (click)="show_medications_settings()" ngbTooltip="Ustawienia">
+            <button [ngxScrollTo]="'#medications'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_medications_settings()"
+              ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
-          <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' " class="table mb-0 table-center">
+          <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' "
+            class="table mb-0 table-center">
             <thead>
-            <tr>
-              <th scope="col" class="border-bottom" style="width:11%;">#</th>
-              <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
-              <th scope="col" class="border-bottom" >Dawka</th>
-              <th scope="col" class="border-bottom" >Co ile</th>
-            </tr>
+              <tr>
+                <th scope="col" class="border-bottom" style="width:11%;">#</th>
+                <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
+                <th scope="col" class="border-bottom">Dawka</th>
+                <th scope="col" class="border-bottom">Co ile</th>
+              </tr>
             </thead>
             <tbody>
               <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
-              <td>{{indexOfElement+1}}</td>
-              <td>{{tabs.name}}</td>
-              <td>{{tabs.portion}}</td>
-              <td>{{tabs.howOften}}</td>
+                <td>{{indexOfElement+1}}</td>
+                <td>{{tabs.name}}</td>
+                <td>{{tabs.portion}}</td>
+                <td>{{tabs.howOften}}</td>
               </tr>
             </tbody>
           </table>
@@ -220,21 +266,23 @@
         <div *ngIf="isVisible" class="pb-4">
           <div class="d-inline-flex col-12">
             <h3 class="col-11">Choroby przewlekłe</h3>
-            <button [ngxScrollTo]="'#illness'" [ngxScrollToDuration]="'0'" class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_illness_settings()" ngbTooltip="Ustawienia">
+            <button [ngxScrollTo]="'#illness'" [ngxScrollToDuration]="'0'"
+              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_illness_settings()"
+              ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
           <table [style.visibility]="(illness_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
             <thead>
-            <tr>
-              <th scope="col" class="border-bottom" style="width:10%;">#</th>
-              <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
-            </tr>
+              <tr>
+                <th scope="col" class="border-bottom" style="width:10%;">#</th>
+                <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
+              </tr>
             </thead>
             <tbody>
               <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
-                <td >{{indexOfElement+1}}</td>
+                <td>{{indexOfElement+1}}</td>
                 <td>{{illness.name}}</td>
               </tr>
             </tbody>
@@ -245,33 +293,57 @@
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12">
               <div class="px-3 py-4">
-                <form id="contactForm" #f="ngForm" (submit)="onContactSubmit(f)" >
+                <form [formGroup]="contactForm" #f="ngForm" (ngSubmit)="onContactSubmit(f)">
                   <h4 class="title text-center">Osoby Kontaktowe</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz typ osoby, której podasz numer</p>
-                    <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto form-group">Wybierz typ osoby, której
+                      podasz numer</p>
+                    <div class="col-12 btn-group btn-group-toggle " data-toggle="buttons">
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
-                        <input type="radio" name="type" value='FAMILY' autocomplete="off" ngModel required (click)="checkSelected(1)"> Rodzina
+                        <input type="radio" formControlName="type" value='FAMILY' autocomplete="off"
+                          (click)="checkSelected(1)" [ngClass]="{ 'is-invalid': submitted && fphone.type.errors }">
+                        Rodzina
                       </label>
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
-                        <input type="radio" name="type" value='FRIEND' autocomplete="off" ngModel required (click)=checkSelected(2)> Znajomy
+                        <input type="radio" formControlName="type" value='FRIEND' autocomplete="off"
+                          (click)=checkSelected(2) [ngClass]="{ 'is-invalid': submitted && fphone.type.errors }">
+                        Znajomy
                       </label>
                     </div>
-                    <!--end col-->
+                    <div *ngIf="submitted && information_to_user" class="col-12 text-center">
+                      <p class="text-danger">Proszę wybrać typ osoby</p>
+                    </div>
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 form-group">
+                      <div class="mb-3 mt-4">
+                        <label class="form-label">Imię</label>
+                        <div class="form-icon position-relative">
+                          <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
+                          <input type="text" formControlName="optionalName" class="form-control ps-5 pt-2"
+                            placeholder="Imię">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 form-group">
                       <div class="mb-3 mt-4">
                         <label class="form-label">Telefon kontaktowy<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="phone" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="number" name="phone" class="form-control ps-5 pt-2" placeholder="Telefon" ngModel required pattern=".{9,9}">
+                          <input type="number" formControlName="phone" class="form-control ps-5 pt-2"
+                            placeholder="Telefon" [ngClass]="{ 'is-invalid': submitted && fphone.phone.errors }">
+                          <div *ngIf="submitted && fphone.phone.errors" class="invalid-feedback">
+                            <div *ngIf="fphone.phone.errors.required">Należy wpisać numer telefonu</div>
+                            <div *ngIf="fphone.phone.errors.pattern">Nieodpowiednia liczba cyfr</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 3 osoby</p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success" [disabled]="!f.valid || contact_counter>2">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"
+                          [disabled]="contact_counter>2">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -281,21 +353,24 @@
                         <div></div>
                         <table class=" table mb-0 table-center">
                           <thead>
-                          <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Kto</th>
-                            <th scope="col" class="border-bottom" >Numer telefonu</th>
-                            <th scope="col" class="border-bottom" ></th>
-                          </tr>
+                            <tr>
+                              <th scope="col" class="border-bottom">#</th>
+                              <th scope="col" class="border-bottom">Kto</th>
+                              <th scope="col" class="border-bottom">Imię</th>
+                              <th scope="col" class="border-bottom">Numer telefonu</th>
+                              <th scope="col" class="border-bottom"></th>
+                            </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let contact of contact_tmp; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina </td>
-                            <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy </td>
-                            <td>{{contact.phoneNumber}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_contact(indexOfElement,contact.id)"></td>
-                          </tr>
+                            <tr *ngFor="let contact of contact_tmp; let indexOfElement=index;">
+                              <td>{{indexOfElement+1}}</td>
+                              <td *ngIf="(contact.contactPersonRole == 'FAMILY')">Rodzina </td>
+                              <td *ngIf="(contact.contactPersonRole == 'FRIEND')">Znajomy </td>
+                              <td>{{contact.optionalName}}</td>
+                              <td>{{contact.phoneNumber}}</td>
+                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
+                                  (click)="delete_contact(indexOfElement,contact.id)"></td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -304,12 +379,13 @@
 
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <button class="btn btn-secondary" (click)="back_to_start(); clean_form(f)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" (click)="back_to_start_complete()">Gotowe</button>
+                        <button class="btn btn-primary"
+                          (click)="back_to_start_complete(); clean_form(f)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -331,13 +407,16 @@
                 <form id="alergyForm" #fa="ngForm" (submit)="onAllergySubmit(fa)">
                   <h4 class="title text-center">Alergie i Uczulenia</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz czy chcesz dodać alergię czy uczulenie</p>
-                    <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons" >
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wybierz czy chcesz dodać alergię czy
+                      uczulenie</p>
+                    <div class="col-12 btn-group btn-group-toggle" data-toggle="buttons">
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
-                        <input type="radio" name="type2" value="ALLERGY" autocomplete="off" ngModel required (click)="checkSelected(1)"> Alergia
+                        <input type="radio" name="type2" value="ALLERGY" autocomplete="off" ngModel required
+                          (click)="checkSelected(1)"> Alergia
                       </label>
                       <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
-                        <input type="radio" name="type2" value="SENSITIVITY" autocomplete="off" ngModel required (click)="checkSelected(2)"> Uczulenie
+                        <input type="radio" name="type2" value="SENSITIVITY" autocomplete="off" ngModel required
+                          (click)="checkSelected(2)"> Uczulenie
                       </label>
                     </div>
                     <!--end col-->
@@ -347,38 +426,41 @@
                         <label class="form-label">Nazwa<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel required minlength="3">
+                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel
+                            required minlength="3">
                         </div>
                       </div>
                     </div>
                     <div class="col-12 mb-0 pb-4 text-center w-100">
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 15 uczuleń/alergii</p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success" [disabled]="!fa.valid || allergies_counter>14">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"
+                          [disabled]="!fa.valid || allergies_counter>14">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
 
-                    <div name="table" class="p-4" >
+                    <div name="table" class="p-4">
                       <div class="table-responsive bg-white shadow rounded">
                         <div></div>
                         <table class=" table mb-0 table-center">
                           <thead>
-                          <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Typ</th>
-                            <th scope="col" class="border-bottom" >Nazwa</th>
-                            <th scope="col" class="border-bottom" ></th>
-                          </tr>
+                            <tr>
+                              <th scope="col" class="border-bottom">#</th>
+                              <th scope="col" class="border-bottom">Typ</th>
+                              <th scope="col" class="border-bottom">Nazwa</th>
+                              <th scope="col" class="border-bottom"></th>
+                            </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let allergy of allergies_tmp ; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
-                            <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
-                            <td>{{allergy.name}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_allergy(indexOfElement, allergy.id)"></td>
-                          </tr>
+                            <tr *ngFor="let allergy of allergies_tmp ; let indexOfElement=index;">
+                              <td>{{indexOfElement+1}}</td>
+                              <td *ngIf="(allergy.type == 'ALLERGY')">Alergia </td>
+                              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
+                              <td>{{allergy.name}}</td>
+                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
+                                  (click)="delete_allergy(indexOfElement, allergy.id)"></td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -387,12 +469,13 @@
 
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <button class="btn btn-secondary" (click)="back_to_start(); clean_form(fa)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" (click)="back_to_start_complete_2()">Gotowe</button>
+                        <button class="btn btn-primary"
+                          (click)="back_to_start_complete_2(); clean_form(fa)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -416,13 +499,15 @@
                 <form id="tabsForm" #ft="ngForm" (submit)="onMedicationsSubmit(ft)">
                   <h4 class="title text-center">Przyjmowane leki</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Uzupełnij informacje poniżej o przyjmowanych lekach przez Ciebie</p>
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Uzupełnij informacje poniżej o
+                      przyjmowanych lekach przez Ciebie</p>
                     <div class="col-lg-12">
                       <div class="mt-4">
                         <label class="form-label">Nazwa<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel required minlength="3">
+                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa" ngModel
+                            required minlength="3">
                         </div>
                       </div>
                     </div>
@@ -433,7 +518,8 @@
                         <label class="form-label">Dawka<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="hash" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="number" name="portion" class="form-control ps-5 pt-2" placeholder="Dawka" ngModel required>
+                          <input type="number" name="portion" class="form-control ps-5 pt-2" placeholder="Dawka" ngModel
+                            required>
                         </div>
                       </div>
                     </div>
@@ -442,8 +528,10 @@
                       <div class="mb-3 mt-4">
                         <label class="form-label">Co ile?<span class="text-danger">*</span></label>
                         <div class="position-relative">
-                          <select [(ngModel)]="selectedModule" name="howOftenSelect" class="form-select form-control-lg pt-2" (change)="selectOptionHandler($event)" required>
-                            <option *ngFor="let interval of how_often; let indexOfElement=index" [value]="interval">{{interval}}</option>
+                          <select [(ngModel)]="selectedModule" name="howOftenSelect"
+                            class="form-select form-control-lg pt-2" (change)="selectOptionHandler($event)" required>
+                            <option *ngFor="let interval of how_often; let indexOfElement=index" [value]="interval">
+                              {{interval}}</option>
                           </select>
                         </div>
                       </div>
@@ -455,16 +543,19 @@
                         <label class="form-label">Inne<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="type" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="text" name="description" class="form-control ps-5 pt-2" placeholder="Opis" ngModel required minlength="3">
+                          <input type="text" name="description" class="form-control ps-5 pt-2" placeholder="Opis"
+                            ngModel required minlength="3">
                         </div>
                       </div>
                     </div>
                     <!--end col-->
 
                     <div class="col-12 mb-0 pb-4 text-center w-100">
-                      <p class="text-secondary para-desc mx-auto mb-0">Możesz dodać maksymalnie 15 przyjmowanych leków</p>
+                      <p class="text-secondary para-desc mx-auto mb-0">Możesz dodać maksymalnie 15 przyjmowanych leków
+                      </p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!ft.valid || medications_counter>14 ">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"
+                          [disabled]="!ft.valid || medications_counter>14 ">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -474,21 +565,22 @@
                         <div></div>
                         <table class=" table mb-0 table-center">
                           <thead>
-                          <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Nazwa leku</th>
-                            <th scope="col" class="border-bottom" >Dawka</th>
-                            <th scope="col" class="border-bottom" >Co ile</th>
-                          </tr>
+                            <tr>
+                              <th scope="col" class="border-bottom">#</th>
+                              <th scope="col" class="border-bottom">Nazwa leku</th>
+                              <th scope="col" class="border-bottom">Dawka</th>
+                              <th scope="col" class="border-bottom">Co ile</th>
+                            </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let tabs of medications_tmp ; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td>{{tabs.name}}</td>
-                            <td>{{tabs.portion}}</td>
-                            <td>{{tabs.howOften}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_medications(indexOfElement,tabs.id)"></td>
-                          </tr>
+                            <tr *ngFor="let tabs of medications_tmp ; let indexOfElement=index;">
+                              <td>{{indexOfElement+1}}</td>
+                              <td>{{tabs.name}}</td>
+                              <td>{{tabs.portion}}</td>
+                              <td>{{tabs.howOften}}</td>
+                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
+                                  (click)="delete_medications(indexOfElement,tabs.id)"></td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -497,12 +589,13 @@
 
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <button class="btn btn-secondary" (click)="back_to_start(); clean_form(ft)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" (click)="back_to_start_complete_3()">Gotowe</button>
+                        <button class="btn btn-primary"
+                          (click)="back_to_start_complete_3(); clean_form(ft)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->
@@ -522,45 +615,50 @@
         <div *ngIf="isVisible_illness" id="illness" class="col-12">
           <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 col-md-12 mb-5">
-              <div  class="px-3 py-4 mb-5">
+              <div class="px-3 py-4 mb-5">
                 <form id="illnessForm" #fam="ngForm" (submit)="onIllnessSubmit(fam)">
                   <h4 class="title text-center">Choroby przewlełe</h4>
                   <div class="row">
-                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe choroby przewlekłej, która ci towarzyszy</p>
+                    <p class="text-secondary text-center para-desc mb-2 mx-auto">Wpisz poniżej nazwe choroby
+                      przewlekłej, która ci towarzyszy</p>
                     <div class="col-lg-12">
                       <div class="mb-3 mt-4">
                         <label class="form-label">Nazwa choroby<span class="text-danger">*</span></label>
                         <div class="form-icon position-relative">
                           <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
-                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa choroby" ngModel required minlength="3">
+                          <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa choroby"
+                            ngModel required minlength="3">
                         </div>
                       </div>
                     </div>
                     <div class="col-12 mb-0 pb-4 text-center w-100">
-                      <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 5 chorób przewlekłych</p>
+                      <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 5 chorób przewlekłych
+                      </p>
                       <div class="col-5 justify-content-center w-100">
-                        <button type="submit" name="push" class="btn btn-success"  [disabled]="!fam.valid || illness_counter>4">Dodaj</button>
+                        <button type="submit" name="push" class="btn btn-success"
+                          [disabled]="!fam.valid || illness_counter>4">Dodaj</button>
                       </div>
                     </div>
                     <!--end col-->
 
-                    <div name="table" class="p-4" >
+                    <div name="table" class="p-4">
                       <div class="table-responsive bg-white shadow rounded" id="illnessTable">
                         <div></div>
                         <table class="table mb-0 table-center">
                           <thead>
-                          <tr>
-                            <th scope="col" class="border-bottom" >#</th>
-                            <th scope="col" class="border-bottom" >Nazwa choroby</th>
-                            <th scope="col" class="border-bottom" ></th>
-                          </tr>
+                            <tr>
+                              <th scope="col" class="border-bottom">#</th>
+                              <th scope="col" class="border-bottom">Nazwa choroby</th>
+                              <th scope="col" class="border-bottom"></th>
+                            </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let illness of illness_tmp ; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td>{{illness.name}}</td>
-                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X" (click)="delete_illness(indexOfElement,illness.id)"></td>
-                          </tr>
+                            <tr *ngFor="let illness of illness_tmp ; let indexOfElement=index;">
+                              <td>{{indexOfElement+1}}</td>
+                              <td>{{illness.name}}</td>
+                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
+                                  (click)="delete_illness(indexOfElement,illness.id)"></td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -569,12 +667,13 @@
 
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-secondary" (click)="back_to_start()">Pomiń</button>
+                        <button class="btn btn-secondary" (click)="back_to_start(); clean_form(fam)">Pomiń</button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button class="btn btn-primary" (click)="back_to_start_complete_4()">Gotowe</button>
+                        <button class="btn btn-primary"
+                          (click)="back_to_start_complete_4(); clean_form(fam)">Gotowe</button>
                       </div>
                     </div>
                     <!--end col-->

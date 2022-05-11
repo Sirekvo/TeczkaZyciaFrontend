@@ -59,7 +59,10 @@ export class VaccinationsInfoComponent implements OnInit {
     activeToggle = 0;
     selectedModule: any;
     vaccinations_counter = 0;
+    vaccinations_tmp_counter = 0;
     isCondensed = false;
+
+    submitted = false;
 
     constructor(private accountService: AccountService,
         private userService: UserService,
@@ -111,6 +114,7 @@ export class VaccinationsInfoComponent implements OnInit {
         this.isVisible_vaccinations = true;
         this.isVisible = false;
         this.vaccinations_tmp = this.vaccinationsList.slice();
+        this.vaccinations_tmp_counter = this.vaccinations_counter;
         // let today = new Date();
         // this.date.year=today.getFullYear();
         // this.date.month=today.getMonth();
@@ -123,7 +127,8 @@ export class VaccinationsInfoComponent implements OnInit {
         this.idVaccinations.splice(0, this.idVaccinations.length);
 
         this.addVaccinations.splice(0, this.addVaccinations.length);
-        this.vaccinations_counter = 0;
+        this.vaccinations_counter = this.vaccinations_tmp_counter;
+        this.submitted = false;
     }
 
     back_to_start_complete_5() {
@@ -154,9 +159,12 @@ export class VaccinationsInfoComponent implements OnInit {
         this.addVaccinations.splice(0, this.addVaccinations.length);
         this.isVisible_vaccinations = false;
         this.isVisible = true;
+        
+        // this.submitted = false;
     }
 
     onVaccinationsSubmit(form: any) {
+        this.submitted = true;
         if (this.vaccinations_counter < 10) {
             const vaccinations = new VaccinationsInput();
             const vaccinations2 = new VaccinationsOutput();
@@ -171,6 +179,7 @@ export class VaccinationsInfoComponent implements OnInit {
             this.addVaccinations.push(vaccinations2);
             this.vaccinations_counter++;
             form.reset();
+            this.submitted = false;
         }
     }
 
@@ -183,6 +192,12 @@ export class VaccinationsInfoComponent implements OnInit {
             this.vaccinations_tmp.splice(rowNumber, 1);
             this.vaccinations_counter--;
         }
+    }
+
+    clean_form(form: any){
+        form.reset();
+        this.activeToggle=0;
+        this.submitted = false;
     }
 
     copyCode(){

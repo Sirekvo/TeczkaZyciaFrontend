@@ -8,7 +8,9 @@ import {
     AllergiesOutput,
     ContactsOutput,
     MedicationsOutput,
-    CodeOutput, EmailOutput
+    OrganDonorOutput,
+    CodeOutput, EmailOutput,
+    InformationOutput
 } from '../models/account.model';
 
 
@@ -38,5 +40,13 @@ export class PatientService {
 
     existsEmail(email: string): Observable<Array<EmailOutput>>{
         return this.httpClient.get<Array<EmailOutput>>(environment.apiUrl + '/account/check-email/' + email);
+    }
+
+    getInformation(code: string): Observable<InformationOutput>{
+        return this.httpClient.get<InformationOutput>(environment.apiUrl + '/information/stars/' + code);
+    }
+
+    getOrganDonor(code: string): Observable<OrganDonorOutput>{
+        return this.httpClient.get<OrganDonorOutput>(environment.apiUrl + "/information/organ-donor/" + code);
     }
 }

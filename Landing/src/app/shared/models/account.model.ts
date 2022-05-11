@@ -3,6 +3,8 @@ export class AccountOutput {
     lastName: string;
     email: string;
     code: string;
+    pesel: string;
+    isOrganDonor: boolean;
 }
 export class DiseasesOutput {
     name: string;
@@ -26,12 +28,14 @@ export class AllergiesInput {
 export class ContactsOutput {
     phoneNumber: number;
     contactPersonRole: string;
+    optionalName: string;
 }
 export class ContactsInput {
     id: number;
     phoneNumber: number;
     contactPersonRole: string;
     appUserID: number;
+    optionalName: string;
 }
 export class MedicationsOutput {
     name: string;
@@ -53,7 +57,7 @@ export class VaccinationsInput {
     id: number;
     name: string;
     date: string;
-    appUserID:number;
+    appUserID: number;
 }
 export class BloodTypeOutput {
     type: string;
@@ -68,8 +72,18 @@ export class BloodTypeInput {
 export class EmailOutput {
     exists: boolean;
 }
+export class OrganDonorOutput{
+    isOrganDonor: boolean;
+}
 export class CodeOutput {
     exists: boolean;
+}
+export class InformationOutput {
+    name: string;
+    email: string;
+}
+export class CardBase64 {
+    base64Code: string;
 }
 
 

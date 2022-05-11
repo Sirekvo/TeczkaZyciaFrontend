@@ -9,14 +9,16 @@ import {
     DiseasesOutput,
     DiseasesInput,
     MedicationsOutput,
-    MedicationsInput
+    MedicationsInput, CardBase64
 } from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
-
+import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import { ClipboardService } from "ngx-clipboard";
+import { NgForm, Validators } from '@angular/forms';
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -79,17 +81,39 @@ export class AccountProfileComponent implements OnInit {
     illness_counter = 0;
     allergies_counter = 0;
     medications_counter = 0;
+
+    contact_counter_tmp : number;
+    illness_counter_tmp : number;
+    allergies_counter_tmp : number;
+    medications_counter_tmp : number;
+
     isCondensed = false;
+
+    contactForm: FormGroup;
+
+    information_to_user = true;
+    submitted = false;
+    cardImg: any;
+    cardImg_copy: any;
+    isOrganDonor = false;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
                 private router: Router,
                 private scroller: ViewportScroller,
-                private clipboardApi: ClipboardService) {
+                private clipboardApi: ClipboardService,
+                private formBuilder: FormBuilder,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        this.contactForm = this.formBuilder.group({
+            phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
+            type: new FormControl('', [Validators.required]),
+            optionalName: new FormControl('', ),
+        }, {
+        });
         if (window.innerWidth <= 991) { // 768px portrait
             this.mobile = true;
         }
@@ -97,6 +121,8 @@ export class AccountProfileComponent implements OnInit {
     }
 
     refresh() {
+        this.getCard();
+
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
 
@@ -106,7 +132,6 @@ export class AccountProfileComponent implements OnInit {
                 this.code = information.code;
 
                 this.code_link = environment.codeUrl + this.code;
-                // console.log("link" + this.code_link); 
 
                 this.accountService.getChronicDiseases(information.code).subscribe(
                     (data: Array<DiseasesInput>) => {
@@ -146,6 +171,8 @@ export class AccountProfileComponent implements OnInit {
         );
     }
 
+    get fphone() { return this.contactForm.controls; }
+
     logout() {
         this.userService.removeLocalUser();
     }
@@ -154,12 +181,25 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible_illness = true;
         this.isVisible = false;
         this.illness_tmp = this.illnessList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
     }
 
     show_medications_settings() {
         this.isVisible_medications = true;
         this.isVisible = false;
         this.medications_tmp = this.medicationsList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
+        console.log(this.medications_counter);
+        console.log(this.medications_counter_tmp);
     }
 
     show_contact_settings() {
@@ -167,12 +207,22 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible = false;
         this.contact_tmp = this.contactList.slice();
 
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
+
     }
 
     show_allergies_settings() {
         this.isVisible_allergy = true;
         this.isVisible = false;
         this.allergies_tmp = this.allegriesList.slice();
+
+        this.contact_counter_tmp = this.contact_counter;
+        this.medications_counter_tmp = this.medications_counter;
+        this.allergies_counter_tmp = this.allergies_counter;
+        this.illness_counter_tmp = this.illness_counter;
     }
 
     back_to_start() {
@@ -181,6 +231,7 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible_medications = false;
         this.isVisible_contact = false;
         this.isVisible = true;
+        this.information_to_user=true;
         this.idContacts.splice(0, this.idContacts.length);
         this.idAllergies.splice(0, this.idAllergies.length);
         this.idMedications.splice(0, this.idMedications.length);
@@ -189,10 +240,14 @@ export class AccountProfileComponent implements OnInit {
         this.addAllergies.splice(0, this.addAllergies.length);
         this.addMedications.splice(0, this.addMedications.length);
         this.addIllness.splice(0, this.addIllness.length);
-        this.contact_counter = 0;
-        this.medications_counter = 0;
-        this.allergies_counter = 0;
-        this.illness_counter =0;
+
+        this.submitted = false;
+
+        this.contact_counter = this.contact_counter_tmp;
+        this.medications_counter = this.medications_counter_tmp;
+        this.allergies_counter = this.allergies_counter_tmp;
+        this.illness_counter = this.illness_counter_tmp;
+
     }
 
     back_to_start_complete() {
@@ -211,7 +266,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addContact.length != 0) {
             this.accountService.setContacts(this.addContact).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -222,6 +276,7 @@ export class AccountProfileComponent implements OnInit {
 
         this.isVisible_contact = false;
         this.isVisible = true;
+        this.information_to_user=true;
 
 
     }
@@ -243,7 +298,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addAllergies.length != 0) {
             this.accountService.setAllergies(this.addAllergies).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -260,7 +314,6 @@ export class AccountProfileComponent implements OnInit {
             for (let i = 0; i < this.idMedications.length; i++) {
                 this.accountService.deleteMedications(this.idMedications[i]).subscribe(
                     (response: any) => {
-
                     },
                     () => {
                     }
@@ -273,7 +326,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addMedications.length != 0) {
             this.accountService.setMedications(this.addMedications).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -303,7 +355,6 @@ export class AccountProfileComponent implements OnInit {
         if (this.addIllness.length != 0) {
             this.accountService.setChronicDiseases(this.addIllness).subscribe(
                 (response: any) => {
-                    console.log(response);
                     this.refresh();
                 },
                 () => {
@@ -317,6 +368,7 @@ export class AccountProfileComponent implements OnInit {
 
     checkSelected(selectedChoice: number) {
         this.activeToggle = selectedChoice;
+        this.information_to_user = false;
     }
 
     selectOptionHandler(event: any) {
@@ -330,20 +382,50 @@ export class AccountProfileComponent implements OnInit {
     }
 
     onContactSubmit(form: any) {
-        if (this.contact_counter < 3) {
-            const contact = new ContactsInput();
-            const contact2 = new ContactsOutput();
-            contact.id = 0;
-            contact.contactPersonRole = form.value.type;
-            contact.phoneNumber = form.value.phone;
-            contact.appUserID = 0;
-            contact2.contactPersonRole = form.value.type;
-            contact2.phoneNumber = form.value.phone;
-            this.contact_tmp.push(contact);
-            this.addContact.push(contact2);
-            this.contact_counter++;
-            form.reset();
+        this.submitted = true;
+        if (this.contactForm.invalid) {
+            return;
         }
+        else{
+            if (this.contact_counter < 3) {
+                const contact = new ContactsInput();
+                const contact2 = new ContactsOutput();
+                contact.id = 0;
+                console.log("imie " + form.value.optionalName);
+                contact.contactPersonRole = form.value.type;
+                contact.phoneNumber = form.value.phone;
+                contact.appUserID = 0;
+                contact.optionalName = form.value.optionalName;
+                contact2.contactPersonRole = form.value.type;
+                contact2.optionalName = form.value.optionalName;
+                contact2.phoneNumber = form.value.phone;
+                this.activeToggle = 0;
+                this.information_to_user = true;
+                this.contact_tmp.push(contact);
+                this.addContact.push(contact2);
+                this.contact_counter++;
+                form.reset();
+                this.submitted = false;
+            }
+        }
+    }
+
+
+
+    getCard() : void {
+        this.accountService.getCardBase64_2().subscribe(
+            (val) => {
+                let objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                this.cardImg_copy = this.cardImg;
+            },
+            response => {
+            });
+    }
+    clean_form(form: any){
+        form.reset();
+        this.activeToggle=0;
+        this.submitted = false;
     }
 
     delete_contact(rowNumber, id) {
@@ -443,6 +525,27 @@ export class AccountProfileComponent implements OnInit {
 
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
+    }
+
+    toogleEditable(event){
+        if(event.target.checked){
+            this.isOrganDonor = true;
+            this.changeOrganDonor();
+        }
+        else{
+            this.isOrganDonor = false;
+            this.changeOrganDonor();
+        }
+        console.log("Wartosc isOrganDonor "+this.isOrganDonor);
+    }
+
+    changeOrganDonor(){
+        this.userService.changeOrganDonor(this.isOrganDonor).subscribe(
+            (data: any) => {;
+            },
+            () => {
+            }
+        );
     }
 
 }

@@ -8,8 +8,8 @@
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
       <a class="dropdown-item" routerLink="/blood" >Wyniki krwi</a>
-      <a class="dropdown-item" >Pełna teczka badań</a>
-      <a class="dropdown-item" >Wizyty u specjalistów</a>
+      <a class="dropdown-item bg-soft-secondary" >Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary" >Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" routerLink="/settings" style="background: #337ab7; color: white">Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
@@ -109,19 +109,17 @@
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-messages"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-folder-open"></i></span>
-                  <h6 class="mb-0 ms-2">Pełna teczka badań</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-folder-open"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Pełna teczka badań - wkrótce</h6>
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/account-payments"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-stethoscope"></i></span>
-                  <h6 class="mb-0 ms-2">Wizyty u specjalistów</h6>
+              <li class="navbar-item account-menu px-0 mt-2 bg-soft-secondary">
+                <a class="d-flex rounded shadow align-items-center py-2 px-4">
+                  <span class="h4 mb-0 text-secondary"><i class="uil uil-stethoscope"></i></span>
+                  <h6 class="mb-0 ms-2 text-secondary">Kalendarz wizyt - wkrótce</h6>
                 </a>
               </li>
 
@@ -144,36 +142,82 @@
       </div>
       <!--end col-->
 
+
       <div class="col-lg-8 col-12 position-relative">
         <div class="row">
-          <div class="col-md-6 mt-4 ml-5 pt-2 ">
+          <div class="col-md-6 mt-4 pt-2 ">
             <div class="border-bottom">
-              <h5>Zmień kod :</h5>
+              <h5>Zmień dane</h5>
             </div>
-            <form class="login-form" [formGroup]="changeCodeForm" #formCode="ngForm" (ngSubmit)="changeCode(formCode)">
+            <form class="login-form"  [formGroup]="changeDataForm" #formData="ngForm" (ngSubmit)="changeData(formData)">
               <div class="row mt-4 ">
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
-                    <label class="form-label">Nowy kod :</label>
+                    <label class="form-label ">Imię</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="newCode" type="text" class="form-control ps-5" placeholder="Nowy kod" [ngClass]="{ 'is-invalid': submitted_code && fa.newCode.errors }">
-                      <div *ngIf="submitted_code && fa.newCode.errors" class="invalid-feedback">
-                        <div *ngIf="fa.newCode.errors.required">Nowy kod jest wymagany</div>
-                        <div *ngIf="fa.newCode.errors.pattern">Nowy kod musi składać się z 6 znaków(Cyfry oraz litery)</div>
+                      <input formControlName="name" type="text" class="form-control ps-5" placeholder="Nowe imię" [ngClass]="{ 'is-invalid': submitted_data && fData.name.errors }">
+                      <div *ngIf="submitted_data && fData.name.errors" class="invalid-feedback">
+                        <div *ngIf="fData.name.errors.required">Należy podać nowe imię</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!--end col-->
 
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Nazwisko</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="lastName" type="text" class="form-control ps-5" placeholder="Nowe nazwisko" [ngClass]="{ 'is-invalid': submitted_data && fData.lastName.errors }">
+                      <div *ngIf="submitted_data && fData.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="fData.lastName.errors.required">Należy podać nowe nazwisko</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Kod</label>
+                    <button class="h5 text-primary bg-white border-0 disable-click"  ngbTooltip="Nowy kod musi składać się z minimalnie 6-ciu znaków, bez znaków specjalnych">
+                      <i class="uil uil-question-circle"></i>
+                    </button>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="newCode" type="text" class="form-control ps-5" placeholder="Nowy kod" [ngClass]="{ 'is-invalid': submitted_data && fData.newCode.errors }">
+                      <div *ngIf="submitted_data && fData.newCode.errors" class="invalid-feedback">
+                        <div *ngIf="fData.newCode.errors.required">Nowy kod jest wymagany</div>
+                        <div *ngIf="fData.newCode.errors.pattern">Nowy kod musi składać się z minimalnie 6-ciu znaków, bez znaków specjalnych</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">PESEL</label>
+                    <button class="h5 text-primary bg-white border-0 disable-click"  ngbTooltip="Ustaw swój PESEL, bądź zostaw puste i zapisz by usunąć obecny">
+                      <i class="uil uil-question-circle"></i>
+                    </button>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="newPESEL" type="text" class="form-control ps-5" placeholder="Nowy PESEL" [ngClass]="{ 'is-invalid': submitted_data && fData.newPESEL.errors }">
+                      <div *ngIf="submitted_data && fData.newPESEL.errors" class="invalid-feedback">
+                        <div *ngIf="fData.newPESEL.errors.pattern">Niepoprawna ilość znaków</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
 
                 <div class="col-lg-12 mt-2 mb-0">
                   <div class="d-grid">
                     <span name="information_to_user" class="text-center text-danger">{{information_to_user2}}</span>
-                    <div *ngIf="showSuccessCode" class="alert alert-success" role="alert">
-                      <b>Twój kod został zmieniony.</b></div>
-                    <button type="submit" class="btn btn-primary">Zapisz kod</button>
+                    <div *ngIf="showSuccessName" class="alert alert-success" role="alert">
+                      <b>Pomyślnie zmieniono dane.</b></div>
+                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
                   </div>
                 </div>
                 <!--end col-->
@@ -181,18 +225,17 @@
               </div>
               <!--end row-->
             </form>
-            <!--end col-->
           </div>
-
+          <!--end col-->
           <div class="col-md-6 mt-4 pt-2 ">
             <div class="border-bottom">
-              <h5>Zmień hasło :</h5>
+              <h5>Zmień hasło</h5>
             </div>
             <form class="login-form"  [formGroup]="changePasswordForm" #form="ngForm" (ngSubmit)="changePassword(form)">
               <div class="row mt-4 ">
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
-                    <label class="form-label ">Stare hasło :</label>
+                    <label class="form-label ">Stare hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
                       <input formControlName="password" type="password" class="form-control ps-5" placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
@@ -206,7 +249,7 @@
 
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
-                    <label class="form-label">Nowe hasło :</label>
+                    <label class="form-label">Nowe hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
                       <input formControlName="newPassword" type="password" class="form-control ps-5" placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }">
@@ -222,7 +265,7 @@
 
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
-                    <label class="form-label">Powtórz nowe hasło :</label>
+                    <label class="form-label">Powtórz nowe hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
                       <input formControlName="confirmPassword" type="password" class="form-control ps-5" placeholder="Powtórz nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
@@ -235,7 +278,7 @@
                 </div>
                 <!--end col-->
 
-                <div class="col-lg-12 mt-2 mb-0">
+                <div class="col-lg-12 mt-2">
                   <div class="d-grid">
                     <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
                     <div *ngIf="showSuccessPassword" class="alert alert-success" role="alert">
@@ -252,17 +295,15 @@
           <!--end col-->
         </div>
         <!--end row-->
-
-
         <div class="mt-4">
           <div class="border-bottom">
-            <h5 class="mb-2 text-danger">Usuń konto :</h5>
+            <h5 class="mb-2 text-danger">Usuń konto</h5>
           </div>
 
           <div class="mt-2">
             <h6 class="mb-1">Chcesz usunąć swoje konto? Prosze kliknąć przycisk "Usuń konto" poniżej</h6>
             <div class="mt-4">
-              <button class="btn btn-danger">Usuń konto</button>
+              <button class="btn btn-danger" (click)="open('focusFirst')">Usuń konto</button>
             </div>
             <!--end col-->
           </div>

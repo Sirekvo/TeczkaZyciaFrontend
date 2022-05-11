@@ -38,8 +38,9 @@ export class AuthSignupComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             firstName: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
-            email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]),
+            pesel: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
+            email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]), // has @abc.abc
+            password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]), // min 8 chracters and max 16 with min 1 capital letter, 1 digit and 1 special character
             confirmPassword: new FormControl('', [Validators.required]),
             rules: new FormControl(false,[Validators.requiredTrue]),
         }, {
@@ -63,7 +64,7 @@ export class AuthSignupComponent implements OnInit {
             this.patientService.existsEmail(form.value.email).subscribe(
             (data: any) => {
                 if (data.exists == false) {
-                    this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.email, form.value.password).subscribe(
+                    this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.pesel, form.value.email, form.value.password).subscribe(
                         (response: any) => {
                             this.router.navigate(['/confirm-mail'], {queryParams: { name: form.value.firstName, email: form.value.email}});
                         },
