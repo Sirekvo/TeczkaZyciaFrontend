@@ -96,6 +96,7 @@ export class AccountProfileComponent implements OnInit {
     cardImg: any;
     cardImg_copy: any;
     isOrganDonor = false;
+    objectURL : string;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
@@ -410,18 +411,6 @@ export class AccountProfileComponent implements OnInit {
         }
     }
 
-
-
-    getCard() : void {
-        this.accountService.getCardBase64_2().subscribe(
-            (val) => {
-                let objectURL = 'data:image/jpg;base64,' + val.img;
-                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-                this.cardImg_copy = this.cardImg;
-            },
-            response => {
-            });
-    }
     clean_form(form: any){
         form.reset();
         this.activeToggle=0;
@@ -546,6 +535,41 @@ export class AccountProfileComponent implements OnInit {
             () => {
             }
         );
+    }
+
+    getCard() : void {
+        this.accountService.getCardBase64().subscribe(
+            (val) => {
+                this.objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(this.objectURL);
+                this.cardImg_copy = this.cardImg;
+                console.log(this.cardImg);
+            },
+            response => {
+            });
+
+    }
+
+    printCard(){
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src= environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
+        img.onload = function(){
+            win.print();
+        };
+    }
+    zoomCard(){
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src= environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
     }
 
 }

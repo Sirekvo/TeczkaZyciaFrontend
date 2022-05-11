@@ -98,24 +98,9 @@ export class AccountService {
 
         return this.httpClient.put(environment.apiUrl  + '/account/first-login',null);
     }
-    getCardUrl(): Observable<Blob>{
 
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        });
-        return this.httpClient.get<Blob>(environment.apiUrl + '/account/card', {headers: headers, responseType: 'blob' as 'json' });
-    }
-
-    getCardBase64_2(): Observable<any>{
+    getCardBase64(): Observable<any>{
         return this.httpClient.get(environment.apiUrl + '/account/card');
-    }
-    getCardBase64(): Observable<CardBase64>{
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        });
-        return this.httpClient.get<CardBase64>(environment.apiUrl + '/account/card', {headers: headers, responseType: 'blob' as 'json' });
     }
 
 }

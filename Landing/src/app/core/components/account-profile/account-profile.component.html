@@ -54,7 +54,7 @@
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-back">
-                      <img src="assets/images/karta_back.jpg" alt="Avatar" style="width:100%;">
+                      <img class="card" src="assets/images/karta_back.jpg" (click)="zoomCard()" alt="Avatar" style="width:100%;">
                     </div>
                     <div class="flip-card-front">
                       <img [src]="cardImg" style="width: 100%;">
@@ -69,7 +69,7 @@
                   </button>
                 </div>
                 <div>
-                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Wydrukuj kartę">
+                  <button class="h4 text-primary bg-white border-0" (click)="printCard()" ngbTooltip="Wydrukuj kartę">
                     <i class="uil uil-print"></i>
                   </button>
                 </div>

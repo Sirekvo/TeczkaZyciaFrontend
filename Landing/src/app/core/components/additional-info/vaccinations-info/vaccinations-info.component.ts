@@ -211,7 +211,7 @@ export class VaccinationsInfoComponent implements OnInit {
     }
 
     getCard() : void {
-        this.accountService.getCardBase64_2().subscribe(
+        this.accountService.getCardBase64().subscribe(
             (val) => {
                 let objectURL = 'data:image/jpg;base64,' + val.img;
                 this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
