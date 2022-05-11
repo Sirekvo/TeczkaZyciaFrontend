@@ -22,6 +22,7 @@ import { NgForm, Validators } from '@angular/forms';
 import {HttpErrorResponse} from "@angular/common/http";
 import {PatientService} from "../../../shared/services/patient.service";
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     selector: 'ngbd-modal-confirm',
@@ -87,20 +88,23 @@ export class AccountSettingsComponent implements OnInit {
     showSuccessPassword = false;
     showSuccessName = false;
     showSuccessPESEL = false;
-
+    
     changePasswordForm: FormGroup;
     changeCodeForm: FormGroup;
     changeDataForm: FormGroup;
     changePESELForm: FormGroup;
 
+    cardImg: any;
+    cardImg_copy: any;
 
     constructor(private accountService: AccountService,
-                private userService: UserService,
-                private router: Router,
-                private clipboardApi: ClipboardService,
-                private formBuilder: FormBuilder,
-                private patientService: PatientService,
-                private _modalService: NgbModal) {
+        private userService: UserService,
+        private router: Router,
+        private clipboardApi: ClipboardService,
+        private formBuilder: FormBuilder,
+        private patientService: PatientService,
+        private _modalService: NgbModal,
+        private sanitizer: DomSanitizer) {
 
     }
 
@@ -139,6 +143,7 @@ export class AccountSettingsComponent implements OnInit {
 
 
     refresh() {
+        this.getCard();
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
 
@@ -291,6 +296,16 @@ export class AccountSettingsComponent implements OnInit {
     }
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
+    }
+    getCard() : void {
+        this.accountService.getCardBase64_2().subscribe(
+            (val) => {
+                let objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                this.cardImg_copy = this.cardImg;
+            },
+            response => {
+            });
     }
     logout() {
         this.userService.removeLocalUser();

@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   //apiUrl: 'https://zesp10-backend.herokuapp.com',
   apiUrl: 'http://localhost:8080',
-  //codeUrl: 'https://black-dune-006646703.1.azurestaticapps.net/patient/'
+  // codeUrl: 'https://www.teczkazycia.pl/patient/'
   codeUrl: 'http://localhost:4200/patient/'
 
 };

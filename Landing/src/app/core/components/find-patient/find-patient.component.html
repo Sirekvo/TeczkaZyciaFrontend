@@ -57,15 +57,19 @@
                             <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
                         </div>
                         <h6>{{contact_main.phoneNumber}}</h6>
-                        <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina</p>
-                        <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
+                        <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina 
+                            <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+                            <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
+                        <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy 
+                            <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+                            <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
                     </div>
                 </div>
                 <div class="pb-4">
                     <h3 class="text-center">Zgoda na pobranie organów</h3>
                     <hr>
                     <h4 *ngIf="(isOrganDonor == true)" class="text-center">Wyrażam zgodę na pobranie po śmierci tkanek oraz narządów do przeszczepienia.</h4>
-                    <h4 *ngIf="(isOrganDonor == false)" class="text-center"><span class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci tkanek oraz narządów do przeszczepienia.</h4>
+                    <h4 *ngIf="(isOrganDonor == false || isOrganDonor == null)" class="text-center"><span class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci tkanek oraz narządów do przeszczepienia.</h4>
                 </div>
                 <div class="pb-4">
                     <h3 class="text-center">Alergie i uczulenia</h3>

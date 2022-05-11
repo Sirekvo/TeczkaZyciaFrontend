@@ -13,6 +13,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import {environment} from '../../../../../environments/environment';
 
 import { ClipboardService } from "ngx-clipboard";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -68,12 +69,16 @@ export class BloodInfoComponent implements OnInit {
 
     bloodID: number;
 
+    cardImg: any;
+    cardImg_copy: any;
+
     constructor(private accountService: AccountService,
         private userService: UserService,
         private router: Router,
         private scroller: ViewportScroller,
         private modalService: NgbModal,
-        private clipboardApi: ClipboardService) {
+        private clipboardApi: ClipboardService,
+        private sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -86,6 +91,7 @@ export class BloodInfoComponent implements OnInit {
     }
 
     refresh() {
+        this.getCard();
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
 
@@ -211,6 +217,17 @@ export class BloodInfoComponent implements OnInit {
 
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
+    }
+
+    getCard() : void {
+        this.accountService.getCardBase64_2().subscribe(
+            (val) => {
+                let objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                this.cardImg_copy = this.cardImg;
+            },
+            response => {
+            });
     }
 
 }

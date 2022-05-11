@@ -25,7 +25,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="card public-profile rounded shadow-sm">
+        <div class="public-profile card rounded shadow-sm">
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
@@ -35,32 +35,43 @@
               <!--end col-->
               <div class="col-lg-6 col-md-6">
                 <div class="row align-items-end">
-                  <div class="col-md-8 text-md-start text-center">
-                    <h3 class="title mb-0">{{name}} {{lastName}} 
-                      <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
-                        <i class="uil uil-copy"></i>
-                      </button> -->
+                  <div class="col-md-12 text-md-start text-center">
+                    <h3 class="title mb-0">{{name}} {{lastName}}
                     </h3>
                     <!-- <div class="row "> -->
-                      <small class="h6 me-2">{{email}}<br>
-                      <!-- //<div class="col-lg-12"> -->
-                        Twój kod: <b>{{code}}</b>
-                          <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
-                          <i class="uil uil-copy"></i>
-                        </button> 
-                      </small> 
-                      <!-- </div> -->
-                    <!-- </div> -->
+                    <small class="h6 me-2">{{email}}<br>
+                      Twój kod: <b>{{code}}</b>
+                      <button (click)="copyCode()" class="h4 text-primary bg-white border-0" ngbTooltip="Skopiuj kod">
+                        <i class="uil uil-copy"></i>
+                      </button>
+                    </small>
                   </div>
                   <!--end col-->
                 </div>
                 <!--end row-->
               </div>
-              <div class="col-lg-4 col-md-3 mt-2">
-                <div class="text-center">
-                  <p>Twój Kod QR<br>
-                    <qr-code [value]=code_link></qr-code>
-                  </p>
+              <div class="col-lg-3 col-md-3 mt-2 d-flex  align-content-center flex-wrap justify-content-center">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img src="assets/images/karta_back.jpg" alt="Avatar" style="width:100%;">
+                    </div>
+                    <div class="flip-card-front">
+                      <img [src]="cardImg" style="width: 100%;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-2 mt-2 d-flex align-content-center flex-wrap justify-content-center">
+                <div>
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę">
+                    <i class="uil uil-shopping-cart"></i>
+                  </button>
+                </div>
+                <div>
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Wydrukuj kartę">
+                    <i class="uil uil-print"></i>
+                  </button>
                 </div>
               </div>
               <!--end col-->
@@ -77,11 +88,10 @@
 </section>
 <!--end section-->
 <!-- Hero End -->
-<br>
 <!-- Profile Start -->
 <section class="section mt-60" id="vaccinations_tab">
 
-  <div class="container mt-lg-3">
+  <div class="container">
     <div class="row">
 
 

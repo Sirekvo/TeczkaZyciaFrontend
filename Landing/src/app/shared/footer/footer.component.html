@@ -33,14 +33,14 @@
     <ng-template #execute_block>
         <footer class="footer">
             <div class="container mx-auto">
-                <div class="row">
+                <div class="row d-flex justify-content-between">
                     <div class="col-sm-4 pt-0">
                         <a routerLink="/index" onclick="window.location.href=this" class="logo-footer">
                             <img src="assets/images/logo_bialy.png" height="70" alt="teczka zycia logo">
                         </a>
                         <p class="mt-4">Teczka Życia to aplikacja, która w łatwy i prosty sposób pozwala na przchowywanie danych medycznych. Teczka Życia pozwala także na przekazanie ratownikom podstawowych danych w sytuacji kryzysowej</p>
                         <!-- TODO DODAĆ PROFILE  -->
-                        <!-- <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                        <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
                                     <i-feather name="facebook" class="fea icon-sm fea-social"></i-feather>
                                 </a></li>
@@ -53,7 +53,7 @@
                             <li class="list-inline-item ms-1"><a href="javascript:void(0)" class="rounded">
                                     <i-feather name="linkedin" class="fea icon-sm fea-social"></i-feather>
                                 </a></li>
-                        </ul> -->
+                        </ul>
                         <!--end icon-->
                     </div>
                     <!--end col-->
@@ -61,7 +61,6 @@
                     <div class="col-sm-4 pt-2">
                         <h5 class="text-light footer-head text-center">O aplikacji</h5>
                         <ul class="list-unstyled footer-list mt-4">
-                            <!-- [ngxScrollTo]="'#o_teczce'" [ngxScrollToDuration]="'0'" -->
                             <li><a routerLink="/index" [ngxScrollTo]="'#o_teczce'" [ngxScrollToDuration]="'0'" class="text-foot"><i
                                         class="uil uil-angle-right-b me-1"></i>
                                     O Teczce Życia</a></li>
@@ -75,7 +74,7 @@
                     </div>
                     <!--end col-->
 
-                    <div class="col-sm-4 pt-2">
+                    <!-- <div class="col-sm-4 pt-2">
                         <h5 class="text-light footer-head text-center">Przydatne linki</h5>
                         <ul class="list-unstyled footer-list mt-4">
                             <li><a routerLink="/page-terms" class="text-foot"><i class="uil uil-angle-right-b me-1"></i>
@@ -84,7 +83,7 @@
                                         class="uil uil-angle-right-b me-1"></i>
                                     Polityka prywatności</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!--end col-->
                 </div>
                 <!--end row-->
