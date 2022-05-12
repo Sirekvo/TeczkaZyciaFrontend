@@ -1,4 +1,4 @@
-import { ViewportScroller } from "@angular/common";
+import {ViewportScroller} from "@angular/common";
 import {Component, Type, OnInit} from '@angular/core';
 import {
     AccountOutput,
@@ -17,39 +17,45 @@ import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
 import {Form, FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {MustMatch, MustMatch2} from "../../../shared/match_validator/must_match.validator";
-import { ClipboardService } from "ngx-clipboard";
-import { NgForm, Validators } from '@angular/forms';
+import {ClipboardService} from "ngx-clipboard";
+import {NgForm, Validators} from '@angular/forms';
 import {HttpErrorResponse} from "@angular/common/http";
 import {PatientService} from "../../../shared/services/patient.service";
-import { NgbModal, NgbActiveModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbActiveModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     selector: 'ngbd-modal-confirm',
     template: `
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-title">Usuwanie konta</h4>
-      <button type="button" class="btn-close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-      <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span> ?</strong></p>
-      <p>Wszystkie informacje przypisane do tego konta zostaną usunięte.
-      <span class="text-danger">Tej operacji nie można cofnąć.</span>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
-      <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')" click="deleteUser()">Potwierdź</button>
-    </div>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Usuwanie konta</h4>
+        <button type="button" class="btn-close" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span> ?</strong>
+        </p>
+        <p>Wszystkie informacje przypisane do tego konta zostaną usunięte.
+          <span class="text-danger">Tej operacji nie można cofnąć.</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')" click="deleteUser()">Potwierdź
+        </button>
+      </div>
     `
-  })
+})
 
-  export class NgbdModalConfirm {
-    constructor(public modal: NgbActiveModal) {}
-  }
-  const MODALS: {[name: string]: Type<any>} = {
+export class NgbdModalConfirm {
+    constructor(public modal: NgbActiveModal) {
+    }
+}
+
+const MODALS: { [name: string]: Type<any> } = {
     focusFirst: NgbdModalConfirm,
     // autofocus: NgbdModalConfirmAutofocus
-  };
+};
 
 @Component({
     selector: 'app-account-settings',
@@ -93,6 +99,9 @@ export class AccountSettingsComponent implements OnInit {
     changeDataForm: FormGroup;
     changePESELForm: FormGroup;
 
+    objectURL: string
+    cardImg: any;
+    cardImg_copy: any;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
@@ -100,7 +109,8 @@ export class AccountSettingsComponent implements OnInit {
                 private clipboardApi: ClipboardService,
                 private formBuilder: FormBuilder,
                 private patientService: PatientService,
-                private _modalService: NgbModal) {
+                private _modalService: NgbModal,
+                private sanitizer: DomSanitizer) {
 
     }
 
@@ -110,26 +120,23 @@ export class AccountSettingsComponent implements OnInit {
             password: new FormControl('', [Validators.required]),
             newPassword: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]), // min 8 chracters and max 16 with min 1 capital letter, 1 digit and 1 special character
             confirmPassword: new FormControl('', [Validators.required]),
-        },{
+        }, {
             validators: [MustMatch('newPassword', 'confirmPassword'),
                 MustMatch2('password', 'newPassword')]
         });
         this.changeCodeForm = this.formBuilder.group({
             newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6,}$")]), // 6 characters without special characters
-        },{
-        });
+        }, {});
         this.changeDataForm = this.formBuilder.group({
             name: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
             newCode: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{6,}$")]), // 6 characters without special characters
             newPESEL: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
-        },{
-        });
+        }, {});
 
         this.changePESELForm = this.formBuilder.group({
             newPESEL: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
-        },{
-        });
+        }, {});
 
         if (window.innerWidth <= 991) { // 768px portrait
             this.mobile = true;
@@ -139,6 +146,7 @@ export class AccountSettingsComponent implements OnInit {
 
 
     refresh() {
+        this.getCard();
         this.userService.getFromRegistration().subscribe(
             (information: AccountOutput) => {
 
@@ -167,20 +175,30 @@ export class AccountSettingsComponent implements OnInit {
         // );
     }
 
-    get f() { return this.changePasswordForm.controls; }
-    get fa() { return this.changeCodeForm.controls; }
-    get fData() { return this.changeDataForm.controls; }
-    get fPESEL() { return this.changePESELForm.controls; }
+    get f() {
+        return this.changePasswordForm.controls;
+    }
 
-    changePassword(form: any){
+    get fa() {
+        return this.changeCodeForm.controls;
+    }
+
+    get fData() {
+        return this.changeDataForm.controls;
+    }
+
+    get fPESEL() {
+        return this.changePESELForm.controls;
+    }
+
+    changePassword(form: any) {
         this.submitted = true;
 
 
         // stop here if form is invalid
         if (this.changePasswordForm.invalid) {
             return;
-        }
-        else{
+        } else {
             this.userService.changePassword(form.value.password, form.value.newPassword).subscribe(
                 (data: any) => {
                     form.reset();
@@ -196,15 +214,15 @@ export class AccountSettingsComponent implements OnInit {
             );
         }
     }
-    changeCode(form: any){
+
+    changeCode(form: any) {
         this.submitted_code = true;
         if (this.changeCodeForm.invalid) {
             return;
-        }
-        else{
+        } else {
             this.patientService.existsCode(form.value.newCode).subscribe(
                 (data: any) => {
-                    if(data.exists == false){
+                    if (data.exists == false) {
                         this.userService.changeCode(form.value.newCode).subscribe(
                             (response: any) => {
                                 form.reset();
@@ -217,8 +235,7 @@ export class AccountSettingsComponent implements OnInit {
                             () => {
                             }
                         );
-                    }
-                    else{
+                    } else {
 
                         this.information_to_user2 = 'Podany kod jest już zajęty';
                         this.submitted_code = false;
@@ -231,16 +248,16 @@ export class AccountSettingsComponent implements OnInit {
             );
         }
     }
-    changeData(form: any){
+
+    changeData(form: any) {
         this.submitted_data = true;
 
         if (this.changeDataForm.invalid) {
             return;
-        }
-        else{
+        } else {
             this.patientService.existsCode(form.value.newCode).subscribe(
                 (data: any) => {
-                    if(data.exists == false){
+                    if (data.exists == false) {
                         this.userService.changeCode(form.value.newCode).subscribe(
                             (response: any) => {
                                 this.userService.changeInformation(form.value.name, form.value.lastName, form.value.newPESEL).subscribe(
@@ -258,8 +275,7 @@ export class AccountSettingsComponent implements OnInit {
                             () => {
                             }
                         );
-                    }
-                    else{
+                    } else {
                         this.information_to_user2 = 'Podany kod jest już zajęty';
                         this.submitted_data = false;
                     }
@@ -269,29 +285,72 @@ export class AccountSettingsComponent implements OnInit {
             );
         }
     }
-    open(name: string) { 
+
+    open(name: string) {
         this._modalService.open(MODALS[name]).result.then((result) => {
-           if(result == 'Ok click') {
-              this.deleteUser(); 
-            //   this.userService.deleteUser();
-            this.router.navigate(['/index']);
-            this.logout();
-           } 
+            if (result == 'Ok click') {
+                this.deleteUser();
+                //   this.userService.deleteUser();
+                this.router.navigate(['/index']);
+                this.logout();
+            }
         }, (reason) => {
             if (reason === ModalDismissReasons.ESC ||
                 reason === ModalDismissReasons.BACKDROP_CLICK ||
-                reason == 'cancel click' || 
-                reason == 'Cross click'){
-                }
+                reason == 'cancel click' ||
+                reason == 'Cross click') {
+            }
         });
     }
 
-    deleteUser(){
-        console.log("Funkcja do usuwania usera");
+    deleteUser() {
+        this.userService.deleteUser().subscribe(
+            (data: any) => {
+                this.logout();
+                this.router.navigate(['/login']);
+            },
+            response => {
+            });
     }
-    copyCode(){
+
+    copyCode() {
         this.clipboardApi.copyFromContent(this.code);
     }
+
+    getCard(): void {
+        this.accountService.getCardBase64().subscribe(
+            (val) => {
+                this.objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(this.objectURL);
+                this.cardImg_copy = this.cardImg;
+            },
+            response => {
+            });
+    }
+
+    printCard() {
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
+        img.onload = function () {
+            win.print();
+        };
+    }
+
+    zoomCard() {
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
+    }
+
     logout() {
         this.userService.removeLocalUser();
     }

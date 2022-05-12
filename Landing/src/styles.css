@@ -10,6 +10,6 @@
 } */
 
 .swiper-button-prev:after {
-  content: none !important;
+    content: none !important;
 } 
 

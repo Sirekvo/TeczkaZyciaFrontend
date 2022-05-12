@@ -1,149 +1,159 @@
 <!-- Hero Start -->
 <section class="bg-profile d-table w-100 bg-primary"
          style="background: url('assets/images/main/bg.png') center center;" id="home">
-         <div class="back-to-home rounded">
-            <a routerLink="/index" class="btn btn-icon btn-secondary">
-              <i-feather name="home" class="icons"></i-feather>
-            </a>
-          </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card public-profile rounded shadow-sm" style="z-index: 1;">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-lg-2 col-md-3 text-md-start text-center">
-                                <img src="assets/images/main/avatar.png" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                                     alt="">
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-10 col-md-9">
-                                <div class="row align-items-end">
-                                    <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
-                                        <h3 class="title mb-0">{{name}}</h3>
-                                        <small class="h6 me-2">{{email}}</small><br>
-                                        <small class="h6 me-2">Kod: {{code}}</small>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </div>
+  <div class="back-to-home rounded">
+    <a routerLink="/index" class="btn btn-icon btn-secondary">
+      <i-feather name="home" class="icons"></i-feather>
+    </a>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card public-profile rounded shadow-sm" style="z-index: 1;">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 text-md-start text-center">
+                <img src="assets/images/main/avatar.png"
+                     class="avatar avatar-large rounded-circle shadow d-block mx-auto"
+                     alt="">
+              </div>
+              <!--end col-->
+              <div class="col-lg-10 col-md-9">
+                <div class="row align-items-end">
+                  <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
+                    <h3 class="title mb-0">{{name}}</h3>
+                    <small class="h6 me-2">{{email}}</small><br>
+                    <small class="h6 me-2">Kod: {{code}}</small>
+                  </div>
+                  <!--end col-->
                 </div>
+                <!--end row-->
+              </div>
+              <!--end col-->
             </div>
-            <!--end col-->
+            <!--end row-->
+          </div>
         </div>
-        <!--end row-->
+      </div>
+      <!--end col-->
     </div>
-    <!--ed container-->
+    <!--end row-->
+  </div>
+  <!--ed container-->
 </section>
 <!--end section-->
 <!-- Hero End -->
 
 <!-- Profile Start -->
 <section class="section mt-60">
-    <div class="container mt-lg-3">
-        <div class="row">
-            <div class="col-lg-8 col-12 mx-auto">
-                <div class="pb-4">
-                    <h3 class="text-center">Osoby kontaktowe</h3>
-                    <hr>
-                    <div [style.visibility]="(contact_counter == 0) ? 'hidden' : 'visible' " *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
-                        <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
-                             style="height: 90px; width: 90px;">
-                            <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
-                        </div>
-                        <h6>{{contact_main.phoneNumber}}</h6>
-                        <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina</p>
-                        <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy</p>
-                    </div>
-                </div>
-                <div class="pb-4">
-                    <h3 class="text-center">Zgoda na pobranie organów</h3>
-                    <hr>
-                    <h4 *ngIf="(isOrganDonor == true)" class="text-center">Wyrażam zgodę na pobranie po śmierci tkanek oraz narządów do przeszczepienia.</h4>
-                    <h4 *ngIf="(isOrganDonor == false)" class="text-center"><span class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci tkanek oraz narządów do przeszczepienia.</h4>
-                </div>
-                <div class="pb-4">
-                    <h3 class="text-center">Alergie i uczulenia</h3>
-                    <hr>
-                    <table [style.visibility]="(allergies_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="border-bottom" style="width:10%;">#</th>
-                            <th scope="col" class="border-bottom" style="width:25%;">Nazwa</th>
-                            <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td>{{allergy.name}}</td>
-                            <td *ngIf="(allergy.type == 'ALLERGY')" >Alergia </td>
-                            <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="pb-4">
-                    <h3 class="text-center">Przyjmowane leki</h3>
-                    <hr>
-                    <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' " class="table mb-0 table-center">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="border-bottom" style="width:11%;">#</th>
-                            <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
-                            <th scope="col" class="border-bottom" >Dawka</th>
-                            <th scope="col" class="border-bottom" >Co ile</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
-                            <td>{{indexOfElement+1}}</td>
-                            <td>{{tabs.name}}</td>
-                            <td>{{tabs.portion}}</td>
-                            <td>{{tabs.howOften}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="pb-4">
-                    <h3 class="text-center">Choroby przewlekłe</h3>
-                    <hr>
-                    <table [style.visibility]="(illness_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="border-bottom" style="width:10%;">#</th>
-                            <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
-                            <td >{{indexOfElement+1}}</td>
-                            <td>{{illness.name}}</td>
-                            <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+  <div class="container mt-lg-3">
+    <div class="row">
+      <div class="col-lg-8 col-12 mx-auto">
+        <div class="pb-4">
+          <h3 class="text-center">Osoby kontaktowe</h3>
+          <hr>
+          <div [style.visibility]="(contact_counter == 0) ? 'hidden' : 'visible' "
+               *ngFor="let contact_main of contactList" class="col-4 col-sm-4 col-md-4 d-inline-block text-center">
+            <div class="mx-auto bg-soft-primary rounded-circle position-relative mb-1"
+                 style="height: 90px; width: 90px;">
+              <i class="uil uil-user h1 mx-auto position-absolute top-50 start-50 translate-middle"></i>
             </div>
-            <!--end col-->
+            <h6>{{contact_main.phoneNumber}}</h6>
+            <p *ngIf="(contact_main.contactPersonRole == 'FAMILY')">Rodzina
+              <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+              <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
+            <p *ngIf="(contact_main.contactPersonRole == 'FRIEND')">Znajomy
+              <span *ngIf="(contact_main.optionalName != null)"><br>({{contact_main.optionalName}})</span>
+              <span *ngIf="(contact_main.optionalName == null)"><br><br></span></p>
+          </div>
         </div>
-        <!--end row-->
+        <div class="pb-4">
+          <h3 class="text-center">Zgoda na pobranie organów</h3>
+          <hr>
+          <h4 *ngIf="(isOrganDonor == true)" class="text-center">Wyrażam zgodę na pobranie po śmierci tkanek oraz
+            narządów do przeszczepienia.</h4>
+          <h4 *ngIf="(isOrganDonor == false || isOrganDonor == null)" class="text-center"><span
+                  class="text-danger">NIE</span> wyrażam zgody na pobranie po śmierci tkanek oraz narządów do
+            przeszczepienia.</h4>
+        </div>
+        <div class="pb-4">
+          <h3 class="text-center">Alergie i uczulenia</h3>
+          <hr>
+          <table [style.visibility]="(allergies_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
+            <thead>
+            <tr>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:25%;">Nazwa</th>
+              <th scope="col" class="border-bottom" style="width:50%;">Typ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let allergy of allegriesList; let indexOfElement=index;">
+              <td>{{indexOfElement + 1}}</td>
+              <td>{{allergy.name}}</td>
+              <td *ngIf="(allergy.type == 'ALLERGY')">Alergia</td>
+              <td *ngIf="(allergy.type == 'SENSITIVITY')">Uczulenie</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pb-4">
+          <h3 class="text-center">Przyjmowane leki</h3>
+          <hr>
+          <table [style.visibility]="(medications_counter == 0) ? 'hidden' : 'visible' "
+                 class="table mb-0 table-center">
+            <thead>
+            <tr>
+              <th scope="col" class="border-bottom" style="width:11%;">#</th>
+              <th scope="col" class="border-bottom" style="width:30%;">Nazwa leku</th>
+              <th scope="col" class="border-bottom">Dawka</th>
+              <th scope="col" class="border-bottom">Co ile</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tabs of medicationsList ; let indexOfElement=index;">
+              <td>{{indexOfElement + 1}}</td>
+              <td>{{tabs.name}}</td>
+              <td>{{tabs.portion}}</td>
+              <td>{{tabs.howOften}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pb-4">
+          <h3 class="text-center">Choroby przewlekłe</h3>
+          <hr>
+          <table [style.visibility]="(illness_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
+            <thead>
+            <tr>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:80%;">Nazwa choroby</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let illness of illnessList; let indexOfElement=index;">
+              <td>{{indexOfElement + 1}}</td>
+              <td>{{illness.name}}</td>
+              <!--<td><input class="btn btn-danger btn-sm align-items-center" type="button" value="-" (click)="delete_row_contact(indexOfElement)"></td>-->
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!--end col-->
     </div>
-    <!--end container-->
+    <!--end row-->
+  </div>
+  <!--end container-->
 </section>
 <!--end section-->
 <!-- Profile End -->
 
 <!-- Back to top -->
 <a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">
-    <i-feather name="arrow-up" class="icons"></i-feather>
+  <i-feather name="arrow-up" class="icons"></i-feather>
 </a>
 <!-- Back to top -->

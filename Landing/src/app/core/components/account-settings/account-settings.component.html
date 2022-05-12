@@ -1,15 +1,16 @@
 <!-- Hero Start -->
 <div *ngIf="mobile" class="back-to-home rounded">
   <div class="btn-group dropdown-primary" ngbDropdown>
-    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
+            aria-haspopup="true" aria-expanded="false">
       Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
-      <a class="dropdown-item" routerLink="/vaccinations" >Szczepienia</a>
-      <a class="dropdown-item" routerLink="/blood" >Wyniki krwi</a>
-      <a class="dropdown-item bg-soft-secondary" >Pełna teczka badań</a>
-      <a class="dropdown-item bg-soft-secondary" >Kalendarz wizyt</a>
+      <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
+      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
+      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" routerLink="/settings" style="background: #337ab7; color: white">Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
@@ -18,9 +19,8 @@
 </div>
 
 
-
 <section class="bg-profile d-table w-100 bg-primary"
-  style="background: url('assets/images/main/bg.png') center center;" id="home">
+         style="background: url('assets/images/main/bg.png') center center;" id="home">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -28,40 +28,51 @@
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
-                <img src="assets/images/main/avatar.png" class="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                  alt="">
+                <img src="assets/images/main/avatar.png"
+                     class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
               </div>
               <!--end col-->
-                <div class="col-lg-6 col-md-6">
-                  <div class="row align-items-end">
-                    <div class="col-md-8 text-md-start text-center">
-                      <h3 class="title mb-0">{{name}} {{lastName}} 
-                        <!-- <button (click)="copyCode()" class="h3 text-primary bg-white border-0 p-0 m-0"  ngbTooltip="Skopiuj kod">
-                          <i class="uil uil-copy"></i>
-                        </button> -->
-                      </h3>
-                      <!-- <div class="row "> -->
-                        <small class="h6 me-2">{{email}}<br>
-                        <!-- //<div class="col-lg-12"> -->
-                          Twój kod: <b>{{code}}</b>
-                            <button (click)="copyCode()" class="h4 text-primary bg-white border-0"  ngbTooltip="Skopiuj kod">
-                            <i class="uil uil-copy"></i>
-                          </button> 
-                        </small> 
-                        <!-- </div> -->
-                      <!-- </div> -->
+              <div class="col-lg-6 col-md-6">
+                <div class="row align-items-end">
+                  <div class="col-md-12 text-md-start text-center">
+                    <h3 class="title mb-0">{{name}} {{lastName}}
+                    </h3>
+                    <!-- <div class="row "> -->
+                    <small class="h6 me-2">{{email}}<br>
+                      Twój kod: <b>{{code}}</b>
+                      <button (click)="copyCode()" class="h4 text-primary bg-white border-0" ngbTooltip="Skopiuj kod">
+                        <i class="uil uil-copy"></i>
+                      </button>
+                    </small>
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+              <div class="col-lg-3 col-md-3 mt-2 d-flex  align-content-center flex-wrap justify-content-center">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img class="card-zoom" src="assets/images/card_back.jpg" (click)="zoomCard()" alt="Avatar" style="width:100%;">
                     </div>
-                    <!--end col-->
-                  </div>
-                  <!--end row-->
-                </div>
-                <div class="col-lg-4 col-md-3 mt-2">
-                  <div class="text-center">
-                    <p>Twój Kod QR<br>
-                      <qr-code [value]=code_link></qr-code>
-                    </p>
+                    <div class="flip-card-front">
+                      <img [src]="cardImg" style="width: 100%;">
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div class="col-lg-1 col-md-2 mt-2 d-flex align-content-center flex-wrap justify-content-center">
+                <div>
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę">
+                    <i class="uil uil-shopping-cart"></i>
+                  </button>
+                </div>
+                <div>
+                  <button class="h4 text-primary bg-white border-0" (click)="printCard()" ngbTooltip="Wydrukuj kartę">
+                    <i class="uil uil-print"></i>
+                  </button>
+                </div>
+              </div>
               <!--end col-->
             </div>
             <!--end row-->
@@ -85,7 +96,7 @@
     <div class="row">
       <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
 
-        <div class="sidebar sticky-bar px-4 rounded shadow" >
+        <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
               <li class="navbar-item account-menu px-0">
@@ -131,7 +142,8 @@
               </li>
 
               <li class="navbar-item account-menu px-0 mt-2">
-                <a (click)=logout() routerLink="/login" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                <a (click)=logout() routerLink="/login"
+                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
@@ -149,14 +161,15 @@
             <div class="border-bottom">
               <h5>Zmień dane</h5>
             </div>
-            <form class="login-form"  [formGroup]="changeDataForm" #formData="ngForm" (ngSubmit)="changeData(formData)">
+            <form class="login-form" [formGroup]="changeDataForm" #formData="ngForm" (ngSubmit)="changeData(formData)">
               <div class="row mt-4 ">
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
                     <label class="form-label ">Imię</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="name" type="text" class="form-control ps-5" placeholder="Nowe imię" [ngClass]="{ 'is-invalid': submitted_data && fData.name.errors }">
+                      <input formControlName="name" type="text" class="form-control ps-5" placeholder="Nowe imię"
+                             [ngClass]="{ 'is-invalid': submitted_data && fData.name.errors }">
                       <div *ngIf="submitted_data && fData.name.errors" class="invalid-feedback">
                         <div *ngIf="fData.name.errors.required">Należy podać nowe imię</div>
                       </div>
@@ -170,7 +183,9 @@
                     <label class="form-label">Nazwisko</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="lastName" type="text" class="form-control ps-5" placeholder="Nowe nazwisko" [ngClass]="{ 'is-invalid': submitted_data && fData.lastName.errors }">
+                      <input formControlName="lastName" type="text" class="form-control ps-5"
+                             placeholder="Nowe nazwisko"
+                             [ngClass]="{ 'is-invalid': submitted_data && fData.lastName.errors }">
                       <div *ngIf="submitted_data && fData.lastName.errors" class="invalid-feedback">
                         <div *ngIf="fData.lastName.errors.required">Należy podać nowe nazwisko</div>
                       </div>
@@ -181,15 +196,19 @@
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
                     <label class="form-label">Kod</label>
-                    <button class="h5 text-primary bg-white border-0 disable-click"  ngbTooltip="Nowy kod musi składać się z minimalnie 6-ciu znaków, bez znaków specjalnych">
+                    <button class="h5 text-primary bg-white border-0 disable-click"
+                            ngbTooltip="Nowy kod musi składać się z minimalnie 6-ciu znaków, bez znaków specjalnych">
                       <i class="uil uil-question-circle"></i>
                     </button>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="newCode" type="text" class="form-control ps-5" placeholder="Nowy kod" [ngClass]="{ 'is-invalid': submitted_data && fData.newCode.errors }">
+                      <input formControlName="newCode" type="text" class="form-control ps-5" placeholder="Nowy kod"
+                             [ngClass]="{ 'is-invalid': submitted_data && fData.newCode.errors }">
                       <div *ngIf="submitted_data && fData.newCode.errors" class="invalid-feedback">
                         <div *ngIf="fData.newCode.errors.required">Nowy kod jest wymagany</div>
-                        <div *ngIf="fData.newCode.errors.pattern">Nowy kod musi składać się z minimalnie 6-ciu znaków, bez znaków specjalnych</div>
+                        <div *ngIf="fData.newCode.errors.pattern">Nowy kod musi składać się z minimalnie 6-ciu znaków,
+                          bez znaków specjalnych
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -198,12 +217,14 @@
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
                     <label class="form-label">PESEL</label>
-                    <button class="h5 text-primary bg-white border-0 disable-click"  ngbTooltip="Ustaw swój PESEL, bądź zostaw puste i zapisz by usunąć obecny">
+                    <button class="h5 text-primary bg-white border-0 disable-click"
+                            ngbTooltip="Ustaw swój PESEL, bądź zostaw puste i zapisz by usunąć obecny">
                       <i class="uil uil-question-circle"></i>
                     </button>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="newPESEL" type="text" class="form-control ps-5" placeholder="Nowy PESEL" [ngClass]="{ 'is-invalid': submitted_data && fData.newPESEL.errors }">
+                      <input formControlName="newPESEL" type="text" class="form-control ps-5" placeholder="Nowy PESEL"
+                             [ngClass]="{ 'is-invalid': submitted_data && fData.newPESEL.errors }">
                       <div *ngIf="submitted_data && fData.newPESEL.errors" class="invalid-feedback">
                         <div *ngIf="fData.newPESEL.errors.pattern">Niepoprawna ilość znaków</div>
                       </div>
@@ -231,14 +252,15 @@
             <div class="border-bottom">
               <h5>Zmień hasło</h5>
             </div>
-            <form class="login-form"  [formGroup]="changePasswordForm" #form="ngForm" (ngSubmit)="changePassword(form)">
+            <form class="login-form" [formGroup]="changePasswordForm" #form="ngForm" (ngSubmit)="changePassword(form)">
               <div class="row mt-4 ">
                 <div class="col-lg-12 form-group">
                   <div class="mb-3">
                     <label class="form-label ">Stare hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="password" type="password" class="form-control ps-5" placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                      <input formControlName="password" type="password" class="form-control ps-5"
+                             placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Powtórzenie hasła jest wymagane</div>
                       </div>
@@ -252,11 +274,14 @@
                     <label class="form-label">Nowe hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="newPassword" type="password" class="form-control ps-5" placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }">
+                      <input formControlName="newPassword" type="password" class="form-control ps-5"
+                             placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }">
                       <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
                         <div *ngIf="f.newPassword.errors.required">Powtórzenie hasła jest wymagane</div>
                         <div *ngIf="f.newPassword.errors.mustMatch">Nowe hasło musi się różnić od starego</div>
-                        <div *ngIf="f.newPassword.errors.pattern">Hasło musi posiadać 8-16 znaków w tym, jedną małą literę, duża literę oraz znak specjalny</div>
+                        <div *ngIf="f.newPassword.errors.pattern">Hasło musi posiadać 8-16 znaków w tym, jedną małą
+                          literę, duża literę oraz znak specjalny
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -268,7 +293,9 @@
                     <label class="form-label">Powtórz nowe hasło</label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons"></i-feather>
-                      <input formControlName="confirmPassword" type="password" class="form-control ps-5" placeholder="Powtórz nowe hasło" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+                      <input formControlName="confirmPassword" type="password" class="form-control ps-5"
+                             placeholder="Powtórz nowe hasło"
+                             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
                       <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                         <div *ngIf="f.confirmPassword.errors.required">Powtórzenie hasła jest wymagane</div>
                         <div *ngIf="f.confirmPassword.errors.mustMatch">Hasła muszą się zgadzać</div>

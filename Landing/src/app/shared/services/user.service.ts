@@ -39,6 +39,7 @@ export class UserService {
             window.sessionStorage.setItem('user', JSON.stringify(user));
         }
     }
+
     getLocalUser(): TokenOutput {
         if (window.sessionStorage.getItem('user') === null) {
             return JSON.parse(window.localStorage.getItem('user'));
@@ -54,8 +55,9 @@ export class UserService {
             password
         };
 
-        return this.httpClient.post<TokenOutput> (environment.apiUrl + '/login', body);
+        return this.httpClient.post<TokenOutput>(environment.apiUrl + '/login', body);
     }
+
     removeLocalUser() {
         if (window.sessionStorage.getItem('user') === null) {
             window.localStorage.removeItem('user');
@@ -63,6 +65,7 @@ export class UserService {
             window.sessionStorage.removeItem('user');
         }
     }
+
     getToken(): string {
         const user = this.getLocalUser();
 
@@ -72,37 +75,43 @@ export class UserService {
 
         return null;
     }
+
     getFromRegistration(): Observable<AccountOutput> {
 
         return this.httpClient.get<AccountOutput>(environment.apiUrl + '/information/user');
     }
-    changePassword(password: string, newPassword: string): Observable<any>{
+
+    changePassword(password: string, newPassword: string): Observable<any> {
         const body = {
             password,
             newPassword
         };
         return this.httpClient.post(environment.apiUrl + '/account/change-password', body);
     }
-    changeCode(cardCode: string): Observable<any>{
+
+    changeCode(cardCode: string): Observable<any> {
         const body = {
             cardCode
         };
 
         return this.httpClient.put(environment.apiUrl + '/account/change-code', body);
     }
-    forgotPassword(email: string): Observable<any>{
+
+    forgotPassword(email: string): Observable<any> {
         const body = {
             email
         };
         return this.httpClient_withoutToken.post(environment.apiUrl + '/account/reset-password', body);
     }
-    resendMail(email: string): Observable<any>{
+
+    resendMail(email: string): Observable<any> {
         const body = {
             email
         };
         return this.httpClient_withoutToken.post(environment.apiUrl + '/registration/resend', body);
     }
-    changeInformation(name: string, lastName: string, pesel: string): Observable<any>{
+
+    changeInformation(name: string, lastName: string, pesel: string): Observable<any> {
         const body = {
             name,
             lastName,
@@ -110,13 +119,15 @@ export class UserService {
         };
         return this.httpClient.put(environment.apiUrl + '/account/change-information', body);
     }
-    deleteUser(): Observable<any>{
+
+    deleteUser(): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/account/deleteUser');
     }
-    changeOrganDonor(organDonor: boolean): Observable<any>{
-       const body = {
+
+    changeOrganDonor(organDonor: boolean): Observable<any> {
+        const body = {
             organDonor
-       };
-       return this.httpClient.put(environment.apiUrl + '/information/organ-donor', body);
+        };
+        return this.httpClient.put(environment.apiUrl + '/information/organ-donor', body);
     }
 }

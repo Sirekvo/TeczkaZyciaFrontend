@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {AccountOutput, DiseasesOutput, 
-        AllergiesOutput, ContactsOutput,
-        MedicationsOutput,InformationOutput, OrganDonorOutput} from "../../../shared/models/account.model";
+import {Component, OnInit} from '@angular/core';
+import {
+    AccountOutput, DiseasesOutput,
+    AllergiesOutput, ContactsOutput,
+    MedicationsOutput, InformationOutput, OrganDonorOutput
+} from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {PatientService} from "../../../shared/services/patient.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -79,7 +81,7 @@ export class FindPatientComponent implements OnInit {
                 this.email = information.email;
             },
             () => {
-            }        
+            }
         );
         this.patientService.getOrganDonor(this.code).subscribe(
             (information: OrganDonorOutput) => {
