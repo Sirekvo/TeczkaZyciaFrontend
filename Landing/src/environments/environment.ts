@@ -10,7 +10,6 @@ export const environment = {
     //imgUrl: 'http://localhost:4200',
     codeUrl: 'https://www.teczkazycia.pl/patient/'
     //codeUrl: 'http://localhost:4200/patient/'
-
 };
 
 /*
