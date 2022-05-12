@@ -22,9 +22,10 @@
                 <div class="col-md-6 form-group">
                   <div class="mb-3">
                     <label class="form-label">Imię<span class="text-danger">*</span></label>
-                    <div class="form-icon position-relative" >
+                    <div class="form-icon position-relative">
                       <i-feather name="user" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="firstName" type="text" class="form-control ps-5 pt-2" placeholder="Imię" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                      <input formControlName="firstName" type="text" class="form-control ps-5 pt-2" placeholder="Imię"
+                             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
                       <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                         <div *ngIf="f.firstName.errors.required">Imię jest wymagane</div>
                       </div>
@@ -39,7 +40,8 @@
                     <label class="form-label">Nazwisko <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="lastName" type="text" class="form-control ps-5 pt-2" placeholder="Nazwisko" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                      <input formControlName="lastName" type="text" class="form-control ps-5 pt-2"
+                             placeholder="Nazwisko" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                       <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                         <div *ngIf="f.lastName.errors.required">Nazwisko jest wymagane</div>
                       </div>
@@ -54,12 +56,12 @@
                     <label class="form-label">PESEL</label>
                     <div class="form-icon position-relative">
                       <i-feather name="user-check" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="pesel" type="number" class="form-control ps-5 pt-2" placeholder="PESEL" [ngClass]="{ 'is-invalid': submitted && f.pesel.errors }">
-                       <div *ngIf="submitted && f.pesel.errors" class="invalid-feedback">
-                         <div *ngIf="f.pesel.errors.pattern">Niepoprawna ilość znaków</div>
-                       </div>
+                      <input formControlName="pesel" type="number" class="form-control ps-5 pt-2" placeholder="PESEL"
+                             [ngClass]="{ 'is-invalid': submitted && f.pesel.errors }">
+                      <div *ngIf="submitted && f.pesel.errors" class="invalid-feedback">
+                        <div *ngIf="f.pesel.errors.pattern">Niepoprawna ilość znaków</div>
+                      </div>
                     </div>
-
                   </div>
                 </div>
 
@@ -68,7 +70,8 @@
                     <label class="form-label">Twój Email <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="mail" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="email" type="text" class="form-control ps-5 pt-2" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <input formControlName="email" type="text" class="form-control ps-5 pt-2" placeholder="Email"
+                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email jest wymagany</div>
                         <div *ngIf="f.email.errors.pattern">Niepoprawny email</div>
@@ -76,28 +79,31 @@
                     </div>
                   </div>
                 </div>
-<!--                  <div *ngIf="(email.invalid && email.touched) || email.dirty">-->
-<!--                    <small *ngIf="email.errors?.pattern" class="text-danger">Niepoprawny email</small>-->
-<!--                  </div>-->
-                  <!--end col-->
+                <!--                  <div *ngIf="(email.invalid && email.touched) || email.dirty">-->
+                <!--                    <small *ngIf="email.errors?.pattern" class="text-danger">Niepoprawny email</small>-->
+                <!--                  </div>-->
+                <!--end col-->
                 <div class="col-md-12 form-group">
                   <div class="mb-3">
                     <label class="form-label">Hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="password" type="password" class="form-control ps-5 pt-2" placeholder="Hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" >
+                      <input formControlName="password" type="password" class="form-control ps-5 pt-2"
+                             placeholder="Hasło" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
-                        <div *ngIf="f.password.errors.pattern">Hasło musi posiadać 8-16 znaków w tym, jedną małą literę, duża literę oraz znak specjalny</div>
+                        <div *ngIf="f.password.errors.pattern">Hasło musi posiadać 8-16 znaków w tym, jedną małą literę,
+                          duża literę oraz znak specjalny
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-<!--                  <div *ngIf="(password.invalid && password.touched) || password.dirty">-->
-<!--                    <small *ngIf="password.errors?.pattern" class="text-danger">Hasło jest zbyt słabe</small>-->
-<!--                  </div>-->
-<!--                  <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter,-->
-<!--                    and at least 8 or more characters.</div>-->
+                <!--                  <div *ngIf="(password.invalid && password.touched) || password.dirty">-->
+                <!--                    <small *ngIf="password.errors?.pattern" class="text-danger">Hasło jest zbyt słabe</small>-->
+                <!--                  </div>-->
+                <!--                  <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter,-->
+                <!--                    and at least 8 or more characters.</div>-->
 
                 <!--end col-->
 
@@ -106,7 +112,9 @@
                     <label class="form-label">Powtórz hasło <span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
                       <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
-                      <input formControlName="confirmPassword" type="password" class="form-control ps-5 pt-2" placeholder="Powtórz hasło" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+                      <input formControlName="confirmPassword" type="password" class="form-control ps-5 pt-2"
+                             placeholder="Powtórz hasło"
+                             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
                       <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                         <div *ngIf="f.confirmPassword.errors.required">Powtórzenie hasła jest wymagane</div>
                         <div *ngIf="f.confirmPassword.errors.mustMatch">Hasła muszą się zgadzać</div>
@@ -129,7 +137,7 @@
                   </div>
                 </div> -->
                 <!--end col-->
-                
+
                 <div class="col-md-12 form-group">
                   <div class="d-grid">
                     <br>

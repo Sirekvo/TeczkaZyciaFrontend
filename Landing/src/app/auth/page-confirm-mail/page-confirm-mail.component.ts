@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../shared/services/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-page-confirm-mail',
-  templateUrl: './page-confirm-mail.component.html',
-  styleUrls: ['./page-confirm-mail.component.css']
+    selector: 'app-page-confirm-mail',
+    templateUrl: './page-confirm-mail.component.html',
+    styleUrls: ['./page-confirm-mail.component.css']
 })
 
 /**
@@ -14,24 +14,27 @@ import {HttpErrorResponse} from "@angular/common/http";
  */
 export class PageConfirmMailComponent implements OnInit {
 
-  firstName = '';
-  email = '';
-  constructor(private route: ActivatedRoute,
-              private userService: UserService) { }
+    firstName = '';
+    email = '';
 
-  ngOnInit(): void {
-    this.firstName = this.route.snapshot.queryParamMap.get('name');
-    this.email = this.route.snapshot.queryParamMap.get('email');
+    constructor(private route: ActivatedRoute,
+                private userService: UserService) {
+    }
 
-  }
-  resend(){
-    this.userService.resendMail(this.email).subscribe(
-        (response: any) => {
-          console.log('Wyslano');
-        },
-        () => {
-        }
-    );
-  }
+    ngOnInit(): void {
+        this.firstName = this.route.snapshot.queryParamMap.get('name');
+        this.email = this.route.snapshot.queryParamMap.get('email');
+
+    }
+
+    resend() {
+        this.userService.resendMail(this.email).subscribe(
+            (response: any) => {
+                console.log('Wyslano');
+            },
+            () => {
+            }
+        );
+    }
 
 }

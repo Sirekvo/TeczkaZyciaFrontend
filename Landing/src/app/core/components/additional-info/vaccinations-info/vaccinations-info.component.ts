@@ -1,19 +1,19 @@
-import { ViewportScroller } from "@angular/common";
-import { Component, OnInit } from '@angular/core';
+import {ViewportScroller} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
 import {
     AccountOutput,
     VaccinationsOutput,
     VaccinationsInput,
 } from "../../../../shared/models/account.model";
-import { AccountService } from "../../../../shared/services/account.service";
-import { UserService } from "../../../../shared/services/user.service";
-import { Router } from "@angular/router";
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { from } from "rxjs";
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {AccountService} from "../../../../shared/services/account.service";
+import {UserService} from "../../../../shared/services/user.service";
+import {Router} from "@angular/router";
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {from} from "rxjs";
+import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {environment} from '../../../../../environments/environment';
-import { ClipboardService } from "ngx-clipboard";
+import {ClipboardService} from "ngx-clipboard";
 import {DomSanitizer} from "@angular/platform-browser";
 
 
@@ -70,12 +70,12 @@ export class VaccinationsInfoComponent implements OnInit {
     cardImg_copy: any;
 
     constructor(private accountService: AccountService,
-        private userService: UserService,
-        private router: Router,
-        private scroller: ViewportScroller,
-        private modalService: NgbModal,
-        private clipboardApi: ClipboardService,
-        private sanitizer: DomSanitizer) {
+                private userService: UserService,
+                private router: Router,
+                private scroller: ViewportScroller,
+                private modalService: NgbModal,
+                private clipboardApi: ClipboardService,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -166,7 +166,7 @@ export class VaccinationsInfoComponent implements OnInit {
         this.addVaccinations.splice(0, this.addVaccinations.length);
         this.isVisible_vaccinations = false;
         this.isVisible = true;
-        
+
         // this.submitted = false;
     }
 
@@ -201,17 +201,17 @@ export class VaccinationsInfoComponent implements OnInit {
         }
     }
 
-    clean_form(form: any){
+    clean_form(form: any) {
         form.reset();
-        this.activeToggle=0;
+        this.activeToggle = 0;
         this.submitted = false;
     }
 
-    copyCode(){
+    copyCode() {
         this.clipboardApi.copyFromContent(this.code);
     }
 
-    getCard() : void {
+    getCard(): void {
         this.accountService.getCardBase64().subscribe(
             (val) => {
                 this.objectURL = 'data:image/jpg;base64,' + val.img;

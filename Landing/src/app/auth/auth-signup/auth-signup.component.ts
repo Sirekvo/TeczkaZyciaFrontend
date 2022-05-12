@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
-import { NgForm, Validators } from '@angular/forms';
+import {NgForm, Validators} from '@angular/forms';
 import {ChangeDetectorRef} from '@angular/core';
-import { UserService } from '../../shared/services/user.service';
+import {UserService} from '../../shared/services/user.service';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {PatientService} from "../../shared/services/patient.service";
@@ -10,11 +10,10 @@ import {MustMatch} from "../../shared/match_validator/must_match.validator";
 import {state} from "@angular/animations";
 
 
-
 @Component({
-  selector: 'app-auth-signup',
-  templateUrl: './auth-signup.component.html',
-  styleUrls: ['./auth-signup.component.css']
+    selector: 'app-auth-signup',
+    templateUrl: './auth-signup.component.html',
+    styleUrls: ['./auth-signup.component.css']
 })
 
 /**
@@ -31,7 +30,7 @@ export class AuthSignupComponent implements OnInit {
     constructor(private userService: UserService,
                 private patientService: PatientService,
                 private router: Router,
-                private formBuilder: FormBuilder){
+                private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
@@ -49,7 +48,10 @@ export class AuthSignupComponent implements OnInit {
             this.web = false;
         }
     }
-    get f() { return this.registerForm.controls; }
+
+    get f() {
+        return this.registerForm.controls;
+    }
 
     addNewUser(form: any) {
         this.submitted = true;
@@ -58,27 +60,30 @@ export class AuthSignupComponent implements OnInit {
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
-        }
-        else{
+        } else {
             this.patientService.existsEmail(form.value.email).subscribe(
-            (data: any) => {
-                if (data.exists == false) {
-                    this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.pesel, form.value.email, form.value.password).subscribe(
-                        (response: any) => {
-                            this.router.navigate(['/confirm-mail'], {queryParams: { name: form.value.firstName, email: form.value.email}});
-                        },
-                        (error: HttpErrorResponse) => {
-                            form.reset();
-                        }
-                    );
+                (data: any) => {
+                    if (data.exists == false) {
+                        this.userService.registerUser(form.value.firstName, form.value.lastName, form.value.pesel, form.value.email, form.value.password).subscribe(
+                            (response: any) => {
+                                this.router.navigate(['/confirm-mail'], {
+                                    queryParams: {
+                                        name: form.value.firstName,
+                                        email: form.value.email
+                                    }
+                                });
+                            },
+                            (error: HttpErrorResponse) => {
+                                form.reset();
+                            }
+                        );
+                    } else {
+                        this.information_to_user = 'Podany adres e-mail jest już zajęty';
+                    }
+                },
+                () => {
                 }
-                else {
-                    this.information_to_user = 'Podany adres e-mail jest już zajęty';
-                }
-            },
-            () => {
-            }
-        );
+            );
         }
     }
 }

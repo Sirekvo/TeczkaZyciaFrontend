@@ -1,4 +1,4 @@
-import { ViewportScroller } from "@angular/common";
+import {ViewportScroller} from "@angular/common";
 import {Component, OnInit} from '@angular/core';
 import {
     AccountOutput,
@@ -16,8 +16,8 @@ import {UserService} from "../../../shared/services/user.service";
 import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
 import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
-import { ClipboardService } from "ngx-clipboard";
-import { NgForm, Validators } from '@angular/forms';
+import {ClipboardService} from "ngx-clipboard";
+import {NgForm, Validators} from '@angular/forms';
 import {DomSanitizer} from "@angular/platform-browser";
 
 
@@ -82,10 +82,10 @@ export class AccountProfileComponent implements OnInit {
     allergies_counter = 0;
     medications_counter = 0;
 
-    contact_counter_tmp : number;
-    illness_counter_tmp : number;
-    allergies_counter_tmp : number;
-    medications_counter_tmp : number;
+    contact_counter_tmp: number;
+    illness_counter_tmp: number;
+    allergies_counter_tmp: number;
+    medications_counter_tmp: number;
 
     isCondensed = false;
 
@@ -96,7 +96,7 @@ export class AccountProfileComponent implements OnInit {
     cardImg: any;
     cardImg_copy: any;
     isOrganDonor = false;
-    objectURL : string;
+    objectURL: string;
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
@@ -112,9 +112,8 @@ export class AccountProfileComponent implements OnInit {
         this.contactForm = this.formBuilder.group({
             phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9,}$")]),
             type: new FormControl('', [Validators.required]),
-            optionalName: new FormControl('', ),
-        }, {
-        });
+            optionalName: new FormControl('',),
+        }, {});
         if (window.innerWidth <= 991) { // 768px portrait
             this.mobile = true;
         }
@@ -172,7 +171,9 @@ export class AccountProfileComponent implements OnInit {
         );
     }
 
-    get fphone() { return this.contactForm.controls; }
+    get fphone() {
+        return this.contactForm.controls;
+    }
 
     logout() {
         this.userService.removeLocalUser();
@@ -232,7 +233,7 @@ export class AccountProfileComponent implements OnInit {
         this.isVisible_medications = false;
         this.isVisible_contact = false;
         this.isVisible = true;
-        this.information_to_user=true;
+        this.information_to_user = true;
         this.idContacts.splice(0, this.idContacts.length);
         this.idAllergies.splice(0, this.idAllergies.length);
         this.idMedications.splice(0, this.idMedications.length);
@@ -277,7 +278,7 @@ export class AccountProfileComponent implements OnInit {
 
         this.isVisible_contact = false;
         this.isVisible = true;
-        this.information_to_user=true;
+        this.information_to_user = true;
 
 
     }
@@ -386,8 +387,7 @@ export class AccountProfileComponent implements OnInit {
         this.submitted = true;
         if (this.contactForm.invalid) {
             return;
-        }
-        else{
+        } else {
             if (this.contact_counter < 3) {
                 const contact = new ContactsInput();
                 const contact2 = new ContactsOutput();
@@ -411,9 +411,9 @@ export class AccountProfileComponent implements OnInit {
         }
     }
 
-    clean_form(form: any){
+    clean_form(form: any) {
         form.reset();
-        this.activeToggle=0;
+        this.activeToggle = 0;
         this.submitted = false;
     }
 
@@ -512,32 +512,32 @@ export class AccountProfileComponent implements OnInit {
         }
     }
 
-    copyCode(){
+    copyCode() {
         this.clipboardApi.copyFromContent(this.code);
     }
 
-    toogleEditable(event){
-        if(event.target.checked){
+    toogleEditable(event) {
+        if (event.target.checked) {
             this.isOrganDonor = true;
             this.changeOrganDonor();
-        }
-        else{
+        } else {
             this.isOrganDonor = false;
             this.changeOrganDonor();
         }
-        console.log("Wartosc isOrganDonor "+this.isOrganDonor);
+        console.log("Wartosc isOrganDonor " + this.isOrganDonor);
     }
 
-    changeOrganDonor(){
+    changeOrganDonor() {
         this.userService.changeOrganDonor(this.isOrganDonor).subscribe(
-            (data: any) => {;
+            (data: any) => {
+                ;
             },
             () => {
             }
         );
     }
 
-    getCard() : void {
+    getCard(): void {
         this.accountService.getCardBase64().subscribe(
             (val) => {
                 this.objectURL = 'data:image/jpg;base64,' + val.img;
@@ -550,24 +550,25 @@ export class AccountProfileComponent implements OnInit {
 
     }
 
-    printCard(){
+    printCard() {
         var win = window.open("");
         var img = win.document.createElement("img");
         var img_2 = win.document.createElement("img");
         img.src = this.objectURL;
-        img_2.src= environment.imgUrl + "/assets/images/card_back.jpg";
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
         win.document.body.appendChild(img);
         win.document.body.appendChild(img_2);
-        img.onload = function(){
+        img.onload = function () {
             win.print();
         };
     }
-    zoomCard(){
+
+    zoomCard() {
         var win = window.open("");
         var img = win.document.createElement("img");
         var img_2 = win.document.createElement("img");
         img.src = this.objectURL;
-        img_2.src= environment.imgUrl + "/assets/images/card_back.jpg";
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
         win.document.body.appendChild(img);
         win.document.body.appendChild(img_2);
     }

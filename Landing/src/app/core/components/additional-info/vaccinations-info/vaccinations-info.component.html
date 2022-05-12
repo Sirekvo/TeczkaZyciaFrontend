@@ -2,26 +2,25 @@
 <div *ngIf="mobile" class="back-to-home rounded">
   <div class="btn-group dropdown-primary" ngbDropdown>
     <button type="button" class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
-      aria-haspopup="true" aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
       <i-feather name="menu" className="fea icon-sm"></i-feather>
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/vaccinations">Szczepienia</a>
       <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
-      <a class="dropdown-item bg-soft-secondary" >Pełna teczka badań</a>
-      <a class="dropdown-item bg-soft-secondary" >Kalendarz wizyt</a>
+      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" routerLink="/settings" >Ustawienia</a>
+      <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
     </div>
   </div>
 </div>
 
 
-
 <section class="bg-profile d-table w-100 bg-primary" style="background: url('assets/images/main/bg.png') center center;"
-  id="home">
+         id="home">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -30,7 +29,7 @@
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
                 <img src="assets/images/main/avatar.png"
-                  class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
+                     class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
               </div>
               <!--end col-->
               <div class="col-lg-6 col-md-6">
@@ -95,7 +94,6 @@
     <div class="row">
 
 
-
       <div *ngIf="isVisible_list" class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
         <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
@@ -144,7 +142,7 @@
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a (click)=logout() routerLink="/login"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
@@ -160,26 +158,27 @@
           <div class="d-inline-flex col-12">
             <h3 class="col-11">Szczepienia</h3>
             <button [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
-              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
-              ngbTooltip="Ustawienia">
+                    class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
+                    ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
           <hr>
-          <table [style.visibility]="(vaccinations_counter == 0) ? 'hidden' : 'visible' " class=" table mb-0 table-center">
+          <table [style.visibility]="(vaccinations_counter == 0) ? 'hidden' : 'visible' "
+                 class=" table mb-0 table-center">
             <thead>
-              <tr>
-                <th scope="col" class="border-bottom" style="width:10%;">#</th>
-                <th scope="col" class="border-bottom" style="width:25%;">Nazwa szczepienia</th>
-                <th scope="col" class="border-bottom" style="width:50%;">Data szczepienia</th>
-              </tr>
+            <tr>
+              <th scope="col" class="border-bottom" style="width:10%;">#</th>
+              <th scope="col" class="border-bottom" style="width:25%;">Nazwa szczepienia</th>
+              <th scope="col" class="border-bottom" style="width:50%;">Data szczepienia</th>
+            </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let vaccine of vaccinationsList; let indexOfElement=index;">
-                <td>{{indexOfElement+1}}</td>
-                <td>{{vaccine.name}}</td>
-                <td>{{vaccine.date}}</td>
-              </tr>
+            <tr *ngFor="let vaccine of vaccinationsList; let indexOfElement=index;">
+              <td>{{indexOfElement + 1}}</td>
+              <td>{{vaccine.name}}</td>
+              <td>{{vaccine.date}}</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -199,7 +198,7 @@
                         <div class="form-icon position-relative">
                           <i-feather name="edit-2" class="fea icon-sm icons d-flex"></i-feather>
                           <input type="text" name="name" class="form-control ps-5 pt-2" placeholder="Nazwa szczepienia"
-                            ngModel required minlength="3">
+                                 ngModel required minlength="3">
                         </div>
                       </div>
                     </div>
@@ -209,9 +208,9 @@
                         <div class="form-icon position-relative">
                           <i-feather name="calendar" class="fea icon-sm icons d-flex"></i-feather>
                           <input readonly class="form-control ps-5 pt-2" placeholder="yyyy-mm-dd" name="dp"
-                            [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                            [maxDate]="{year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()}"
-                            (click)="d.toggle()">
+                                 [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                                 [maxDate]="{year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()}"
+                                 (click)="d.toggle()">
                         </div>
                       </div>
                     </div>
@@ -219,7 +218,8 @@
                       <p class="text-secondary para-desc mb-0 mx-auto">Możesz dodać maksymalnie 10 szczepień</p>
                       <div class="col-5 justify-content-center w-100">
                         <button type="submit" name="push" class="btn btn-success"
-                          [disabled]="!fv.valid || vaccinations_counter>9">Dodaj</button>
+                                [disabled]="!fv.valid || vaccinations_counter>9">Dodaj
+                        </button>
                       </div>
                     </div>
                     <!--end col-->
@@ -229,20 +229,20 @@
                         <div></div>
                         <table class="table mb-0 table-center">
                           <thead>
-                            <tr>
-                              <th scope="col" class="border-bottom">#</th>
-                              <th scope="col" class="border-bottom">Nazwa szczepienia</th>
-                              <th scope="col" class="border-bottom">Data wykonania</th>
-                            </tr>
+                          <tr>
+                            <th scope="col" class="border-bottom">#</th>
+                            <th scope="col" class="border-bottom">Nazwa szczepienia</th>
+                            <th scope="col" class="border-bottom">Data wykonania</th>
+                          </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let vaccinations of vaccinations_tmp ; let indexOfElement=index;">
-                              <td>{{indexOfElement+1}}</td>
-                              <td>{{vaccinations.name}}</td>
-                              <td>{{vaccinations.date}}</td>
-                              <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
-                                  (click)="delete_vaccinations(indexOfElement,vaccinations.id)"></td>
-                            </tr>
+                          <tr *ngFor="let vaccinations of vaccinations_tmp ; let indexOfElement=index;">
+                            <td>{{indexOfElement + 1}}</td>
+                            <td>{{vaccinations.name}}</td>
+                            <td>{{vaccinations.date}}</td>
+                            <td><input class="btn btn-danger btn-sm align-items-center" type="button" value="X"
+                                       (click)="delete_vaccinations(indexOfElement,vaccinations.id)"></td>
+                          </tr>
                           </tbody>
                         </table>
                       </div>
@@ -252,13 +252,15 @@
                     <div class="col mb-0">
                       <div class="d-grid">
                         <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'"
-                          class="btn btn-secondary" (click)="back_to_start(); clean_form(fv)">Pomiń</button>
+                                class="btn btn-secondary" (click)="back_to_start(); clean_form(fv)">Pomiń
+                        </button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
                         <button [ngxScrollTo]="'#vaccinations_tab'" [ngxScrollToDuration]="'0'" class="btn btn-primary"
-                          (click)="back_to_start_complete_5(); clean_form(fv)">Gotowe</button>
+                                (click)="back_to_start_complete_5(); clean_form(fv)">Gotowe
+                        </button>
                       </div>
                     </div>
                     <!--end col-->

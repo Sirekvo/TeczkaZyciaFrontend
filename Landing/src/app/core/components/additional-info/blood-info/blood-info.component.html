@@ -2,26 +2,25 @@
 <div *ngIf="mobile" class="back-to-home rounded">
   <div class="btn-group dropdown-primary" ngbDropdown>
     <button type="button" class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
-      aria-haspopup="true" aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
       <i-feather name="menu" className="fea icon-sm"></i-feather>
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
       <a class="dropdown-item" routerLink="/blood" style="background: #337ab7; color: white">Wyniki krwi</a>
-      <a class="dropdown-item bg-soft-secondary" >Pełna teczka badań</a>
-      <a class="dropdown-item bg-soft-secondary" >Kalendarz wizyt</a>
+      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
+      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" routerLink="/settings" >Ustawienia</a>
+      <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item" (click)=logout() routerLink="/login"><b>Wyloguj się</b></a>
     </div>
   </div>
 </div>
 
 
-
-<section class="bg-profile d-table w-100 bg-primary" 
-  style="background: url('assets/images/main/bg.png') center center;" id="home">
+<section class="bg-profile d-table w-100 bg-primary"
+         style="background: url('assets/images/main/bg.png') center center;" id="home">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -30,7 +29,7 @@
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 text-md-start text-center">
                 <img src="assets/images/main/avatar.png"
-                  class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
+                     class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
               </div>
               <!--end col-->
               <div class="col-lg-6 col-md-6">
@@ -141,7 +140,7 @@
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a (click)=logout() routerLink="/login"
-                  class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
@@ -168,8 +167,8 @@
               </div>
             </h3>
             <button [ngxScrollTo]="'#blood-type'" [ngxScrollToDuration]="'0'"
-              class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_bloodType_settings()"
-              ngbTooltip="Ustawienia">
+                    class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_bloodType_settings()"
+                    ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
             </button>
           </div>
@@ -188,10 +187,13 @@
                       <div class="mb-3 mt-4">
                         <label class="form-label">Grupa krwi<span class="text-danger">*</span></label>
                         <div class="position-relative">
-                          <select [(ngModel)]="selectedGroupModule" name="bloodGroupSelect" class="form-select form-control-lg pt-2" (change)="selectOptionGroupHandler($event)" required>
-                            <option *ngFor="let interval of blood_group" [selected]="interval == selectedGroupModule" 
-                            [disabled]="interval == blood_group[0]" [hidden]="interval == blood_group[0]" [value]="interval" >
-                            {{interval}}</option>
+                          <select [(ngModel)]="selectedGroupModule" name="bloodGroupSelect"
+                                  class="form-select form-control-lg pt-2" (change)="selectOptionGroupHandler($event)"
+                                  required>
+                            <option *ngFor="let interval of blood_group" [selected]="interval == selectedGroupModule"
+                                    [disabled]="interval == blood_group[0]" [hidden]="interval == blood_group[0]"
+                                    [value]="interval">
+                              {{interval}}</option>
                           </select>
                         </div>
                       </div>
@@ -200,10 +202,13 @@
                       <div class="mb-3 mt-4">
                         <label class="form-label">Typ RH<span class="text-danger">*</span></label>
                         <div class="position-relative">
-                          <select [(ngModel)]="selectedFactorModule" name="bloodFactorSelect" class="form-select form-control-lg pt-2" (change)="selectOptionFactorHandler($event)" required>
-                            <option *ngFor="let interval of blood_factor" [selected]="interval == selectedFactorModule" 
-                            [disabled]="interval == blood_factor[0]" [hidden]="interval == blood_factor[0]" [value]="interval">
-                            {{interval}}</option>
+                          <select [(ngModel)]="selectedFactorModule" name="bloodFactorSelect"
+                                  class="form-select form-control-lg pt-2" (change)="selectOptionFactorHandler($event)"
+                                  required>
+                            <option *ngFor="let interval of blood_factor" [selected]="interval == selectedFactorModule"
+                                    [disabled]="interval == blood_factor[0]" [hidden]="interval == blood_factor[0]"
+                                    [value]="interval">
+                              {{interval}}</option>
                           </select>
                         </div>
                       </div>
@@ -211,21 +216,26 @@
                     <div class="col-lg-4 mb-3 mt-5">
                       <div class="d-grid">
                         <label class="form-label"></label>
-                        <button  name="push" class="btn btn-danger pt-2" (click)="delete_bloodType(0,this.bloodTypeList[0].id)"
-                        [disabled]="!fb.valid || bloodType_counter<1">Usuń grupę krwi</button>
+                        <button name="push" class="btn btn-danger pt-2"
+                                (click)="delete_bloodType(0,this.bloodTypeList[0].id)"
+                                [disabled]="!fb.valid || bloodType_counter<1">Usuń grupę krwi
+                        </button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
                         <button [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
-                          class="btn btn-secondary" (click)="back_to_start()">Anuluj</button>
+                                class="btn btn-secondary" (click)="back_to_start()">Anuluj
+                        </button>
                       </div>
                     </div>
                     <div class="col mb-0">
                       <div class="d-grid">
-                        <button type="submit" name="push" class="btn btn-success" 
-                        [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
-                          [disabled]="!fb.valid || bloodType_counter>2 || selectedFactorModule==blood_factor[0] || selectedGroupModule == blood_group[0]">Zapisz</button>
+                        <button type="submit" name="push" class="btn btn-success"
+                                [ngxScrollTo]="'#blood-type-tab'" [ngxScrollToDuration]="'0'"
+                                [disabled]="!fb.valid || bloodType_counter>2 || selectedFactorModule==blood_factor[0] || selectedGroupModule == blood_group[0]">
+                          Zapisz
+                        </button>
                       </div>
                     </div>
                     <!--end col-->

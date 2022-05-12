@@ -37,18 +37,19 @@ export class AccountService {
 
     setChronicDiseases(list: Array<DiseasesOutput>): Observable<any> {
 
-        return this.httpClient.post(environment.apiUrl  + '/information/chronicDiseases', list);
+        return this.httpClient.post(environment.apiUrl + '/information/chronicDiseases', list);
     }
 
-    getAllergies(code: string): Observable<Array<AllergiesInput>>{
+    getAllergies(code: string): Observable<Array<AllergiesInput>> {
         return this.httpClient.get<Array<AllergiesInput>>(environment.apiUrl + '/information/allergic/' + code);
     }
 
     setAllergies(list: Array<AllergiesOutput>): Observable<any> {
 
-        return this.httpClient.post(environment.apiUrl  + '/information/allergic', list);
+        return this.httpClient.post(environment.apiUrl + '/information/allergic', list);
     }
-    getContacts(code: string): Observable<Array<ContactsInput>>{
+
+    getContacts(code: string): Observable<Array<ContactsInput>> {
         return this.httpClient.get<Array<ContactsInput>>(environment.apiUrl + '/information/contactPerson/' + code);
     }
 
@@ -56,22 +57,26 @@ export class AccountService {
         return this.httpClient.post(environment.apiUrl + '/information/contactPerson', list);
     }
 
-    getMedications(code: string): Observable<Array<MedicationsInput>>{
+    getMedications(code: string): Observable<Array<MedicationsInput>> {
         return this.httpClient.get<Array<MedicationsInput>>(environment.apiUrl + '/information/medications/' + code);
     }
 
     setMedications(list: Array<MedicationsOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/information/medications', list);
     }
-    getVaccinations(code: string): Observable<Array<VaccinationsInput>>{
-        return this.httpClient.get<Array<VaccinationsInput>>(environment.apiUrl+ '/additional/vaccinations');
+
+    getVaccinations(code: string): Observable<Array<VaccinationsInput>> {
+        return this.httpClient.get<Array<VaccinationsInput>>(environment.apiUrl + '/additional/vaccinations');
     }
+
     setVaccinations(list: Array<VaccinationsOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/additional/vaccinations', list);
     }
-    getBloodType(): Observable<Array<BloodTypeInput>>{
+
+    getBloodType(): Observable<Array<BloodTypeInput>> {
         return this.httpClient.get<Array<BloodTypeInput>>(environment.apiUrl + '/additional/blood-type');
     }
+
     setBloodType(list: Array<BloodTypeOutput>): Observable<any> {
         return this.httpClient.post(environment.apiUrl + '/additional/blood-type', list);
     }
@@ -79,27 +84,33 @@ export class AccountService {
     deleteContacts(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/contactPerson/' + id);
     }
+
     deleteAllergies(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/allergic/' + id);
     }
+
     deleteMedications(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/medications/' + id);
     }
+
     deleteChronicDiseases(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/information/chronicDiseases/' + id);
     }
+
     deleteVaccinations(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/additional/vaccinations/' + id);
     }
+
     deleteBloodType(id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/additional/blood-type/' + id);
     }
+
     setFirstLogin(): Observable<any> {
 
-        return this.httpClient.put(environment.apiUrl  + '/account/first-login',null);
+        return this.httpClient.put(environment.apiUrl + '/account/first-login', null);
     }
 
-    getCardBase64(): Observable<any>{
+    getCardBase64(): Observable<any> {
         return this.httpClient.get(environment.apiUrl + '/account/card');
     }
 

@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         req = req.clone({
             headers: req.headers
-                .set('authorization','Bearer ' + this.userService.getToken())
+                .set('authorization', 'Bearer ' + this.userService.getToken())
         });
         return next.handle(req);
     }

@@ -1,18 +1,18 @@
-import { ViewportScroller } from "@angular/common";
-import { Component, OnInit } from '@angular/core';
+import {ViewportScroller} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
 import {
     AccountOutput,
     BloodTypeInput,
     BloodTypeOutput,
 } from "../../../../shared/models/account.model";
-import { AccountService } from "../../../../shared/services/account.service";
-import { UserService } from "../../../../shared/services/user.service";
-import { Router } from "@angular/router";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {AccountService} from "../../../../shared/services/account.service";
+import {UserService} from "../../../../shared/services/user.service";
+import {Router} from "@angular/router";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {environment} from '../../../../../environments/environment';
 
-import { ClipboardService } from "ngx-clipboard";
+import {ClipboardService} from "ngx-clipboard";
 import {DomSanitizer} from "@angular/platform-browser";
 
 
@@ -48,7 +48,7 @@ export class BloodInfoComponent implements OnInit {
     addBloodType: Array<BloodTypeOutput> = [];
 
     blood_group: Array<string> = ['Podaj grupę krwi', '0', 'A', 'B', 'AB'];
-    blood_factor: Array<string> = ['Podaj RH krwi', 'RH+','RH-'];
+    blood_factor: Array<string> = ['Podaj RH krwi', 'RH+', 'RH-'];
     blood_group_select = this.blood_group[0];
     blood_factor_select = this.blood_factor[0];
 
@@ -74,12 +74,12 @@ export class BloodInfoComponent implements OnInit {
     cardImg_copy: any;
 
     constructor(private accountService: AccountService,
-        private userService: UserService,
-        private router: Router,
-        private scroller: ViewportScroller,
-        private modalService: NgbModal,
-        private clipboardApi: ClipboardService,
-        private sanitizer: DomSanitizer) {
+                private userService: UserService,
+                private router: Router,
+                private scroller: ViewportScroller,
+                private modalService: NgbModal,
+                private clipboardApi: ClipboardService,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -126,14 +126,13 @@ export class BloodInfoComponent implements OnInit {
         this.isVisible_bloodType = true;
         this.isVisible = false;
         this.bloodType_tmp = this.bloodTypeList.slice();
-        if(this.bloodTypeList.length==1){
+        if (this.bloodTypeList.length == 1) {
             this.selectedGroupModule = null;
             this.selectedFactorModule = null;
             this.selectedGroupModule = this.bloodTypeList[0].type;
             this.selectedFactorModule = this.bloodTypeList[0].factor;
             this.bloodID = this.bloodTypeList[0].id;
-        }
-        else{
+        } else {
             this.selectedGroupModule = this.blood_group[0];
             this.selectedFactorModule = this.blood_factor[0];
         }
@@ -189,20 +188,21 @@ export class BloodInfoComponent implements OnInit {
             this.bloodType_tmp.push(bloodType);
             this.addBloodType.push(bloodType2);
             this.bloodType_counter++;
-            this.delete_bloodType(0,this.bloodID);
+            this.delete_bloodType(0, this.bloodID);
             form.reset();
             this.back_to_start_complete();
         }
     }
 
     selectOptionGroupHandler(event: any) {
-            this.isVisible_others = false;
-            this.blood_group_select = event.target.value;
+        this.isVisible_others = false;
+        this.blood_group_select = event.target.value;
     }
+
     selectOptionFactorHandler(event: any) {
         this.isVisible_others = false;
         this.blood_factor_select = event.target.value;
-}
+    }
 
     delete_bloodType(rowNumber, id) {
         if (id != 0) {
@@ -216,11 +216,11 @@ export class BloodInfoComponent implements OnInit {
         this.back_to_start_complete();
     }
 
-    copyCode(){
+    copyCode() {
         this.clipboardApi.copyFromContent(this.code);
     }
 
-    getCard() : void {
+    getCard(): void {
         this.accountService.getCardBase64().subscribe(
             (val) => {
                 this.objectURL = 'data:image/jpg;base64,' + val.img;
