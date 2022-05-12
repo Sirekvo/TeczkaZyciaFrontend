@@ -42,10 +42,14 @@ input[type=number] {
   /* Style the front side (fallback if image is missing) */
   .flip-card-front {
     color: black;
-  }
-  
-  /* Style the back side */
-  .flip-card-back {
+}
+
+/* Style the back side */
+.flip-card-back {
     color: white;
     transform: rotateY(180deg);
-  }
+}
+
+.card {
+    cursor: zoom-in;
+}

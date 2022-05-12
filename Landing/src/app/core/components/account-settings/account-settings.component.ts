@@ -94,6 +94,7 @@ export class AccountSettingsComponent implements OnInit {
     changeDataForm: FormGroup;
     changePESELForm: FormGroup;
 
+    objectURL: string
     cardImg: any;
     cardImg_copy: any;
 
@@ -291,8 +292,14 @@ export class AccountSettingsComponent implements OnInit {
         });
     }
 
-    deleteUser(){
-        console.log("Funkcja do usuwania usera");
+    deleteUser() {
+        this.userService.deleteUser().subscribe(
+            (data: any) => {
+                this.logout();
+                this.router.navigate(['/login']);
+            },
+            response => {
+            });
     }
     copyCode(){
         this.clipboardApi.copyFromContent(this.code);
@@ -300,13 +307,37 @@ export class AccountSettingsComponent implements OnInit {
     getCard() : void {
         this.accountService.getCardBase64().subscribe(
             (val) => {
-                let objectURL = 'data:image/jpg;base64,' + val.img;
-                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                this.objectURL = 'data:image/jpg;base64,' + val.img;
+                this.cardImg = this.sanitizer.bypassSecurityTrustUrl(this.objectURL);
                 this.cardImg_copy = this.cardImg;
             },
             response => {
             });
     }
+
+    printCard() {
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
+        img.onload = function () {
+            win.print();
+        };
+    }
+
+    zoomCard() {
+        var win = window.open("");
+        var img = win.document.createElement("img");
+        var img_2 = win.document.createElement("img");
+        img.src = this.objectURL;
+        img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
+        win.document.body.appendChild(img);
+        win.document.body.appendChild(img_2);
+    }
+
     logout() {
         this.userService.removeLocalUser();
     }

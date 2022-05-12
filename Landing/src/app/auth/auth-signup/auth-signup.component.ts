@@ -38,11 +38,10 @@ export class AuthSignupComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             firstName: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
-            pesel: new FormControl('', Validators.pattern("^[0-9]{11}$")), // 11 letters
+            pesel: new FormControl('', [Validators.pattern("^[0-9]{11}$")]), // 11 letters
             email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]), // has @abc.abc
             password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$")]), // min 8 chracters and max 16 with min 1 capital letter, 1 digit and 1 special character
-            confirmPassword: new FormControl('', [Validators.required]),
-            rules: new FormControl(false,[Validators.requiredTrue]),
+            confirmPassword: new FormControl('', [Validators.required])
         }, {
             validator: MustMatch('password', 'confirmPassword')
         });
