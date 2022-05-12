@@ -56,6 +56,6 @@ input[type=number] {
     transform: rotateY(180deg);
 }
 
-.card {
+.card-zoom {
     cursor: zoom-in;
 }
