@@ -1,5 +1,5 @@
 import {ViewportScroller} from "@angular/common";
-import {Component, OnInit} from '@angular/core';
+import {Component, Type, OnInit} from '@angular/core';
 import {
     AccountOutput,
     AllergiesOutput,
@@ -19,7 +19,34 @@ import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {ClipboardService} from "ngx-clipboard";
 import {NgForm, Validators} from '@angular/forms';
 import {DomSanitizer} from "@angular/platform-browser";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal,ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Zakup Karty</h4>
+      </div>
+      <div class="modal-body">
+        <p>Aby zamówić swoją kartę wyślij do nas mail na adres</p><p style="text-align: center;"><span class="text-primary">10.teczka.zycia@gmail.com</span></p>
+        <p>W tytule wiadmości napisz <i>Zakup karty - [kod]</i>, gdzie w wyznaczone miejsce wpisz swój indywidualny kod.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('confirm click')">Ok</button>
+      </div>
+    `
+})
+
+export class NgbdModalContent {
+    constructor(public modal: NgbActiveModal){
+    }
+}
+
+const MODALS: { [name: string]: Type<any> } = {
+    cardFirst: NgbdModalContent,
+    // autofocus: NgbdModalConfirmAutofocus
+};
 
 @Component({
     selector: 'app-account-profile',
@@ -104,6 +131,7 @@ export class AccountProfileComponent implements OnInit {
                 private scroller: ViewportScroller,
                 private clipboardApi: ClipboardService,
                 private formBuilder: FormBuilder,
+                private modalService: NgbModal,
                 private sanitizer: DomSanitizer) {
     }
 
@@ -169,6 +197,7 @@ export class AccountProfileComponent implements OnInit {
             () => {
             }
         );
+        // console.log(this.medicationsList.length);
     }
 
     get fphone() {
@@ -200,8 +229,8 @@ export class AccountProfileComponent implements OnInit {
         this.allergies_counter_tmp = this.allergies_counter;
         this.illness_counter_tmp = this.illness_counter;
 
-        console.log(this.medications_counter);
-        console.log(this.medications_counter_tmp);
+        // console.log(this.medications_counter);
+        // console.log(this.medications_counter_tmp);
     }
 
     show_contact_settings() {
@@ -242,6 +271,7 @@ export class AccountProfileComponent implements OnInit {
         this.addAllergies.splice(0, this.addAllergies.length);
         this.addMedications.splice(0, this.addMedications.length);
         this.addIllness.splice(0, this.addIllness.length);
+        // this.medicationsList.length
 
         this.submitted = false;
 
@@ -392,7 +422,7 @@ export class AccountProfileComponent implements OnInit {
                 const contact = new ContactsInput();
                 const contact2 = new ContactsOutput();
                 contact.id = 0;
-                console.log("imie " + form.value.optionalName);
+                // console.log("imie " + form.value.optionalName);
                 contact.contactPersonRole = form.value.type;
                 contact.phoneNumber = form.value.phone;
                 contact.appUserID = 0;
@@ -524,7 +554,7 @@ export class AccountProfileComponent implements OnInit {
             this.isOrganDonor = false;
             this.changeOrganDonor();
         }
-        console.log("Wartosc isOrganDonor " + this.isOrganDonor);
+        // console.log("Wartosc isOrganDonor " + this.isOrganDonor);
     }
 
     changeOrganDonor() {
@@ -537,13 +567,26 @@ export class AccountProfileComponent implements OnInit {
         );
     }
 
+    open(name: string) {
+        this.modalService.open(MODALS[name]).result.then((result) => {
+            if (result == 'Ok click') {
+            }
+        }, (reason) => {
+            if (reason === ModalDismissReasons.ESC ||
+                reason === ModalDismissReasons.BACKDROP_CLICK ||
+                reason == 'cancel click' ||
+                reason == 'Cross click' ||
+                reason == 'confirm click') {
+            }
+        });
+    }
+
     getCard(): void {
         this.accountService.getCardBase64().subscribe(
             (val) => {
                 this.objectURL = 'data:image/jpg;base64,' + val.img;
                 this.cardImg = this.sanitizer.bypassSecurityTrustUrl(this.objectURL);
                 this.cardImg_copy = this.cardImg;
-                console.log(this.cardImg);
             },
             response => {
             });
@@ -555,11 +598,14 @@ export class AccountProfileComponent implements OnInit {
         var img = win.document.createElement("img");
         var img_2 = win.document.createElement("img");
         img.src = this.objectURL;
+        img.setAttribute("width",'50%');
+        img_2.setAttribute("width",'50%');
         img_2.src = environment.imgUrl + "/assets/images/card_back.jpg";
         win.document.body.appendChild(img);
         win.document.body.appendChild(img_2);
         img.onload = function () {
             win.print();
+            win.onafterprint=function(){ win.close();}
         };
     }
 

@@ -8,7 +8,7 @@
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/vaccinations">Szczepienia</a>
-      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
+      <a class="dropdown-item" routerLink="/blood">Grupa Krwi</a>
       <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
       <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
@@ -63,7 +63,7 @@
               </div>
               <div class="col-lg-1 col-md-2 mt-2 d-flex align-content-center flex-wrap justify-content-center">
                 <div>
-                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę">
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę" (click)="open('cardFirst')">
                     <i class="uil uil-shopping-cart"></i>
                   </button>
                 </div>
@@ -114,8 +114,8 @@
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-file"></i></span>
-                  <h6 class="mb-0 ms-2">Wyniki krwi</h6>
+                  <span class="h4 mb-0"><i class="uil uil-tear"></i></span>
+                  <h6 class="mb-0 ms-2">Grupa Krwi</h6>
                 </a>
               </li>
 
@@ -157,7 +157,17 @@
         <div *ngIf="isVisible" class="pb-4">
           <div class="d-inline-flex col-12">
             <h3 class="col-11">Szczepienia</h3>
-            <button [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
+            <!-- <button [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
+                    class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
+                    ngbTooltip="Ustawienia">
+              <i class="uil uil-setting"></i>
+            </button> -->
+            <button *ngIf="vaccinations_counter == 0" [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
+                    class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
+                    ngbTooltip="Dodaj">
+              <i class="uil uil-plus"></i>
+            </button>
+            <button *ngIf="vaccinations_counter != 0" [ngxScrollTo]="'#vaccinations'" [ngxScrollToDuration]="'0'"
                     class="h3 text-primary bg-white border-0 p-0 m-0" (click)="show_vaccinations_settings()"
                     ngbTooltip="Ustawienia">
               <i class="uil uil-setting"></i>
