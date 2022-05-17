@@ -12,15 +12,13 @@
     <div class="row mt-5 align-items-center">
       <div class="col-lg-6 col-md-6">
         <div class="title-heading">
-          <h4 class="heading my-3">Twoje dane <span class="text-primary">medyczne</span> w jednym miejscu</h4>
-          <p class="para-desc text-secondary mb-0">Trzymaj swoją dokumentację medyczną i wyniki badań w jednym miejscu.
-            Teczka Życia przechowuje i porządkuje Twoje dane medyczne, dzięki czemu masz do nich łatwy dostęp w każdej
-            chwili.</p>
-          <p class="text-secondary mb-0 mt-3">Nie posiadasz jeszcze konta?<a routerLink="/registration"
-                                                                             class="text-primary ms-2 h6 mb-0">Zarejestruj
-            się
-            <i-feather name="arrow-right" class="fea icon-sm">
-            </i-feather>
+          <h4 class="heading my-3">Zostań swoim <span class="text-primary">Bohaterem!</span></h4>
+          <p class="para-desc text-secondary mb-0">Trzymaj swoje podstawowe dane medyczne w jednym miejscu.
+            Teczka Życia przechowuje je, a dzięki zastosowaniu indywidualnego kodu konta Ty, ratownik medyczny bądź lekarz zyskujecie do nich łatwy i szybki dostęp.</p>
+          <p class="text-secondary mb-0 mt-3">Nie posiadasz jeszcze konta?
+            <a routerLink="/registration"class="text-primary ms-2 h6 mb-0">Zarejestruj się
+              <i-feather name="arrow-right" class="fea icon-sm">
+              </i-feather>
           </a></p>
         </div>
       </div>
@@ -87,18 +85,15 @@
         <div class="section-title ms-lg-5">
           <!--                    <span class="badge rounded-pill bg-soft-primary">O aplikacji</span>-->
           <h4 class="title mt-3 mb-4">O Teczce Życia</h4>
-          <p class="text-secondary para-desc">Teczka Życia to nowa aplikacja, której celem jest przechowywanie danych
-            medycznych dostarczonych przez użytkowników.
-            Aplikacja została zaprojektowana tak, aby umożliwić pacjentom łatwe i bezpieczne przechowywanie ich
-            dokumentacji medycznej.</p>
+          <p class="text-secondary para-desc">Teczka Życia to nowa aplikacja, której celem jest zapewnienie szybkiego i pewnego dostępu do podstawowych informacji zdrowotnych.
+            Aplikacja została zaprojektowana tak, aby umożliwić ratownikom medycznym lub lekarzom szybki dostęp do podstawowych danych, dzięki czemu mogą oni sprawniej zapewnić Ci odpowiednią pomoc .</p>
 
           <p class="text-secondary para-desc">Użytkownicy mogą wprowadzać informacje, takie jak przyjmowane leki,
-            alergie, przebyte procedury medyczne lub kontakty w nagłych wypadkach.</p>
+            alergie, choroby przewlekłe, grupa krwi, szczepienia lub kontakty w nagłych wypadkach.</p>
 
-          <p class="text-secondary para-desc mb-0">Aplikacja Teczka Życia oferuje bezpieczną alternatywę do zapisywania
-            tych danych, do których można uzyskać dostęp z dowolnego miejsca w Internecie.
-            Dostęp do tego folderu możesz uzyskać Ty lub Twój lekarz za pośrednictwem bezpiecznego loginu chronionego
-            hasłem.</p>
+          <p class="text-secondary para-desc mb-0">Dzięki zastosowaniu indywidualnego kodu dla każdego konta użytkownika w szybki sposób za pomocą wygenerowanego kodu QR lub za pomocą wyszukiwarki ratownik lub lekarz uzyska dostęp do
+            podstawowych informacji podanych w sekcji <i>Profil</i>.
+          </p>
         </div>
       </div>
       <!--end col-->
@@ -112,7 +107,7 @@
     <div class="row align-items-end ">
       <div class="col-md-8">
         <div class="section-title text-center text-md-start">
-          <h4 class="title">Jakie dane możesz tu przechować?</h4>
+          <h4 class="title">Funkcjonalności <span class="text-primary">Teczki Życia</span></h4>
         </div>
       </div>
       <!--end col-->
@@ -122,7 +117,66 @@
       <div class="d-flex">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active"
             class="nav nav-pills flex-column bg-white rounded shadow p-3 mb-0 col-md-4" orientation="vertical">
-          <li ngbNavItem="top" class="nav-item">
+            <li ngbNavItem="card" class="nav-item">
+              <a ngbNavLink>
+                <div class="text-start py-1 px-2">
+                  <h6 class="mb-0">Personalizowana Karta</h6>
+                </div>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="alergie"
+                     role="tabpanel" aria-labelledby="dentalcare">
+                  <img src="assets/images/card_show.png" class="img-fluid rounded shadow" alt="">
+                  <div class="mt-4">
+                    <h5>Personalizowana Karta</h5>
+                    <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> masz możliwość zamówienia 
+                      specjalnej, personalizowanej karty. Zawiera ona Twoje imie i nazwisko, kod twojego konta oraz numer PESEL, jeśli zdecydujesz się go podać. 
+                      Na karcie znajduje się także kod QR, prowadzący do publicznej wersji twojego profilu. Dzięki temu
+                      w nagłym wypadku lekarz bądź ratownik będzie mógł sprawdzić najważniejsze informacje dotyczące Twojego zdrowia.<br>
+                    </p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="contacts" class="nav-item mt-2">
+              <a ngbNavLink>
+                <div class="text-start py-1 px-2">
+                  <h6 class="mb-0">Kontakt z rodziną</h6>
+                </div>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="kontakt"
+                     role="tabpanel" aria-labelledby="dentalcare">
+                  <img src="assets/images/medical/general.jpg" class="img-fluid rounded shadow" alt="">
+                  <div class="mt-4">
+                    <h5>Kontakt z rodziną</h5>
+                    <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> możesz przechowywać
+                      dane kontaktowe do swoich bliskich, dzięki czemu w sytuacji kryzysowej lekarz, bądź ratownik będzie
+                      w stanie poinformować ich o Twoim stanie.<br> Informacja o kontakcie składa się z numeru telefonu oraz opcjonalnie imienia danej osoby. 
+                      Należy także podać czy jest to osoba z Twojej rodziny, czy może jest to Twój znajomy.
+                      </p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="organDonor" class="nav-item mt-2">
+              <a ngbNavLink>
+                <div class="text-start py-1 px-2">
+                  <h6 class="mb-0">Status Dawcy Organów</h6>
+                </div>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="wyniki"
+                     role="tabpanel" aria-labelledby="dentalcare">
+                  <img src="assets/images/medical/orthopedic.jpg" class="img-fluid rounded shadow" alt="">
+                  <div class="mt-4">
+                    <h5>Status dawcy organów</h5>
+                    <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> możesz zaznaczyć czy zgadzasz się na pobór organów i tkanek po twojej śmierci.<br>Domyślnie ustawiana jest zgoda na pobranie organów.</p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="allergy" class="nav-item">
             <a ngbNavLink>
               <div class="text-start py-1 px-2">
                 <h6 class="mb-0">Alergie</h6>
@@ -131,21 +185,19 @@
             <ng-template ngbNavContent>
               <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="alergie"
                    role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/dental.jpg" class="img-fluid rounded shadow" alt="">
+                <img src="assets/images/medical/allergy.jpg" class="img-fluid rounded shadow" alt="">
                 <div class="mt-4">
                   <h5>Alergie</h5>
                   <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> możesz przechowywać
                     informacje dotyczące Twoich alergii. Dzięki temu
                     w nagłym wypadku lekarz będzie mógł sprawdzić na co jesteś uczulony/a, dzięki czemu będzie mógł
-                    lepiej rozeznać się w Twoim stanie zdrowia oraz dobrać odpowiednie leki.<br>
-                    Pozwala to również na sprawdzenie wszystkich naszych uczuleń, co pozwala na wymienienie wszystkich
-                    alergii, nawet jeżeli o jakiejś zapomnimy.
+                    lepiej rozeznać się w Twoim stanie zdrowia oraz dobrać odpowiednie leki.
                   </p>
                 </div>
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="middle" class="nav-item mt-2">
+          <li ngbNavItem="medications" class="nav-item mt-2">
             <a ngbNavLink>
               <div class="text-start py-1 px-2">
                 <h6 class="mb-0">Przyjmowane leki</h6>
@@ -154,7 +206,7 @@
             <ng-template ngbNavContent>
               <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="leki"
                    role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/cardio.jpg" class="img-fluid rounded shadow" alt="">
+                <img src="assets/images/medical/medicine.jpg" class="img-fluid rounded shadow" alt="">
                 <div class="mt-4">
                   <h5>Przyjmowane leki</h5>
                   <p class="text-secondary my-3">Przechując informacje o przyjmowanych lekach w <span
@@ -167,7 +219,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="bottom" class="nav-item mt-2">
+          <li ngbNavItem="illness" class="nav-item mt-2">
             <a ngbNavLink>
               <div class="text-start py-1 px-2">
                 <h6 class="mb-0">Choroby przewlekłe</h6>
@@ -176,7 +228,7 @@
             <ng-template ngbNavContent>
               <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="choroby"
                    role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/eyecare.jpg" class="img-fluid rounded shadow" alt="">
+                <img src="assets/images/medical/cardio.jpg" class="img-fluid rounded shadow" alt="">
                 <div class="mt-4">
                   <h5>Choroby przewlekłe</h5>
                   <p class="text-secondary my-3">Osoby cierpiące z powodu chorób przewlekłych niestety zmuszone są do
@@ -188,28 +240,25 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="general" class="nav-item mt-2">
+          <li ngbNavItem="blood_group" class="nav-item mt-2">
             <a ngbNavLink>
               <div class="text-start py-1 px-2">
-                <h6 class="mb-0">Kontakt z rodziną</h6>
+                <h6 class="mb-0">Grupa Krwi</h6>
               </div>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="kontakt"
+              <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="szczepienia"
                    role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/general.jpg" class="img-fluid rounded shadow" alt="">
+                <img src="assets/images/medical/blood_bag.jpg" class="img-fluid rounded shadow" alt="">
                 <div class="mt-4">
-                  <h5>Kontakt z rodziną</h5>
-                  <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> możesz przechowywać
-                    dane kontaktowe do swoich bliskich, dzięki czemu w sytuacji kryzysowej lekarz, bądź ratownik będzie
-                    w stanie poinformować Twoich bliskich o Twoim stanie.<br>
-                    W <span class="text-primary">Teczce Życia</span> można przechowywać także dane kontaktowe do lekarzy
-                    prowadzących, dzięki uzyskasz łatwy dostęp do wszystkich numerów Twoich specjalistów. </p>
+                  <h5>Grupa Krwi</h5>
+                  <p class="text-secondary my-3">Dzięki przechowywaniu w <span class="text-primary">Teczce Życia</span>
+                    informacji dotyczącej Twojej grupy krwi możesz wspomóc ratowników w niesieniu sobie pomocy w nagłych wypadkach.</p>
                 </div>
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="medicine" class="nav-item mt-2">
+          <li ngbNavItem="vaccines" class="nav-item mt-2">
             <a ngbNavLink>
               <div class="text-start py-1 px-2">
                 <h6 class="mb-0">Szczepienia</h6>
@@ -218,50 +267,12 @@
             <ng-template ngbNavContent>
               <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="szczepienia"
                    role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/medicine.jpg" class="img-fluid rounded shadow" alt="">
+                <img src="assets/images/medical/vaccination.jpg" class="img-fluid rounded shadow" alt="">
                 <div class="mt-4">
                   <h5>Szczepienia</h5>
                   <p class="text-secondary my-3">Dzięki przechowywaniu w <span class="text-primary">Teczce Życia</span>
                     informacji dotyczących Twoich szczepień będziesz mógł/mogła w łatwy sposób kontrolować swoje
                     szczepienia okresowe.</p>
-                </div>
-              </div>
-            </ng-template>
-          </li>
-          <li ngbNavItem="orthopadic" class="nav-item mt-2">
-            <a ngbNavLink>
-              <div class="text-start py-1 px-2">
-                <h6 class="mb-0">Wyniki badań</h6>
-              </div>
-            </a>
-            <ng-template ngbNavContent>
-              <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="wyniki"
-                   role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/orthopedic.jpg" class="img-fluid rounded shadow" alt="">
-                <div class="mt-4">
-                  <h5>Wyniki badań</h5>
-                  <p class="text-secondary my-3">Przechując w <span class="text-primary">Teczce Życia</span> swoje
-                    aktualne wyniki podstawowych badań zyskujesz do nich łatwy oraz szybki dostęp, bez potrzeby noszenia
-                    ze sobą wydrukowanego raportu.</p>
-                </div>
-              </div>
-            </ng-template>
-          </li>
-          <li ngbNavItem="wizyty" class="nav-item mt-2">
-            <a ngbNavLink>
-              <div class="text-start py-1 px-2">
-                <h6 class="mb-0">Wizyty u specjalistów</h6>
-              </div>
-            </a>
-            <ng-template ngbNavContent>
-              <div class="tab-pane fade bg-white show active p-4 rounded shadow" id="wizyty"
-                   role="tabpanel" aria-labelledby="dentalcare">
-                <img src="assets/images/medical/medicine.jpg" class="img-fluid rounded shadow" alt="">
-                <div class="mt-4">
-                  <h5>Wizyty u specjalistów</h5>
-                  <p class="text-secondary my-3">W <span class="text-primary">Teczce Życia</span> możesz przechowywać
-                    także daty swoich ostatnich wizyt u specjalistów. Dzięki temu w łatwy sposób możesz sprawdzić ile
-                    czasu minęło od ostatniej wizyty, oraz kiedy powinno umówić się na następną wizytę.</p>
                 </div>
               </div>
             </ng-template>
@@ -298,15 +309,15 @@
           <div class="flex-1">
             <h5 class="mt-0">Jak <span class="text-primary">Teczka Życia</span> działa?</h5>
             <p id="section_faq" class="answer text-secondary mb-0">Teczka Życia służy do ułatwienia użytkownikom
-              kontrolowania informacji o swoim zdrowiu. Korzystając z naszego produktu łatwiej przygotujesz się do
+              przekazywania informacji o swoim zdrowiu. Korzystając z naszego produktu łatwiej przygotujesz się do
               wizyty u lekarza, a także będziesz mieć
               natychmiastowy dostęp do przechowywanych w niej informacji także podczas samej wizyty.<br>Poprzez <span
                       class="text-primary">Teczkę Życia</span> możesz się także zabezpieczyć na wypadek sytuacji
               awaryjnej, kiedy nie będziesz w stanie osobiście przekazać informacji o swoim zdrowiu lekarzowi, bądź
               ratownikowi.
               Poprzez wykorzystanie Twojego unikalnego kodu, lub kodu QR, ratownik bądź lekarz może sprawdzić
-              udostępnione przez Ciebie, oraz wybrane do pokazania w Twojej <span
-                      class="text-primary">"Karcie Pacjenta"</span> informacje o Twoim zdrowiu.
+              wpisane przez Ciebie do sekcji <i>Profil</i> informacje w Twojej <span
+                      class="text-primary">"Karcie Pacjenta"</span>.
             </p>
           </div>
         </div>
@@ -321,12 +332,13 @@
             <p class="answer text-secondary mb-0">Dostęp do Twoich danych możliwy jest na dwa sposoby, w pełni
               kontrolowane przez Ciebie. Dane, które wprowadzasz do swojej <span
                       class="text-primary">Teczki Życia</span> dostępne są jedynie po zalogowaniu na Twoje konto.
-              Poprzez pełne szyfrowanie danych będą one w pełni bezpieczne.<br>
-              Aby stworzyć możliwość zobaczenia części Twoich danych po uzyskaniu dostępu konieczne jest stworzenie
-              <span class="text-primary">"Karty Pacjenta"</span>. Dostęp do niej można uzyskać poprzez wpisanie
-              unikalnego, anonimowego kodu w wyszukiwarkę pacjentów, otworzenie przesłanego linku lub zeskanowanie kodu
-              QR.
-              Poprzez udostępnienie swoich najważniejszych danych w <span class="text-primary">"Karcie Pacjenta"</span>
+              Poprzez zanonimizowanie danych będą one w pełni bezpieczne.<br>
+              Dane które są pokazywane w
+              <span class="text-primary">"Karcie Pacjenta"</span> znajdują się w sekcji <i>Profil</i> dostępnej po zalogowaniu na konto.
+              Dostęp do można informacji zawartych w <span class="text-primary">"Karcie Pacjenta"</span> można uzyskać poprzez wpisanie
+              unikalnego, anonimowego kodu w wyszukiwarkę pacjentów lub zeskanowanie kodu
+              QR.<br>
+              Poprzez podanie informacji o swoim zdrowiu  w <span class="text-primary">"Karcie Pacjenta"</span>
               lekarz lub ratownik medyczny będzie mieć do nich natychmiastowy dostęp, co może pomóc w ratowaniu Twojego
               zdrowia lub życia.
             </p>
@@ -340,10 +352,8 @@
           <i-feather name="help-circle" class="fea icon-ex-md text-primary me-2 mt-1"></i-feather>
           <div class="flex-1">
             <h5 class="mt-0"> Czy moje dane są bezpieczne?</h5>
-            <p class="answer text-secondary mb-0">Oczywiście, że tak! Twoje dane są w pełni szyfrowane, a dane dostępne
-              w <span class="text-primary">"Karcie pacjenta"</span> są wybierane przez Ciebie!
-              Dzięki temu dostęp do danych których nie chcesz w niej udostępniać będą w pełni bezpieczne, a dostęp do
-              nich zyzskasz po zalogowaniu na swoje konto.
+            <p class="answer text-secondary mb-0">Oczywiście, że tak! Twoje dane są w pełni zanonimizowanie a dane które dostępne
+              w <span class="text-primary">"Karcie pacjenta"</span> są podawane przez Ciebie!
             </p>
           </div>
         </div>

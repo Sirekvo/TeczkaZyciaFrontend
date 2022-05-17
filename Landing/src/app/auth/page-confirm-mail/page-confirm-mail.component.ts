@@ -30,7 +30,7 @@ export class PageConfirmMailComponent implements OnInit {
     resend() {
         this.userService.resendMail(this.email).subscribe(
             (response: any) => {
-                console.log('Wyslano');
+                // console.log('Wyslano');
             },
             () => {
             }

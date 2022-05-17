@@ -182,7 +182,7 @@ export class VaccinationsInfoComponent implements OnInit {
         if (this.addVaccinations.length != 0) {
             this.accountService.setVaccinations(this.addVaccinations).subscribe(
                 (response: any) => {
-                    console.log(response);
+                    // console.log(response);
                     this.refresh();
                 },
                 () => {
