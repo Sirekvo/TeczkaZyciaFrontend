@@ -4,12 +4,12 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'https://zesp10-backend.herokuapp.com',
-    apiUrl: 'http://localhost:8080',
+    apiUrl: 'https://zesp10-backend.herokuapp.com',
+    //apiUrl: 'http://localhost:8080',
     imgUrl: 'https://www.teczkazycia.pl',
     //imgUrl: 'http://localhost:4200',
-    //codeUrl: 'https://www.teczkazycia.pl/patient/'
-    codeUrl: 'http://localhost:4200/patient/'
+    codeUrl: 'https://www.teczkazycia.pl/patient/'
+    //codeUrl: 'http://localhost:4200/patient/'
 };
 
 /*
