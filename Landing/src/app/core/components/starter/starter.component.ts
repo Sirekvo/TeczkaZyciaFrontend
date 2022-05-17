@@ -114,7 +114,7 @@ export class StarterComponent implements OnInit {
         this.visible = 0;
         this.accountService.setContacts(this.contactList).subscribe(
             (response: any) => {
-                console.log(response);
+                // console.log(response);
             },
             () => {
             }
@@ -129,7 +129,7 @@ export class StarterComponent implements OnInit {
         this.visible = 0;
         this.accountService.setAllergies(this.allergyList).subscribe(
             (response: any) => {
-                console.log(response);
+                // console.log(response);
             },
             () => {
             }
@@ -144,7 +144,7 @@ export class StarterComponent implements OnInit {
         this.visible = 0;
         this.accountService.setMedications(this.tabsList).subscribe(
             (response: any) => {
-                console.log(response);
+                // console.log(response);
             },
             () => {
             }
@@ -159,7 +159,7 @@ export class StarterComponent implements OnInit {
         this.visible = 0;
         this.accountService.setChronicDiseases(this.illnessList).subscribe(
             (response: any) => {
-                console.log(response);
+                // console.log(response);
             },
             () => {
             }

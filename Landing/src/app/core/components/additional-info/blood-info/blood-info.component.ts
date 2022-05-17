@@ -1,5 +1,5 @@
 import {ViewportScroller} from "@angular/common";
-import {Component, OnInit} from '@angular/core';
+import {Component,Type, OnInit} from '@angular/core';
 import {
     AccountOutput,
     BloodTypeInput,
@@ -11,10 +11,35 @@ import {Router} from "@angular/router";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {environment} from '../../../../../environments/environment';
-
+import { NgbActiveModal,ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import {ClipboardService} from "ngx-clipboard";
 import {DomSanitizer} from "@angular/platform-browser";
 
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Zakup Karty</h4>
+      </div>
+      <div class="modal-body">
+        <p>Aby zamówić swoją kartę wyślij do nas mail na adres</p><p style="text-align: center;"><span class="text-primary">10.teczka.zycia@gmail.com</span></p>
+        <p>W tytule wiadmości napisz <i>Zakup karty - [kod]</i>, gdzie w wyznaczone miejsce wpisz swój indywidualny kod.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('confirm click')">Ok</button>
+      </div>
+    `
+})
+
+export class NgbdModalContent {
+    constructor(public modal: NgbActiveModal){
+    }
+}
+
+const MODALS: { [name: string]: Type<any> } = {
+    cardFirst: NgbdModalContent,
+    // autofocus: NgbdModalConfirmAutofocus
+};
 
 @Component({
     selector: 'app-blood-info',
@@ -214,6 +239,20 @@ export class BloodInfoComponent implements OnInit {
             this.bloodType_counter--;
         }
         this.back_to_start_complete();
+    }
+
+    open(name: string) {
+        this.modalService.open(MODALS[name]).result.then((result) => {
+            if (result == 'Ok click') {
+            }
+        }, (reason) => {
+            if (reason === ModalDismissReasons.ESC ||
+                reason === ModalDismissReasons.BACKDROP_CLICK ||
+                reason == 'cancel click' ||
+                reason == 'Cross click' ||
+                reason == 'confirm click') {
+            }
+        });
     }
 
     copyCode() {

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {AccountService} from "../../../shared/services/account.service";
 import {PatientService} from "../../../shared/services/patient.service";
 
+
 @Component({
     selector: 'app-index',
     templateUrl: './index.component.html',
@@ -16,7 +17,7 @@ import {PatientService} from "../../../shared/services/patient.service";
  */
 export class IndexComponent implements OnInit {
 
-    active = 'top';
+    active = 'card';
     code = '';
     information_to_user = '';
 
@@ -45,3 +46,5 @@ export class IndexComponent implements OnInit {
     }
 
 }
+
+

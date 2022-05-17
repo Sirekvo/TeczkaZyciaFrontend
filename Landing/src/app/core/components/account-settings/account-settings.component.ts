@@ -33,7 +33,7 @@ import {DomSanitizer} from "@angular/platform-browser";
                 (click)="modal.dismiss('Cross click')"></button>
       </div>
       <div class="modal-body">
-        <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span> ?</strong>
+        <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span>?</strong>
         </p>
         <p>Wszystkie informacje przypisane do tego konta zostaną usunięte.
           <span class="text-danger">Tej operacji nie można cofnąć.</span>
@@ -52,8 +52,30 @@ export class NgbdModalConfirm {
     }
 }
 
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Zakup Karty</h4>
+      </div>
+      <div class="modal-body">
+        <p>Aby zamówić swoją kartę wyślij do nas mail na adres</p><p style="text-align: center;"><span class="text-primary">10.teczka.zycia@gmail.com</span></p>
+        <p>W tytule wiadmości napisz <i>Zakup karty - [kod]</i>, gdzie w wyznaczone miejsce wpisz swój indywidualny kod.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('confirm click')">Ok</button>
+      </div>
+    `
+})
+
+export class NgbdModalContent {
+    constructor(public modal: NgbActiveModal){
+    }
+}
+
 const MODALS: { [name: string]: Type<any> } = {
     focusFirst: NgbdModalConfirm,
+    cardFirst: NgbdModalContent,
     // autofocus: NgbdModalConfirmAutofocus
 };
 
@@ -109,7 +131,7 @@ export class AccountSettingsComponent implements OnInit {
                 private clipboardApi: ClipboardService,
                 private formBuilder: FormBuilder,
                 private patientService: PatientService,
-                private _modalService: NgbModal,
+                private modalService: NgbModal,
                 private sanitizer: DomSanitizer) {
 
     }
@@ -287,7 +309,7 @@ export class AccountSettingsComponent implements OnInit {
     }
 
     open(name: string) {
-        this._modalService.open(MODALS[name]).result.then((result) => {
+        this.modalService.open(MODALS[name]).result.then((result) => {
             if (result == 'Ok click') {
                 this.deleteUser();
                 //   this.userService.deleteUser();
@@ -298,7 +320,8 @@ export class AccountSettingsComponent implements OnInit {
             if (reason === ModalDismissReasons.ESC ||
                 reason === ModalDismissReasons.BACKDROP_CLICK ||
                 reason == 'cancel click' ||
-                reason == 'Cross click') {
+                reason == 'Cross click' ||
+                reason == 'confirm click') {
             }
         });
     }

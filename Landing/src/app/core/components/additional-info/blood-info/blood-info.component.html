@@ -8,7 +8,7 @@
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/main">Profil</a>
       <a class="dropdown-item" routerLink="/vaccinations">Szczepienia</a>
-      <a class="dropdown-item" routerLink="/blood" style="background: #337ab7; color: white">Wyniki krwi</a>
+      <a class="dropdown-item" routerLink="/blood" style="background: #337ab7; color: white">Grupa Krwi</a>
       <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
       <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
       <div class="dropdown-divider"></div>
@@ -63,7 +63,7 @@
               </div>
               <div class="col-lg-1 col-md-2 mt-2 d-flex align-content-center flex-wrap justify-content-center">
                 <div>
-                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę">
+                  <button class="h4 text-primary bg-white border-0" ngbTooltip="Zamów kartę" (click)="open('cardFirst')">
                     <i class="uil uil-shopping-cart"></i>
                   </button>
                 </div>
@@ -112,8 +112,8 @@
 
               <li class="navbar-item account-menu px-0 mt-2 active">
                 <a routerLink="/blood" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-file"></i></span>
-                  <h6 class="mb-0 ms-2">Wyniki krwi</h6>
+                  <span class="h4 mb-0"><i class="uil uil-tear"></i></span>
+                  <h6 class="mb-0 ms-2">Grupa Krwi</h6>
                 </a>
               </li>
 
