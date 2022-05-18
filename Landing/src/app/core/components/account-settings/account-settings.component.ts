@@ -187,14 +187,6 @@ export class AccountSettingsComponent implements OnInit {
             () => {
             }
         );
-        // this.patientService.getOrganDonor(this.code).subscribe(
-        //     (inputValue: Boolean) => {
-        //         this.isOrganDonor = inputValue;
-        //         console.log("Wartosc startowa isOrganDonor " + this.isOrganDonor );
-        //     },
-        //     () => {
-        //     }
-        // );
     }
 
     get f() {
