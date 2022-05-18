@@ -9,10 +9,11 @@ import {
     DiseasesOutput,
     DiseasesInput,
     MedicationsOutput,
-    MedicationsInput, CardBase64
+    MedicationsInput, CardBase64, OrganDonorOutput
 } from "../../../shared/models/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {UserService} from "../../../shared/services/user.service";
+import { PatientService } from "src/app/shared/services/patient.service";
 import {Router} from "@angular/router";
 import {environment} from '../../../../environments/environment';
 import {FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
@@ -127,6 +128,7 @@ export class AccountProfileComponent implements OnInit {
 
     constructor(private accountService: AccountService,
                 private userService: UserService,
+                private patientService: PatientService,
                 private router: Router,
                 private scroller: ViewportScroller,
                 private clipboardApi: ClipboardService,
@@ -189,6 +191,13 @@ export class AccountProfileComponent implements OnInit {
                     (data: Array<MedicationsInput>) => {
                         this.medicationsList = data;
                         this.medications_counter = this.medicationsList.length;
+                    },
+                    () => {
+                    }
+                );
+                this.patientService.getOrganDonor(this.code).subscribe(
+                    (information: OrganDonorOutput) => {
+                        this.isOrganDonor = information.isOrganDonor;
                     },
                     () => {
                     }
